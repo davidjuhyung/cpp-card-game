@@ -1,1 +1,7 @@
-# CS246-final-project
+# CS246 Final Project
+
+Todos:
+[] 
+[]
+[]
+
