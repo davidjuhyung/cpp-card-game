@@ -1,7 +1,7 @@
 #ifndef ENCHANTMENT_H
 #define ENCHANTMENT_H
 
-#include "Minion.h"
+#include "minion.h"
 
 class Enchantment public : AbstractMinion {
 	Minion* minion;
