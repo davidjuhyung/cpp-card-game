@@ -8,7 +8,7 @@ class Card {
 	Board* board;
   public:
   	Card(std::string name, Board* board) : name{name}, board{board} {}
-  	virtual play(int player, int minion) = 0;
+  	virtual void play(int player, int minion) = 0;
 };
 
 #endif
