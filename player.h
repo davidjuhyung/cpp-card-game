@@ -6,19 +6,19 @@
 
 class Player
 {
-private:
+public: // will make it public now for testing in main
   std::string name;
 public:
-  player();
-  ~player();
-  startTurn();
-  endTurn();
-  attack(int i, Player *p);
-  attack(int i, int j, Player *p);
-  play(int i);
-  play(int i, int j, Player *p);
-  use(int i);
-  use(int i, int i, Player *p);
+  Player(std::string name);
+  ~Player();
+  void startTurn();
+  void endTurn();
+  void attack(int i, Player *p);
+  void attack(int i, int j, Player *p);
+  void play(int i);
+  void play(int i, int j, Player *p);
+  void use(int i);
+  void use(int i, int j, Player *p);
 };
 
 #endif
