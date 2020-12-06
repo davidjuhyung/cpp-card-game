@@ -26,9 +26,11 @@ public:
   void play(int i, int j, Player *p);
   void use(int i);
   void use(int i, int j, Player *p);
-  Minion* getMinion(int i);
+  AbstractMinion* getMinion(int i);
   Ritual* getRiutal();
   void setRitual(std::shared_ptr<Ritual> ritual);
+  void addMinion(std::shared_ptr<AbstractMinion> m);
+  int numMinions();
   void moveToHand(int i); // ith minion goes back to hand
   void resurrect();
 };
