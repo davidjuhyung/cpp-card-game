@@ -1,3 +1,4 @@
+
 #ifndef _SPELL_H_
 #define _SPELL_H_
 #include "card.h"
