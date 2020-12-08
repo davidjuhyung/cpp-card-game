@@ -10,6 +10,8 @@ class Player
 {
 private:
   std::string name;
+  int life;
+  int magic;
   std::vector<std::shared_ptr<Card>> deck;
   std::vector<std::shared_ptr<Card>> hand;
   std::vector<std::shared_ptr<AbstractMinion>> minions;
@@ -26,6 +28,8 @@ public:
   void play(int i, int j, Player *p);
   void use(int i);
   void use(int i, int j, Player *p);
+  void damage(int d); // reduce life by d
+  void incrementMagic(); // increase magic by 1
   AbstractMinion* getMinion(int i);
   Ritual* getRiutal();
   void setRitual(std::shared_ptr<Ritual> ritual);
