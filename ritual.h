@@ -6,7 +6,6 @@ class Ritual : public Card {
 	std::string description;
 	int activationCost
 	int charges;
-	int numOfRitualCards;
   public:
   	void play(int player, int minion) override;
 	virtual void useAbility(bool startOfPlay, bool minionplayed) = 0;
