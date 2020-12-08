@@ -30,8 +30,9 @@ public:
   void use(int i, int j, Player *p);
   void damage(int d); // reduce life by d
   void incrementMagic(); // increase magic by 1
-  AbstractMinion* getMinion(int i);
-  Ritual* getRiutal();
+  std::shared_ptr<AbstractMinion> getMinion(int i);
+  std::shared_ptr<Ritual> getRiutal();
+  void replaceMinion(int i, std::shared_ptr<AbstractMinion> m);
   void setRitual(std::shared_ptr<Ritual> ritual);
   void addMinion(std::shared_ptr<AbstractMinion> m);
   int numMinions();
