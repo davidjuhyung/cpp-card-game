@@ -19,7 +19,7 @@ private:
   std::shared_ptr<Ritual> ritual;
 public:
   Player(std::string name);
-  ~Player(); // I don't think you'll need to implement a dtor
+  ~Player();
   void startTurn();
   void endTurn();
   void attack(int i, Player *p);
