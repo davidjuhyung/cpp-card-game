@@ -6,9 +6,10 @@
 class Card {
 	std::string name;
 	Board* board;
+	int cost;
   public:
   	Card(std::string name, Board* board) : name{name}, board{board} {}
-  	virtual void play(int player, int minion) = 0;
+  	virtual void play(int player, int minion) = 0; // always pass in active player as argument in play
 };
 
 #endif
