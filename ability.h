@@ -7,6 +7,7 @@ class Ability public : Enchantment {
 	bool Triggered;
   public:
   	Ability(std::string name, Board* board, std::shared_ptr<AbstractMinion> minion);
+  	void play(int player, int minion) override;
   	void useAbility(int activeplayer) override;
   	void useTriggered(int activeplayer) override;
 };
