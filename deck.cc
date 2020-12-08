@@ -9,20 +9,20 @@ std::vector<std::shared_prt<Card>> initialize(std::istream &in,Board* b) {
 	std::string name;
 	while (getline(in,name)) {
 		if (minions.find(name)!=minions.end()) {
-			std::shared_ptr<Card> card = std::make_shared<AbstractMinion>(name,b);
+			auto card = std::make_shared<AbstractMinion>(name,b);
 			deck.push_back(card);
 		} else if (enchantments.find(name)!=enchantments.end()) {
-			if (name=="Delay") std::shared_ptr<Card> card = std::make_shared<Delay>(name,b);
-			if (name=="Enrage") std::shared_ptr<Card> card = std::make_shared<Enrage>(name,b);
-			if (name=="Giant Strength") std::shared_ptr<Card> card = std::make_shared<GiantStrength>(name,b);
-			if (name=="Magic Fatigue") std::shared_ptr<Card> card = std::make_shared<MagicFatigue>(name,b);
-			if (name=="Silence") std::shared_ptr<Card> card = std::make_shared<Silence>(name,b);
+			if (name=="Delay") auto card = std::make_shared<Delay>(name,b);
+			if (name=="Enrage") auto card = std::make_shared<Enrage>(name,b);
+			if (name=="Giant Strength") auto card = std::make_shared<GiantStrength>(name,b);
+			if (name=="Magic Fatigue") auto card = std::make_shared<MagicFatigue>(name,b);
+			if (name=="Silence") auto card = std::make_shared<Silence>(name,b);
 			deck.push_back(card);
 		} else if (spells.find(name)!=spells.end()) {
-			std::shared_ptr<Card> card = std::make_shared<Spell>(name,b);
+			auto card = std::make_shared<Spell>(name,b);
 			deck.push_back(card);
 		} else if (rituals.find(name)!=rituals.end()) {
-			std::shared_ptr<Card> card = std::make_shared<Ritual>(name,b);
+			auto card = std::make_shared<Ritual>(name,b);
 			deck.push_back(card);
 		}
 	}
