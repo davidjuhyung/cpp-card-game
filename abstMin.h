@@ -3,7 +3,7 @@
 
 #include "card.h"
 
-class AbstractMinion public : Card {
+class AbstractMinion : public Card {
 	int attack;
 	int defence;
 	int actions;

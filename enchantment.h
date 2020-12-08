@@ -3,7 +3,7 @@
 
 #include "minion.h"
 
-class Enchantment public : AbstractMinion {
+class Enchantment : public AbstractMinion {
 	std::string enchantmentName;
 	std::shared_ptr<AbstractMinion> minion = nullptr;
   public:

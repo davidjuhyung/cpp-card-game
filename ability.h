@@ -3,7 +3,7 @@
 
 #include "enchantment.h"
 
-class Ability public : Enchantment {
+class Ability : public Enchantment {
 	bool Triggered;
 	int activationCost;
   public:
