@@ -6,7 +6,7 @@
 class Enchantment public : AbstractMinion {
 	std::shared_ptr<AbstractMinion> minion;
   public:
-  	Enchantment(std::string name, Board* board, std::shared_ptr<AbstractMinion> minion = nullptr);
+  	Enchantment(std::string name, Board* board);
   	std::shared_ptr<AbstractMinion> getMinion();
     void play(int player, int minion) override;
 };
