@@ -1,6 +1,6 @@
 #include "spell.h"
 
-void Spell::play(Board *board, Player player, Minion minion) {
+void Spell::play(nt player, int minion) {
     if (description == "Banish"){
         cost -= 2;
         //Minion temp{} //what values??;
@@ -14,10 +14,12 @@ void Spell::play(Board *board, Player player, Minion minion) {
     }
     else if (description == "Recharge"){
         cost --;
+        getRitual().charges += 3;
         //ritual gains 3 charges
     }
     else if (description == "Disenchant"){
         cost--;
+
         //destroy the top enchantment on target minion
     }
     else if (description == "RaiseDead"){
@@ -28,7 +30,9 @@ void Spell::play(Board *board, Player player, Minion minion) {
     }
     else if (description == "Blizzard"){
         cost--;
-
+        play_one_mininion = getMinion(1);
+        play_two_mininion = getMinion(2);
+        
         //deal 2 damage to all minion
     }
     else if (description == "Summoner"){

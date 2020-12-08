@@ -5,7 +5,7 @@
 class Spell : public Card {
 	std::string description;
 	public:
-	void play(Board *board, int player, int minion) override;
+	void play(int player, int minion) override;
 };
 
 
