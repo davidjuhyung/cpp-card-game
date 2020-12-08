@@ -5,7 +5,7 @@
 
 class GiantStrength public : Enchantment {
   public:
-  	GiantStrength(std::string name = "GiantStrength", Board* board, Minion* minion = nullptr);
+  	GiantStrength(std::string name = "Giant Strength", Board* board, Minion* minion = nullptr);
   	void useAbility(int activeplayer) override;
   	void useTriggered(int activeplayer) override;
 };
