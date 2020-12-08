@@ -61,7 +61,13 @@ void AbstractMinion::play(int player, int minion) {
 	board->getPlayer(player)->addMinion(a);
 }
 
-int AbstractMinion::getDefence() { return defence; }
+int AbstractMinion::getDefence() const { return defence; }
+
+int AbstractMinion::getAttack() const { return attack; }
+
+int AbstractMinion::getAction() const {return actions; }
+
+bool AbstractMinion::gaining() const { return gainAction; }
 
 int AbstractMinion::setAction() {
 	if (gainAction) actions = 1;

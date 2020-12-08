@@ -12,7 +12,10 @@ class AbstractMinion public : Card {
   	AbstractMinion(std::string name, Board* board);
   	void attack(int player);
   	void attack(int player, int minion);
-  	int getDefence();
+  	int getDefence() const;
+  	int getAttack() const;
+  	int getAction() const;
+  	bool gaining() const;
   	void setAction();
   	virtual void play(int player, int minion);
   	virtual void useAbility(int activeplayer) = 0;
