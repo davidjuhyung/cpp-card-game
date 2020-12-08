@@ -53,7 +53,7 @@ void AbstractMinion::attack(int player, int minion) {
 	defence -= m->attack;
 }
 
-void AbstractMinion::play(int player, int minion) {
+void AbstractMinion::play(int player, int minion = 0, bool actOnRitual = false) {
 	std::shared_ptr<AbstractMinion> m = std::make_shared<Minion>(name,board);
 	m->attack = attack;
 	m->defence = defence;

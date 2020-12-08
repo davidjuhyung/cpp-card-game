@@ -8,7 +8,7 @@ class Ability : public Enchantment {
 	int activationCost;
   public:
   	Ability(std::string name, Board* board, std::shared_ptr<AbstractMinion> minion);
-  	void play(int player, int minion) override;
+  	void play(int player, int minion = 0, bool actOnRitual = false) override;
   	void useAbility(int activeplayer, int target) override;
   	void useTriggered(int activeplayer, int target) override;
 };

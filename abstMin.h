@@ -17,7 +17,7 @@ class AbstractMinion : public Card {
   	int getAction() const;
   	bool gaining() const;
   	void setAction();
-  	virtual void play(int player, int minion);
+  	virtual void play(int player, int minion = 0, bool actOnRitual = false);
   	virtual void useAbility(int activeplayer, int target) = 0;
   	virtual void useTriggered(int activeplayer, int target) = 0;
 };

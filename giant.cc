@@ -2,7 +2,7 @@
 
 GiantStrength::GiantStrength(std::string name = "Giant Strength", Board* board) : Enchantment{name,board}, enchantmentName{"Giant Strength"} {}
 
-void GiantStrength::play(int player, int minion) {
+void GiantStrength::play(int player, int minion = 0, bool actOnRitual = false) {
 	auto m = std::make_shared<GiantStrength>(name,board);
 	m->minion = board->getPlayer(player)->getMinion(minion);
 	m->actions = m->minion->getAction();
