@@ -2,7 +2,7 @@
 
 std::vector<std::shared_prt<Card>> initialize(std::istream &in,Board* b) {
 	std::set<std::string> minions = {"Air Elemental","Apprentice Summoner","Bomb","Earth Elemental","Fire Elemental","Master Summoner","Novice Pyromancer","Potion Seller"};
-	std::set<std::string> enchantments = {"Delay","Enrage","Giant Strength","Magic Statue","Silence"};
+	std::set<std::string> enchantments = {"Delay","Enrage","Giant Strength","Magic Fatigue","Silence"};
 	std::set<std::string> spells = {"Banish","Blizzard","Disenchant","Raise Dead","Recharge","Unsommon"};
 	std::set<std::string> rituals = {"Aura of Power","Dark Ritual","Standstill"};
 	std::vector<Card> deck;
@@ -12,7 +12,11 @@ std::vector<std::shared_prt<Card>> initialize(std::istream &in,Board* b) {
 			std::shared_ptr<Card> card = std::make_shared<AbstractMinion>(name,b);
 			deck.push_back(card);
 		} else if (enchantments.find(name)!=enchantments.end()) {
-			std::shared_ptr<Card> card = std::make_shared<Enchantment>(name,b);
+			if (name=="Delay") std::shared_ptr<Card> card = std::make_shared<Delay>(name,b);
+			if (name=="Enrage") std::shared_ptr<Card> card = std::make_shared<Enrage>(name,b);
+			if (name=="Giant Strength") std::shared_ptr<Card> card = std::make_shared<GiantStrength>(name,b);
+			if (name=="Magic Fatigue") std::shared_ptr<Card> card = std::make_shared<MagicFatigue>(name,b);
+			if (name=="Silence") std::shared_ptr<Card> card = std::make_shared<Silence>(name,b);
 			deck.push_back(card);
 		} else if (spells.find(name)!=spells.end()) {
 			std::shared_ptr<Card> card = std::make_shared<Spell>(name,b);
