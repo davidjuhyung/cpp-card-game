@@ -7,7 +7,7 @@ class MagicFatigue : public Enchantment {
 	
   public:
 	MagicFatigue(Minion* minion);
-	void useAbility(bool activated = true) override;
+	void useAbility(int activePlayer) override;
 };
 
 #endif
