@@ -15,7 +15,8 @@
 #include "delay.h"
 #include "fatigue.h"
 #include "silence.h"
+#include "board.h"
 
-std::vector<std::shared_ptr<Card>> initialize(std::istream &in);
+std::vector<std::shared_ptr<Card>> initialize(std::istream &in,Board* b);
 
 #endif
