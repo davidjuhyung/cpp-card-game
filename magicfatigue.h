@@ -4,10 +4,11 @@
 
 #include 
 class MagicFatigue : public Enchantment {
-	
   public:
-	MagicFatigue(Minion* minion);
-	void useAbility(int activePlayer) override;
+	MagicFatigue(std::string name = "Magic Fatigue", Board* board);
+	void play(int player, int minion) override;
+  	void useAbility(int activeplayer, int target) override;
+  	void useTriggered(int activeplayer, int target) override;
 };
 
 #endif
