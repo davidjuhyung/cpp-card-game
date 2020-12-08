@@ -8,5 +8,4 @@ class Spell : public Card {
 	void play(int player, int minion) override;
 };
 
-
 #endif
