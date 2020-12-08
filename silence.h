@@ -5,7 +5,9 @@
 class Silence : public Enchantment {
   public:
 	Silence(std::string name = "Silence", Board* board);
-	void useAbility(int activePlayer, int minion) override;
+	void play(int player, int minion) override;
+  	void useAbility(int activeplayer, int target) override;
+  	void useTriggered(int activeplayer, int target) override;
 };
 
 #endif
