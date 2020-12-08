@@ -6,12 +6,11 @@
 class Board
 {
 private:
-  int active;
-  std::shared_ptr<Player> player1;
-  std::shared_ptr<Player> player2;
+  int active = 1;
+  std::shared_ptr<Player> player1 = nullptr;
+  std::shared_ptr<Player> player2 = nullptr;
 public:
-  Board(std::shared_ptr<Player>,std::shared_ptr<Player>);
-  ~Board(); // I don't think you'll need to implement a dtor
+  void setPlayer(int player, std::shared_ptr<Player> player);
   void endturn();
   void attack(int i);
   void attack(int i, int j);
