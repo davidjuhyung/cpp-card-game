@@ -4,8 +4,8 @@
 
 class Silence : public Enchantment {
   public:
-	Silence(Minion* minion);
-	void useAbility(bool activated = true) override;
+	Silence(std::string name = "Silence", Board* board);
+	void useAbility(int activePlayer, int minion) override;
 };
 
 #endif

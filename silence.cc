@@ -1,10 +1,11 @@
 #include "silence.h"
 
-Silence::Silence(Minion* minion) : Enchantment{component} {
+Silence::Silence(std::string name = "Silence", Board* board) : Enchantment{name, board} {}
 
 }
 
-void Silence::useAbility(bool activated = true) {
-    minion 
+void Silence::useAbility(int activePlayer, int minion) {
+    board->getPlayer(activePlayer)->getMinion(minion); 
+    
     //encahnted minion cannot use ability
 }
