@@ -2,6 +2,6 @@
 
 Minion::Minion(std::string name, Board* board) : AbstractMinion{name,board} {}
 
-void useAbility(int activeplayer) {}
+void Minion::useAbility(int activeplayer) {}
 
-void useTriggered(int activeplayer) {}
+void Minion::useTriggered(int activeplayer) {}
