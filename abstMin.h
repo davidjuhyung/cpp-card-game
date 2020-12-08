@@ -18,8 +18,8 @@ class AbstractMinion public : Card {
   	bool gaining() const;
   	void setAction();
   	virtual void play(int player, int minion);
-  	virtual void useAbility(int activeplayer) = 0;
-  	virtual void useTriggered(int activeplayer) = 0;
+  	virtual void useAbility(int activeplayer, int target) = 0;
+  	virtual void useTriggered(int activeplayer, int target) = 0;
 };
 
 #endif

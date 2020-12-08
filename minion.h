@@ -6,8 +6,8 @@
 class Minion public : AbstractMinion {
   public:
   	Minion(std::string name, Board* board);
-  	void useAbility(int activeplayer) override;
-  	void useTriggered(int activeplayer) override;
+  	void useAbility(int activeplayer, int target) override;
+  	void useTriggered(int activeplayer, int target) override;
 };
 
 #endif

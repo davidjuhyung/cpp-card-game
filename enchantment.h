@@ -4,6 +4,7 @@
 #include "minion.h"
 
 class Enchantment public : AbstractMinion {
+	std::string enchantmentName;
 	std::shared_ptr<AbstractMinion> minion = nullptr;
   public:
   	Enchantment(std::string name, Board* board) : AbstractMinion{name,board} {}
