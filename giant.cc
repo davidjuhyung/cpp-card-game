@@ -10,7 +10,7 @@ void GiantStrength::play(int player, int minion) {
 	m->defence = m->minion->getDefence()+2;
 	m->gainAction = m->minion->gaining();
 	m->name = m->minion->getName();
-	board->getPlayer(minion,m);
+	board->getPlayer(player)->replaceMinion(minion,m);
 }
 
 void GiantStrength::useAbility(int activeplayer, int target) { minion->useAbility(activeplayer,target); }
