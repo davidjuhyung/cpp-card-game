@@ -5,11 +5,11 @@ GiantStrength::GiantStrength(std::string name = "Giant Strength", Board* board) 
 void GiantStrength::play(int player, int minion) {
 	auto m = std::make_shared<GiantStrength>(name,board);
 	m->minion = board->getPlayer(player)->getMinion(minion);
-	m->actions = this->minion->getAction();
-	m->attack = this->minion->getAttack()+2;
-	m->defence = this->minion->getDefence()+2;
-	m->gainAction = this->minion->gaining();
-	m->name = this->minion->getName();
+	m->actions = m->minion->getAction();
+	m->attack = m->minion->getAttack()+2;
+	m->defence = m->minion->getDefence()+2;
+	m->gainAction = m->minion->gaining();
+	m->name = m->minion->getName();
 	board->getPlayer(minion,m);
 }
 
