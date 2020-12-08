@@ -19,7 +19,7 @@ public:
   void play(int i, int p, int t);
   void use(int i);
   void use(int i, int p, int t);
-  Player* getPlayer(bool active = true); // if false is passed, return inactive player
+  Player* getPlayer(int p);
   void inspect(int i);
   void display();
   void showHand();
