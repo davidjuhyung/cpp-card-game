@@ -2,6 +2,7 @@
 #define ENCHANTMENT_H
 
 #include "card.h"
+#include "player.h"
 #include "abstractMinion.h"
 #include "minion.h"
 

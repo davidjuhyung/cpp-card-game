@@ -16,6 +16,7 @@
 #include "magicFatigue.h"
 #include "silence.h"
 #include "board.h"
+#include "player.h"
 
 // Pass an input stream in from which the deck is read, and the board pointer b on which this game is taking place
 std::vector<std::shared_ptr<Card>> initialize(std::istream &in,Board* b);

@@ -1,6 +1,7 @@
 #ifndef RITUAL_H
 #define RITUAL_H
 
+#include "player.h"
 #include "card.h"
 #include "abstractMinion.h"
 

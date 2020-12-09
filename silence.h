@@ -1,6 +1,8 @@
 #ifndef SILENCE_H
 #define SILENCE_H
 
+#include "player.h"
+#include "abstractMinion.h"
 #include "enchantment.h"
 
 class Silence : public Enchantment {

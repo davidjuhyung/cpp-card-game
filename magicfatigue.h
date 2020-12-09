@@ -1,6 +1,8 @@
 #ifndef MAGICFATIGUE_H
 #define MAGICFATIGUE_H
 
+#include "player.h"
+#include "abstractMinion.h"
 #include "enchantment.h"
 
 #include 

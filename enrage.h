@@ -1,6 +1,7 @@
 #ifndef ENRAGE_H
 #define ENRAGE_H
 
+#include "player.h"
 #include "enchantment.h"
 
 class Enrage : public Enchantment

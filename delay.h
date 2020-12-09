@@ -1,6 +1,8 @@
 #ifndef DELAY_H
 #define DELAY_H
 
+#include "player.h"
+#include "abstractMinion.h"
 #include "enchantment.h"
 
 class Delay : public Enchantment

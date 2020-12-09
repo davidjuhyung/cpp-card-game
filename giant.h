@@ -1,6 +1,8 @@
 #ifndef GIANT_H
 #define GIANT_H
 
+#include "player.h"
+#include "abstractMinion.h"
 #include "enchantment.h"
 
 class GiantStrength : public Enchantment
