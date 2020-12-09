@@ -1,5 +1,6 @@
 #ifndef MAGICFATIGUE_H
 #define MAGICFATIGUE_H
+
 #include "enchantment.h"
 
 #include 
