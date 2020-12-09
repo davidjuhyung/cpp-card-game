@@ -8,9 +8,7 @@ class Ritual : public Card {
 	int charges;
   public:
   	void play(int player, int minion) override;
-	virtual void useAbility(bool startOfPlay, bool minionplayed) = 0;
+	virtual void useAbility(int player, int minion) = 0;
 };
-
-
 
 #endif
