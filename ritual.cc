@@ -29,3 +29,5 @@ void useAbility(int player, int minion)
         board->getPlayer(player).graveyard.push_back(minion);
     }
 }
+
+int Ritual::getCharges() const { return charges; }
