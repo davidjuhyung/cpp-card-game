@@ -14,7 +14,7 @@ class GiantStrength : public Enchantment
 
   	void useAbility(int activeplayer, int target, bool turn) override;
 
-  	void useTriggered(int activeplayer, int target, bool turn) override;
+  	void useTriggered(int owner, int playedminion, bool isOwnerActive, When when) override;
 };
 
 #endif

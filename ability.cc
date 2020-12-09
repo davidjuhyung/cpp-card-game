@@ -40,7 +40,7 @@ void Ability::useAbility(int activeplayer, int target) {
 	}
 }
 
-void Ability::useTriggered(int activeplayer, int target, bool turn) {
+void Ability::useTriggered(int owner, int playedminion, bool isOwnerActive, When when) {
 	Player* p = board->getPlayer(activeplayer);
 	if (name == "Bomb") {
 		if (defence > 0) return;

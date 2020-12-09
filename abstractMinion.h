@@ -42,9 +42,7 @@ class AbstractMinion : public Card
   	// remember, active player as param
   	virtual void useAbility(int activeplayer, int target = 0) = 0;
   	
-  	// remember, active player as param. Also, turn = false represents start of the turn, and turn = true
-    // represents end of the turn
-  	virtual void useTriggered(int activeplayer, int target = 0, bool turn) = 0;
+  	virtual void useTriggered(int owner, int playedminion, bool isOwnerActive, When when) = 0;
 };
 
 #endif

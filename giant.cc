@@ -16,4 +16,4 @@ void GiantStrength::play(int player, int minion = 0, bool actOnRitual = false) {
 
 void GiantStrength::useAbility(int activeplayer, int target) { minion->useAbility(activeplayer,target); }
 
-void GiantStrength::useTriggered(int activeplayer, int target) { minion->useTriggered(activeplayer,target); }
+void GiantStrength::useTriggered(int owner, int playedminion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedminion,isOwnerActive,when); }
