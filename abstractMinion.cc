@@ -60,13 +60,13 @@ void AbstractMinion::attackMinion(int player, int minion) {
 
 void AbstractMinion::damage(int d) { defence -= d; }
 
-void AbstractMinion::play(int player, int minion = 0, bool actOnRitual = false) {
+void AbstractMinion::play(int owner, int targetPlayer, int minion = 0, bool actOnRitual = false) {
 	auto m = std::make_shared<Minion>(name,board);
 	m->setAttack(attack);
 	m->setDefence(defence);
 	auto a = std::make_shared<Ability>(name,board,m);
-	board->getPlayer(player)->addMinion(a);
-	board->APNAP(board->getPlayer(player)->getNumMinions(),When::Play);
+	board->getPlayer(owner)->addMinion(a);
+	board->APNAP(board->getPlayer(owner)->getNumMinions(),When::Play);
 }
 
 int AbstractMinion::getDefence() const { return defence; }

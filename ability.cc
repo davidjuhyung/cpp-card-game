@@ -8,7 +8,7 @@ Ability::Ability(std::string name, Board* board, std::shared_ptr<AbstractMinion>
 	else activationCost = 0;
 }
 
-void Ability::play(int player, int minion = 0, bool actOnRitual = false) {}
+void Ability::play(int owner, int targetPlayer, int minion = 0, bool actOnRitual = false) {}
 
 void Ability::useAbility(int activeplayer, int target) {
 	if (actions == 0) return;
