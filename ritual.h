@@ -8,9 +8,9 @@ class Ritual : public Card {
 	int activationCost;
 	int charges;
   public:
-  	void play(int player, int minion = 0, bool actOnRitual = false) override;
-	void useAbility(int player, int playedminion = 0, bool actOnRitual = false, When when = When::Start);
-	int getCharges();
+  	void play(int player, int minion = 0, bool actOnRitual = false) override; //when it is played on the board
+	void useAbility(int player, int playedMinion = 0, bool actOnRitual = false, When when = When::Start); //when it is used/triggered
+	int getCharges(); //return charges
 };
 
 #endif
