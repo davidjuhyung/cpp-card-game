@@ -1,4 +1,5 @@
 #include "abstractMinion.h"
+#include "player.h"
 #include "minion.h"
 #include "ability.h"
 
@@ -39,7 +40,7 @@ AbstractMinion::AbstractMinion(std::string name, Board* board) : Card{name,board
 	}
 }
 
-void AbstractMinion::attack(int player) {
+void AbstractMinion::attackMinion(int player) {
 	if (actions == 0) return;
 	Player* p = board->getPlayer(player);
 	if (actions == 0) return;
@@ -47,7 +48,7 @@ void AbstractMinion::attack(int player) {
 	actions--;
 }
 
-void AbstractMinion::attack(int player, int minion) {
+void AbstractMinion::attackMinion(int player, int minion) {
 	if (actions == 0) return;
 	Player* p = board->getPlayer(player);
 	AbstractMinion* m = p->getMinion(minion);

@@ -1,6 +1,8 @@
 #ifndef ENCHANTMENT_H
 #define ENCHANTMENT_H
 
+#include "card.h"
+#include "abstractMinion.h"
 #include "minion.h"
 
 class Enchantment : public AbstractMinion

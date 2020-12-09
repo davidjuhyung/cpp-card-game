@@ -2,6 +2,7 @@
 #define ABSTRACTMINION_H
 
 #include "card.h"
+#include "board.h"
 
 class AbstractMinion : public Card
 {
@@ -16,10 +17,10 @@ class AbstractMinion : public Card
   	AbstractMinion(std::string name, Board* board);
 
   	// pass target playernum as param
-  	void attack(int player);
+  	void attackMinion(int player);
 
   	// pass target playernum as param
-  	void attack(int player, int minion);
+  	void attackMinion(int player, int minion);
 
     // decrease defence by d
   	void damage(int d);

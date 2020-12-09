@@ -13,7 +13,7 @@
 #include "ritual.h"
 #include "enrage.h"
 #include "delay.h"
-#include "fatigue.h"
+#include "magicFatigue.h"
 #include "silence.h"
 #include "board.h"
 

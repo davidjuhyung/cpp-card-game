@@ -1,3 +1,4 @@
+
 enum class CardType 
 { 
   minion,
