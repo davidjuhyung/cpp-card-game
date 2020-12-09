@@ -3,8 +3,8 @@
 void Spell::play(int player, int minion) {
     if (description == "Banish"){
         //destroy target minion or ritual
-        getCost()-= 2;
-        board->getPlayer(player).graveyard.push_back(minion);
+        getCost() -= 2;
+        board->getPlayer(player)->removeMinion();
         board->getPlayer(player)->removeRitual();
     }
     else if (description == "Unsommon"){
@@ -20,6 +20,8 @@ void Spell::play(int player, int minion) {
     else if (description == "Disenchant"){
         //destroy the top enchantment on target minion
         getCost()--;
+        auto m = board->getPlayer(player)->getMinon(minion)->getMinion(); 
+        board->getPlayer(player)->replaceMinion(minion, m)
     }
     else if (description == "Raise Dead"){
         //resurrect the top minion in your graveyard and set its defence to 1
@@ -30,12 +32,11 @@ void Spell::play(int player, int minion) {
     else if (description == "Blizzard"){
         //deal 2 damage to all minion
         getCost()--;
-        /*play_one_mininion = getMinion(1);
-        play_two_mininion = getMinion(2);
-        play_one_num = numMinions(1);
-        play_two_num = numMinions(2);
-        for (int i; i < play_one_num; i++) {}*/
-        board->getPlayer(player)->getMinion(1)->damage(2);
-        board->getPlayer(player)->getMinion(2)->damage(2);
+        for (int i = 1; i <= board->getPlayer(player)->getNumMinions(); i++ ){
+            board->getPlayer(player)->getMinion(1)->damage(2);
+        }
+        for (int i = 1; i <= board->getPlayer(player%2+1)->getNumMinions(); i++ ){
+            board->getPlayer(player)->getMinion(2)->damage(2);
+        }
     }
 }
