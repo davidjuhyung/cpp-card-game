@@ -3,6 +3,7 @@
 Delay::Delay(std::string name = "Delay", Board* board) : Enchantment{name,board}, enchantmentName{"Delay"} {}
 
 void Delay::play(int player, int minion = 0, bool actOnRitual = false) {
+	//enchanted minion doesn't gain an action on their next turn. automatically destroyed after 1 turn
 	auto m = std::make_shared<Delay>(name,board);
 	m->minion = board->getPlayer(player)->getMinion(minion);
 	m->actions = m->minion->getAction();
