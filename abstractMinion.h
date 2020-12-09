@@ -45,7 +45,7 @@ class AbstractMinion : public Card
 
   	void setAction();
 
-  	virtual void play(int player, int minion = 0, bool actOnRitual = false);
+  	virtual void play(int owner, int targetPlayer, int minion = 0, bool actOnRitual = false);
 
   	// remember, active player as param. Use minions activated ability
   	virtual void useAbility(int activeplayer, int target = 0) = 0;

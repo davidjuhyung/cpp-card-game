@@ -10,7 +10,7 @@ class Minion : public AbstractMinion
 
   	Minion(std::string name, Board* board);
 
-  	void useAbility(int activeplayer, int target = 0, bool turn) override;
+  	void useAbility(int activeplayer, int target = 0) override;
 
   	void useTriggered(int owner, int playedminion, bool isOwnerActive, When when) override;
 
