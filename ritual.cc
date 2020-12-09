@@ -10,7 +10,7 @@ void play(int player, int minion = 0, bool actOnRitual = false)
     //already active, the old ritual is removed from the game and destroyed
 }
 
-void useAbility(int player, int minion)
+void useAbility(int player, int playedminion = 0, bool actOnRitual = false, When when = When::Start)
 {
     if (description == "DarkRitual"){
         //At the start of your turn, gain 1 magic
@@ -26,7 +26,9 @@ void useAbility(int player, int minion)
     else if (description == "Standstill"){
         //whenever a minion enter a play, destroy it
         cost -= activationCost;
-        board->getPlayer(player).graveyard.push_back(minion);
+        for (int i = 1; i <= player->getNumMinions(); i++){
+            board->getPlayer(player)->removeMinion();
+        }
     }
 }
 
