@@ -13,6 +13,6 @@ void GiantStrength::play(int player, int minion = 0, bool actOnRitual = false) {
 	board->getPlayer(player)->replaceMinion(minion,m);
 }
 
-void GiantStrength::useAbility(int activeplayer, int target) { minion->useAbility(activeplayer,target); }
+void GiantStrength::useAbility(int targetplayer, int target) { minion->useAbility(targetplayer,target); }
 
-void GiantStrength::useTriggered(int activeplayer, int target) { minion->useTriggered(activeplayer,target); }
+void GiantStrength::useTriggered(int targetplayer, int target) { minion->useTriggered(targetplayer,target); }
