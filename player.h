@@ -2,11 +2,13 @@
 #define PLAYER_H
 
 #include <string>
-// [TODO] include card object
+// our libraries
+#include "card.h"
+#include "abst"
 
 class Player
 {
-public: // will make it public now for testing in main
+private:
   std::string name;
   int life;
   int magic;
@@ -17,7 +19,7 @@ public: // will make it public now for testing in main
   std::shared_ptr<Ritual> ritual;
 
 public:
-  Player(std::string name);
+  Player(std::string name, std::vector<std::shared_ptr<Card>> deck);
   void startTurn();
   void endTurn();
 
