@@ -22,8 +22,6 @@ public:
   Player(std::string name, std::vector<std::shared_ptr<Card>> deck);
   void startTurn();
   void endTurn();
-
-  // in all the below functions p is the target player, the param is handled by main
   void attack(int i, int p);
   void attack(int i, int p, char t);
   void play(int i, int p);
@@ -31,30 +29,25 @@ public:
   void use(int i, int p);
   void use(int i, int p, char t);
 
-  // reduce life by d
-  void damage(int d);
+  void getName();
 
-  // increase magic by 1
-  void incrementMagic();
+  void moveToHand(int i);  // ith minion goes back to hand
+  void resurrect();
+  
+  void getLife();
+  void damage(int d); // decrease life by d
 
-  std::shared_ptr<AbstractMinion> getMinion(int i);
+  int getMagic();
+  void setMagic(int m)
 
   std::shared_ptr<Ritual> getRiutal();
-
+  void setRitual(std::shared_ptr<Ritual> ritual);
   void removeRitual();
 
-  void replaceMinion(int i, std::shared_ptr<AbstractMinion> m);
-
-  void setRitual(std::shared_ptr<Ritual> ritual);
-
+  std::shared_ptr<AbstractMinion> getMinion(int i);
+  int getNumMinions();
   void addMinion(std::shared_ptr<AbstractMinion> m);
-
-  int numMinions();
-
-  // ith minion goes back to hand
-  void moveToHand(int i);
-  
-  void resurrect();
+  void replaceMinion(int i, std::shared_ptr<AbstractMinion> m);
 };
 
 #endif
