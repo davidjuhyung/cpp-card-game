@@ -4,7 +4,7 @@
 #include <string>
 // our libraries
 #include "card.h"
-#include "abst"
+#include "abstractMinion.h"
 
 class Player
 {
