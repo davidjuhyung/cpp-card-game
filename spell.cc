@@ -1,6 +1,6 @@
 #include "spell.h"
 
-void Spell::play(int player, int minion) {
+void Spell::play(int player, int minion, bool actOnRitual) {
     if (description == "Banish"){
         //destroy target minion or ritual
         getCost() -= 2;
@@ -27,7 +27,8 @@ void Spell::play(int player, int minion) {
         //resurrect the top minion in your graveyard and set its defence to 1
         getCost()--;
         board->getPlayer(player)->resurect();
-        top_minion->getDefence() += 1;
+        int num = board->getPlayer(player)->getNumMinions();
+        board->getPlayer(player)->getMinion(num)->setDefence(1);
     }
     else if (description == "Blizzard"){
         //deal 2 damage to all minion
