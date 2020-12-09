@@ -52,16 +52,18 @@ void AbstractMinion::attack(int player, int minion) {
 	Player* p = board->getPlayer(player);
 	AbstractMinion* m = p->getMinion(minion);
 	if (actions == 0) return;
-	m->defence -= attack;
-	defence -= m->attack;
+	m->damage(attack);
+	defence -= m->getAttack();
 	actions--;
 }
 
+void AbstractMinion::damage(int d) { defence -= d; }
+
 void AbstractMinion::play(int player, int minion = 0, bool actOnRitual = false) {
-	std::shared_ptr<AbstractMinion> m = std::make_shared<Minion>(name,board);
+	auto m = std::make_shared<Minion>(name,board);
 	m->attack = attack;
 	m->defence = defence;
-	std::shared_ptr<AbstractMinion> a = std::make_shared<Ability>(name,board,m);
+	auto a = std::make_shared<Ability>(name,board,m);
 	board->getPlayer(player)->addMinion(a);
 }
 
@@ -72,6 +74,8 @@ int AbstractMinion::getAttack() const { return attack; }
 int AbstractMinion::getAction() const {return actions; }
 
 bool AbstractMinion::gaining() const { return gainAction; }
+
+int getActivationCost() const { return activationCost; }
 
 int AbstractMinion::setAction() {
 	if (gainAction) actions = 1;

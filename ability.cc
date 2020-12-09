@@ -13,8 +13,9 @@ void Ability::play(int player, int minion = 0, bool actOnRitual = false) {}
 void Ability::useAbility(int targetplayer, int target) {
 	Player* p = board->getPlayer(p);
 	int m = p->getMagic();
-	if (name == "Novice Pyromancer") {
-		if (m < activationCost) return;
+	if (m < activationCost) return;
+	if (name == "Novice Pyromancer") p->getMinion(target)->damage(1);
+	else if (name == "Apprentice Summoner") {
 		
 	}
 }

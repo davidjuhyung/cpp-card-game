@@ -9,6 +9,7 @@ class AbstractMinion : public Card
 	int defence;
 	int actions;
 	bool gainAction = true;
+	int activationCost = 0;
 
   public:
 
@@ -20,6 +21,8 @@ class AbstractMinion : public Card
   	// pass target playernum as param
   	void attack(int player, int minion);
 
+  	void damage(int d);
+
   	int getDefence() const;
 
   	int getAttack() const;
@@ -27,6 +30,8 @@ class AbstractMinion : public Card
   	int getAction() const;
 
   	bool gaining() const;
+
+  	int getActivationCost() const;
 
   	void setAction();
 
