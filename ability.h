@@ -13,7 +13,7 @@ class Ability : public Enchantment
   	
   	void useAbility(int activeplayer, int target, bool turn) override;
   	
-  	void useTriggered(int owner, int playedminion, bool isOwnerActive, When when) override;
+  	void useTriggered(int owner, int playedminion, int minionowner, bool isOwnerActive, When when) override;
 };
 
 #endif

@@ -11,7 +11,7 @@ class Minion : public AbstractMinion
 
   	void useAbility(int activeplayer, int target = 0, bool turn) override;
 
-  	void useTriggered(int owner, int playedminion, bool isOwnerActive, When when) override;
+  	void useTriggered(int owner, int playedminion, int minionowner, bool isOwnerActive, When when) override;
 };
 
 #endif

@@ -40,11 +40,11 @@ void Ability::useAbility(int activeplayer, int target) {
 	}
 }
 
-void Ability::useTriggered(int owner, int playedminion, bool isOwnerActive, When when) {
-	Player* p = board->getPlayer(activeplayer);
+void Ability::useTriggered(int owner, int playedminion, int minionowner, bool isOwnerActive, When when) {
+	Player* p = board->getPlayer(owner);
+	Player* enemy = board->getPlayer(owner%2+1);
 	if (name == "Bomb") {
 		if (defence > 0) return;
-		Player *enemy = board->getPlayer(activeplayer%2+1);
 		int num = enemy->getNumMinions();
 		for (int i = 1; i <= num; ++i) {
 			enemy->getMinion(i)->damage(attack);
@@ -55,6 +55,7 @@ void Ability::useTriggered(int owner, int playedminion, bool isOwnerActive, When
 			p->getMinion(i)->incrementAttack();
 		}
 	} else if (name == "Fire Elemental") {
-		
+		if (when != When::Play) return;
+
 	}
 }
