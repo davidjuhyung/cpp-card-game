@@ -17,26 +17,43 @@ private:
   std::vector<std::shared_ptr<AbstractMinion>> minions;
   std::vector<std::shared_ptr<AbstractMinion>> graveyard;
   std::shared_ptr<Ritual> ritual;
+
 public:
   Player(std::string name);
-  ~Player();
   void startTurn();
   void endTurn();
-  void attack(int i, Player *p);
-  void attack(int i, int j, Player *p);
-  void play(int i);
-  void play(int i, int j, Player *p);
-  void use(int i);
-  void use(int i, int j, Player *p);
-  void damage(int d); // reduce life by d
-  void incrementMagic(); // increase magic by 1
+
+  // in all the below functions p is the target player, the param is handled by main
+  void attack(int i, int p);
+  void attack(int i, int p, char t);
+  void play(int i, int p);
+  void play(int i, int p, char t);
+  void use(int i, int p);
+  void use(int i, int p, char t);
+
+  // reduce life by d
+  void damage(int d);
+
+  // increase magic by 1
+  void incrementMagic();
+
   std::shared_ptr<AbstractMinion> getMinion(int i);
+
   std::shared_ptr<Ritual> getRiutal();
+
+  void removeRitual();
+
   void replaceMinion(int i, std::shared_ptr<AbstractMinion> m);
+
   void setRitual(std::shared_ptr<Ritual> ritual);
+
   void addMinion(std::shared_ptr<AbstractMinion> m);
+
   int numMinions();
-  void moveToHand(int i); // ith minion goes back to hand
+
+  // ith minion goes back to hand
+  void moveToHand(int i);
+  
   void resurrect();
 };
 
