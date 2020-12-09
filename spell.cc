@@ -3,32 +3,33 @@
 void Spell::play(int player, int minion) {
     if (description == "Banish"){
         //destroy target minion or ritual
-        cost -= 2;
+        getCost()-= 2;
         board->getPlayer(player).graveyard.push_back(minion);
+        board->getPlayer(player)->removeRitual();
     }
     else if (description == "Unsommon"){
         //return target minion to its owner's hand
-        cost --;
+        getCost()--;
         board->getPlayer(player)->moveToHand(minion);
     }
     else if (description == "Recharge"){
         //ritual gains 3 charges
-        cost --;
-        board->getPlayer(player)->getRitual().charges += 3;
+        getCost()--;
+        board->getPlayer(player)->getRitual()->getCharges() += 3;
     }
     else if (description == "Disenchant"){
         //destroy the top enchantment on target minion
-        cost--;
+        getCost()--;
     }
     else if (description == "Raise Dead"){
         //resurrect the top minion in your graveyard and set its defence to 1
-        cost--;
+        getCost()--;
         board->getPlayer(player)->resurect();
-        top_minion.defence = 1;
+        top_minion->getDefence() += 1;
     }
     else if (description == "Blizzard"){
         //deal 2 damage to all minion
-        cost--;
+        getCost()--;
         /*play_one_mininion = getMinion(1);
         play_two_mininion = getMinion(2);
         play_one_num = numMinions(1);
