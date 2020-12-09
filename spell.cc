@@ -2,7 +2,7 @@
 
 void Spell::play(int player, int minion, bool actOnRitual) {
     if (description == "Banish"){
-        //destroy target minion or ritual
+        //destroy target minion or ritual *****
         getCost() -= 2;
         board->getPlayer(player)->removeMinion();
         board->getPlayer(player)->removeRitual();
