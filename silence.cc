@@ -12,13 +12,10 @@ void Silence::play(int player, int minion) {
 	m->defence = m->minion->getDefence();
 	m->gainAction = m->minion->gaining();
 	m->name = m->minion->getName();
+	m->activationCost = m->minion->getActivationCost();
 	board->getPlayer(player)->replaceMinion(minion,m);
 }
 
-void Silence::useAbility(int activeplayer, int target) { 
-    minion->useAbility(activeplayer,target); 
-}
+void Silence::useAbility(int activeplayer, int target) {}
 
-void Silence::useTriggered(int activeplayer, int target) { 
-    minion->useTriggered(activeplayer,target); 
-}
+void Silence::useTriggered(int activeplayer, int target) {}
