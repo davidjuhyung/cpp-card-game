@@ -12,7 +12,7 @@ class Enchantment : public AbstractMinion
   	
   	Enchantment(std::string name, Board* board) : AbstractMinion{name,board} {}
   	
-  	std::shared_ptr<AbstractMinion> getMinion() const { return minion; };
+  	std::shared_ptr<AbstractMinion> getMinion() const override { return minion; };
 };
 
 #endif

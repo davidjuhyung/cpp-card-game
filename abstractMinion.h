@@ -43,6 +43,8 @@ class AbstractMinion : public Card
   	virtual void useAbility(int activeplayer, int target = 0) = 0;
   	
   	virtual void useTriggered(int owner, int playedminion, bool isOwnerActive, When when) = 0;
+
+    virtual std::shared_ptr<AbstractMinion> getMinion() const = 0;
 };
 
 #endif
