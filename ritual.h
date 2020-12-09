@@ -2,6 +2,7 @@
 #define RITUAL_H
 
 #include "card.h"
+#include "abstractMinion.h"
 
 class Ritual : public Card {
 	std::string description;

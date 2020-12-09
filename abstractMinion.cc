@@ -40,7 +40,7 @@ AbstractMinion::AbstractMinion(std::string name, Board* board) : Card{name,board
 	}
 }
 
-void AbstractMinion::attackMinion(int player) {
+void AbstractMinion::attackPlayer(int player) {
 	if (actions == 0) return;
 	Player* p = board->getPlayer(player);
 	if (actions == 0) return;
