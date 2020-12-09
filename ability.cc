@@ -46,12 +46,14 @@ void Ability::useTriggered(int owner, int playedminion, bool isOwnerActive, When
 	Player* p = board->getPlayer(owner);
 	Player* enemy = board->getPlayer(owner%2+1);
 	if (name == "Bomb") {
+		if (when != When::Death) return;
 		if (defence > 0) return;
 		int num = enemy->getNumMinions();
 		for (int i = 1; i <= num; ++i) {
 			enemy->getMinion(i)->damage(attack);
 		}
 	} else if (name == "PotionSeller") {
+		if (when != When::End) return;
 		int num = p->getNumMinions();
 		for (int i = 1; i <=  num; ++i) {
 			p->getMinion(i)->incrementAttack();

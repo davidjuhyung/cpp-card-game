@@ -3,7 +3,7 @@
 
 #include "player.h"
 
-enum class When {Start = 0, End, Play};
+enum class When {Start = 0, End, Play, Death};
 
 class Board
 {
