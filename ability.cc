@@ -11,5 +11,10 @@ Ability::Ability(std::string name, Board* board, std::shared_ptr<AbstractMinion>
 void Ability::play(int player, int minion = 0, bool actOnRitual = false) {}
 
 void Ability::useAbility(int targetplayer, int target) {
-	
+	Player* p = board->getPlayer(p);
+	int m = p->getMagic();
+	if (name == "Novice Pyromancer") {
+		if (m < activationCost) return;
+		
+	}
 }
