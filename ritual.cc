@@ -2,9 +2,6 @@
 
 void play(int player, int minion = 0, bool actOnRitual = false) 
 {
-    if (numOfRituals == 1){
-        
-    }
     //Every time the ritual's triggered ability activates, it expends a 
     //number of charges equal to its activation cost to do the effect.  
     //If it does not have enough charges left to activate, the ability's 
