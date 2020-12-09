@@ -1,5 +1,6 @@
-#ifndef _RITUAL_H_
-#define _RITUAL_H_
+#ifndef RITUAL_H
+#define RITUAL_H
+
 #include "card.h"
 
 class Ritual : public Card {
@@ -7,10 +8,8 @@ class Ritual : public Card {
 	int activationCost
 	int charges;
   public:
-  	void play(int player, int minion) override;
-	virtual void useAbility(bool startOfPlay, bool minionplayed) = 0;
+  	void play(int player, int minion = 0, bool actOnRitual = false) override;
+	void useAbility(int player, int minion);
 };
-
-
 
 #endif

@@ -1,6 +1,6 @@
 #include "ritual.h"
 
-void play(int player, int minion) override 
+void play(int player, int minion = 0, bool actOnRitual = false) 
 {
     if (numOfRituals == 1){
         
@@ -13,7 +13,7 @@ void play(int player, int minion) override
     //already active, the old ritual is removed from the game and destroyed
 }
 
-virtual void useAbility(int player, int minion) = 0
+void useAbility(int player, int minion)
 {
     if (description == "DarkRitual"){
         //At the start of your turn, gain 1 magic
@@ -23,17 +23,12 @@ virtual void useAbility(int player, int minion) = 0
     else if (description == "AuraOfPower"){
         //whenever a minion enter a play under your control, it gains +1/+1
         cost -= activationCost;
-        board->getPlayer(player)->getMinion(minion).attack++;
-        board->getPlayer(player)->getMinion(minion).defence++;
+        board->getPlayer(player)->getMinion(minion)->getAttack()++;
+        board->getPlayer(player)->getMinion(minion)->getDefence()++;
     }
     else if (description == "Standstill"){
         //whenever a minion enter a play, destroy it
         cost -= activationCost;
         board->getPlayer(player).graveyard.push_back(minion);
     }
-    /*else if (description == "BombRitual"){
-        //Deals damage to all the opponent minions equal to its attack value when it dies
-    }
-    else if (description == "PotionSellerRitual"){
-    }*/
 }
