@@ -42,7 +42,7 @@ class AbstractMinion : public Card
   	// remember, active player as param
   	virtual void useAbility(int activeplayer, int target = 0) = 0;
   	
-  	virtual void useTriggered(int owner, int playedminion, int minionowner, bool isOwnerActive, When when) = 0;
+  	virtual void useTriggered(int owner, int playedminion, bool isOwnerActive, When when) = 0;
 };
 
 #endif

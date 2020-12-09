@@ -40,7 +40,7 @@ void Ability::useAbility(int activeplayer, int target) {
 	}
 }
 
-void Ability::useTriggered(int owner, int playedminion, int minionowner, bool isOwnerActive, When when) {
+void Ability::useTriggered(int owner, int playedminion, bool isOwnerActive, When when) {
 	Player* p = board->getPlayer(owner);
 	Player* enemy = board->getPlayer(owner%2+1);
 	if (name == "Bomb") {
@@ -56,6 +56,7 @@ void Ability::useTriggered(int owner, int playedminion, int minionowner, bool is
 		}
 	} else if (name == "Fire Elemental") {
 		if (when != When::Play) return;
-
+		if (isOwnerActive) return;
+		enemy->getMinion(playedminion)->damage(1);
 	}
 }
