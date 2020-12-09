@@ -9,8 +9,9 @@ void Delay::play(int player, int minion = 0, bool actOnRitual = false) {
 	m->actions = m->minion->getAction();
 	m->attack = m->minion->getAttack();
 	m->defence = m->minion->getDefence();
-	m->gainAction = m->minion->gaining();
+	m->gainAction = m->minion->gaining() = false;
 	m->name = m->minion->getName();
+	m->activationCost = m->minion->getActivationCost();
 	board->getPlayer(player)->replaceMinion(minion,m);
 }
 
