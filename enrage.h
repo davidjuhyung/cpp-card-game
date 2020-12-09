@@ -7,7 +7,7 @@ class Enrage : public Enchantment
 {
   
   public:
-
+  
   	Enrage(std::string name = "Enrage", Board* board);
 
   	void play(int player, int minion = 0, bool actOnRitual = false) override;
