@@ -61,8 +61,8 @@ void AbstractMinion::damage(int d) { defence -= d; }
 
 void AbstractMinion::play(int player, int minion = 0, bool actOnRitual = false) {
 	auto m = std::make_shared<Minion>(name,board);
-	m->attack = attack;
-	m->defence = defence;
+	m->setAttack(attack);
+	m->setDefence(defence);
 	auto a = std::make_shared<Ability>(name,board,m);
 	board->getPlayer(player)->addMinion(a);
 	board->APNAP(board->getPlayer(player)->getNumMinions(),When::Play);
@@ -72,6 +72,10 @@ int AbstractMinion::getDefence() const { return defence; }
 
 int AbstractMinion::getAttack() const { return attack; }
 
+void setDefence(int d) { defence = d; }
+
+void setAttack(int a) { attack = a; }
+
 int AbstractMinion::getAction() const {return actions; }
 
 bool AbstractMinion::gaining() const { return gainAction; }
@@ -80,6 +84,4 @@ int getActivationCost() const { return activationCost; }
 
 void AbstractMinion::incrementAttack() { attack++; }
 
-int AbstractMinion::setAction() {
-	if (gainAction) actions = 1;
-}
+int AbstractMinion::setAction() { gainActions ? actions = 1; }

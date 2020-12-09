@@ -27,6 +27,10 @@ class AbstractMinion : public Card
 
   	int getAttack() const;
 
+    void setDefence(int d);
+
+    void setAttack(int a);
+
   	int getAction() const;
 
   	bool gaining() const;

@@ -9,8 +9,8 @@ void Minion::useTriggered(int owner, int playedminion, bool isOwnerActive, When 
 
 std::shared_ptr<AbstractMinion> getMinion() const {
 	auto m = std::make_shared<Minion>(name,board);
-	m->attack = attack;
-	m->defence = defence;
+	m->setAttack(attack);
+	m->setDefence(defence);
 	auto a = std::make_shared<Ability>(name,board,m);
 	return a;
 }
