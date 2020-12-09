@@ -1,4 +1,4 @@
-#include "giant.h"
+#include "enrage.h"
 
 Enrage::Enrage(std::string name = "Enrage", Board* board) : Enchantment{name,board}, enchantmentName{"Enrage"} {}
 
