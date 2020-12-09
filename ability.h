@@ -11,9 +11,9 @@ class Ability : public Enchantment
   	
   	void play(int player, int minion = 0, bool actOnRitual = false) override;
   	
-  	void useAbility(int targetplayer, int target) override;
+  	void useAbility(int activeplayer, int target, bool turn) override;
   	
-  	void useTriggered(int targetplayer, int target) override;
+  	void useTriggered(int activeplayer, int target, bool turn) override;
 };
 
 #endif

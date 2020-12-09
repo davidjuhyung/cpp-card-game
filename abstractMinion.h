@@ -33,15 +33,18 @@ class AbstractMinion : public Card
 
   	int getActivationCost() const;
 
+    void incrementAttack();
+
   	void setAction();
 
   	virtual void play(int player, int minion = 0, bool actOnRitual = false);
 
-  	// remember, target player as param
-  	virtual void useAbility(int targetplayer, int target = 0) = 0;
-  	
   	// remember, active player as param
-  	virtual void useTriggered(int targetplayer, int target = 0) = 0;
+  	virtual void useAbility(int activeplayer, int target = 0) = 0;
+  	
+  	// remember, active player as param. Also, turn = false represents start of the turn, and turn = true
+    // represents end of the turn
+  	virtual void useTriggered(int activeplayer, int target = 0, bool turn) = 0;
 };
 
 #endif

@@ -10,12 +10,51 @@ Ability::Ability(std::string name, Board* board, std::shared_ptr<AbstractMinion>
 
 void Ability::play(int player, int minion = 0, bool actOnRitual = false) {}
 
-void Ability::useAbility(int targetplayer, int target) {
-	Player* p = board->getPlayer(p);
+void Ability::useAbility(int activeplayer, int target) {
+	if (actions == 0) return;
+	Player* p = board->getPlayer(activeplayer);
 	int m = p->getMagic();
 	if (m < activationCost) return;
-	if (name == "Novice Pyromancer") p->getMinion(target)->damage(1);
-	else if (name == "Apprentice Summoner") {
+	if (name == "Novice Pyromancer") {
+		board->getPlayer(activeplayer%2+1)->getMinion(target)->damage(1);
+		actions--;
+		p->setMagic(m-activationCost);
+	} else if (name == "Apprentice Summoner") {
+		int num = p->getNumMinions();
+		if (num == 5) return;
+		auto m = std::make_shared<Minion>("Air Elemental",board);
+		auto a = std::make_shared<Ability>(name,board,m);
+		p->addMinion(a);
+		actions--;
+		p->setMagic(m-activationCost);
+	} else if (name == "Master Summoner") {
+		int num = p->getNumMinions();
+		if (num == 5) return;
+		for (int i = 1; i <= 5 - num && i <= 3; ++i) {
+			auto m = std::make_shared<Minion>("Air Elemental",board);
+			auto a = std::make_shared<Ability>(name,board,m);
+			p->addMinion(a);
+		}
+		actions--;
+		p->setMagic(m-activationCost);
+	}
+}
+
+void Ability::useTriggered(int activeplayer, int target, bool turn) {
+	Player* p = board->getPlayer(activeplayer);
+	if (name == "Bomb") {
+		if (defence > 0) return;
+		Player *enemy = board->getPlayer(activeplayer%2+1);
+		int num = enemy->getNumMinions();
+		for (int i = 1; i <= num; ++i) {
+			enemy->getMinion(i)->damage(attack);
+		}
+	} else if (name == "PotionSeller") {
+		int num = p->getNumMinions();
+		for (int i = 1; i <=  num; ++i) {
+			p->getMinion(i)->incrementAttack();
+		}
+	} else if (name == "Fire Elemental") {
 		
 	}
 }

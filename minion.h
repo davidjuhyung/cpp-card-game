@@ -9,9 +9,9 @@ class Minion : public AbstractMinion
 
   	Minion(std::string name, Board* board);
 
-  	void useAbility(int targetplayer, int target = 0) override;
+  	void useAbility(int activeplayer, int target = 0, bool turn) override;
 
-  	void useTriggered(int targetplayer, int target = 0) override;
+  	void useTriggered(int activeplayer, int target = 0, bool turn) override;
 };
 
 #endif
