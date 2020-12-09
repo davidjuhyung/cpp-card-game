@@ -47,7 +47,7 @@ public:
   std::shared_ptr<AbstractMinion> getMinion(int i);
   int getNumMinions();
   void addMinion(std::shared_ptr<AbstractMinion> m);
-  void replaceMinion(int i, std::shared_ptr<AbstractMinion> m);\
+  void replaceMinion(int i, std::shared_ptr<AbstractMinion> m);
   void removeMinion(int i);
 };
 
