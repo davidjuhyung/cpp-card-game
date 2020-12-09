@@ -3,6 +3,8 @@
 
 #include "player.h"
 
+enum class When {Start = 0, End, Play};
+
 class Board
 {
 private:
@@ -22,6 +24,20 @@ public:
   void inspect(int i);
   void display();
   void showHand();
+
+  void APNAP(int owner = 0, int playedminion = 0, When when = When::Start) {
+    if (active == 1) {
+      for (int i = 1; i <= player1->getNumMinions(); ++i) player1->getMinion(i)->useTriggered(1,playedminion,true,when);
+      player1->getRitual()->useAbility(1,playedminion,true,when);
+      for (int i = 1; i <= player2->getNumMinions(); ++i) player2->getMinion(i)->useTriggered(2,playedminion,false,when);
+      player2->getRitual()->useAbility(2,playedminion,false,when);
+    } else {
+      for (int i = 1; i <= player2->getNumMinions(); ++i) player2->getMinion(i)->useTriggered(2,playedminion,true,when);
+      player2->getRitual()->useAbility(1,playedminion,true,when);
+      for (int i = 1; i <= player1->getNumMinions(); ++i) player1->getMinion(i)->useTriggered(1,playedminion,false,when);
+      player1->getRitual()->useAbility(1,playedminion,false,when);
+    }
+  }
 };
 
 
