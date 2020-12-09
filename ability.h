@@ -5,7 +5,6 @@
 
 class Ability : public Enchantment
 {
-	bool Triggered;
 	int activationCost;
 
   public:

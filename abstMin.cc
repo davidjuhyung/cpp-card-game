@@ -1,4 +1,4 @@
-#include "abstMin.h"
+#include "abstractMinion.h"
 #include "minion.h"
 #include "ability.h"
 
@@ -43,6 +43,7 @@ void AbstractMinion::attack(int player) {
 	Player* p = board->getPlayer(player);
 	if (actions == 0) return;
 	p->damage(attack);
+	actions--;
 }
 
 void AbstractMinion::attack(int player, int minion) {
@@ -51,6 +52,7 @@ void AbstractMinion::attack(int player, int minion) {
 	if (actions == 0) return;
 	m->defence -= attack;
 	defence -= m->attack;
+	actions--;
 }
 
 void AbstractMinion::play(int player, int minion = 0, bool actOnRitual = false) {

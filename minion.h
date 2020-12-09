@@ -1,7 +1,7 @@
 #ifndef MINION_H
 #define MINION_H
 
-#include "abstMin.h"
+#include "abstractMinion.h"
 
 class Minion : public AbstractMinion
 {

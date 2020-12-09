@@ -1,5 +1,5 @@
-#ifndef ABSTMIN_H
-#define ABSTMIN_H
+#ifndef ABSTRACTMINION_H
+#define ABSTRACTMINION_H
 
 #include "card.h"
 
