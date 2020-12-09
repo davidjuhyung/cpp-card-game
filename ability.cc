@@ -25,6 +25,7 @@ void Ability::useAbility(int activeplayer, int target) {
 		auto m = std::make_shared<Minion>("Air Elemental",board);
 		auto a = std::make_shared<Ability>(name,board,m);
 		p->addMinion(a);
+		board->APNAP(num+1,When::Play);
 		actions--;
 		p->setMagic(m-activationCost);
 	} else if (name == "Master Summoner") {
@@ -34,6 +35,7 @@ void Ability::useAbility(int activeplayer, int target) {
 			auto m = std::make_shared<Minion>("Air Elemental",board);
 			auto a = std::make_shared<Ability>(name,board,m);
 			p->addMinion(a);
+			board->APNAP(num+i,When::Play);
 		}
 		actions--;
 		p->setMagic(m-activationCost);

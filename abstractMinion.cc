@@ -65,6 +65,7 @@ void AbstractMinion::play(int player, int minion = 0, bool actOnRitual = false) 
 	m->defence = defence;
 	auto a = std::make_shared<Ability>(name,board,m);
 	board->getPlayer(player)->addMinion(a);
+	board->APNAP(board->getPlayer(player)->getNumMinions(),When::Play);
 }
 
 int AbstractMinion::getDefence() const { return defence; }
