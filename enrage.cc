@@ -10,6 +10,7 @@ void Enrage::play(int player, int minion = 0, bool actOnRitual = false) {
 	m->defence = m->minion->getDefence() - 2;
 	m->gainAction = m->minion->gaining();
 	m->name = m->minion->getName();
+	m->activationCost = m->minion->getActivationCost();
 	board->getPlayer(player)->replaceMinion(minion,m);
 }
 
