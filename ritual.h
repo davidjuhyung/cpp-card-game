@@ -18,7 +18,7 @@ class Ritual : public Card {
 
 	int getCharges() const;
 
-	void recharge() { charges += 3; }
+	void recharge();
 };
 
 #endif

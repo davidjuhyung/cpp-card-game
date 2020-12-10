@@ -13,7 +13,7 @@ Ritual::Ritual(std::string name, Board* board) : Card{name,board} {
 	}
 }
 
-void play(int owner, int targetPlayer, int minion, bool actOnRitual) 
+void Ritual::play(int owner, int targetPlayer, int minion, bool actOnRitual) 
 {
 	if (cost > board->getPlayer(owner)->getMagic()) return;
     board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()-cost);
@@ -21,14 +21,14 @@ void play(int owner, int targetPlayer, int minion, bool actOnRitual)
     board->getPlayer(owner)->setRitual(r);
 }
 
-void useAbility(int owner, int playedMinion, bool isOwnerActive, When when)
+void Ritual::useAbility(int owner, int playedMinion, bool isOwnerActive, When when)
 {
     if (charges < activationCost) { return; }
     if (name == "Dark Ritual"){
         //At the start of your turn, gain 1 magic
         (!isOwnerActive || when!=When::Start) ? return;
         charges -= activationCost;
-        board->getPlayer(owner)->incrementMagic();
+        board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()+1);
     }
     else if (name == "Aura Of Power") {
         //whenever a minion enter a play under your control, it gains +1/+1
@@ -47,3 +47,5 @@ void useAbility(int owner, int playedMinion, bool isOwnerActive, When when)
 }
 
 int Ritual::getCharges() const { return charges; }
+
+void Ritual::recharge() { charges += 3; }
