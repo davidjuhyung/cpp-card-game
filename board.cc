@@ -51,7 +51,7 @@ void Board::play(int i)
 
 void Board::play(int i, int p, char t)
 {
-  getPlayer(active)->play(i, p, t);
+  getPlayer(active)->play(active, i, p, t);
 }
 
 void Board::use(int i)
@@ -61,7 +61,7 @@ void Board::use(int i)
 
 void Board::use(int i, int p, char t)
 {
-  getPlayer(active)->play(i, p, t);
+  getPlayer(active)->use(i, p, t);
 }
 
 

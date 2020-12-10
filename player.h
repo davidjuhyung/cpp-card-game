@@ -27,7 +27,7 @@ public:
   Player(std::string name, std::vector<std::shared_ptr<Card>> deck);
   void startTurn();
   void attack(int i, int p);
-  void attack(int i, int p, char t);
+  void attack(int i, int p, int t);
   void play(int i, int p);
   void play(int a, int i, int p, char t);
   void use(int i, int p);

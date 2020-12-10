@@ -4,6 +4,7 @@
 #include "player.h"
 #include "card.h"
 #include "abstractMinion.h"
+#include "board.h"
 
 class Ritual : public Card 
 {
@@ -12,7 +13,7 @@ class Ritual : public Card
 	int charges;
 
   public:
-  
+
   	Ritual(std::string name, Board* board);
 
   	void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false) override;
