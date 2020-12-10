@@ -21,7 +21,7 @@ void Ability::useAbility(int activeplayer, int target) {
 		p->setMagic(m-activationCost);
 	} else if (name == "Apprentice Summoner") {
 		int num = p->getNumMinions();
-		if (num == 5) return;
+		if (num == Player::maxMinionSize) return;
 		auto m = std::make_shared<Minion>("Air Elemental",board);
 		auto a = std::make_shared<Ability>(name,board,m);
 		p->addMinion(a);
@@ -30,8 +30,8 @@ void Ability::useAbility(int activeplayer, int target) {
 		p->setMagic(m-activationCost);
 	} else if (name == "Master Summoner") {
 		int num = p->getNumMinions();
-		if (num == 5) return;
-		for (int i = 0; i < 5 - num && i < 3; ++i) {
+		if (num == Player::maxMinionSize) return;
+		for (int i = 0; i < Player::maxMinionSize - num && i < 3; ++i) {
 			auto m = std::make_shared<Minion>("Air Elemental",board);
 			auto a = std::make_shared<Ability>(name,board,m);
 			p->addMinion(a);
