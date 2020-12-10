@@ -1,4 +1,5 @@
 #include "ability.h"
+#include "player.h"
 
 Ability::Ability(std::string name, Board* board, std::shared_ptr<AbstractMinion> minion) : Enchantment{name,board} {
 	enchantmentName = "Ability";

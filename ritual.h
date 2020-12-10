@@ -7,7 +7,7 @@
 
 class Ritual : public Card {
 	std::string description;
-	int activationCost
+	int activationCost;
 	int charges;
   public:
   	Ritual(std::string name, Board* board);
