@@ -16,11 +16,9 @@ class AbstractMinion : public Card
 
   	AbstractMinion(std::string name, Board* board);
 
-  	// attacks the opposing player p
-  	void attackPlayer(int p);
+  	void attackPlayer(int player);
 
-  	// attacks the opposing player p's minion m
-  	void attackMinion(int p, int m);
+  	void attackMinion(int player, int minion);
 
     // decrease defence by d
   	void damage(int d);
