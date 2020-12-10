@@ -10,10 +10,13 @@
 
 int main(int argc, char const *argv[]) {
   bool testingMode = false;
+  bool init = false;
+  std::ifstream defaultDeck{"default.deck"};
   std::istream actionInput;
   Board b;
   std::string name1 = "", name2 = "";
-  std::vector<std::shared_ptr<Card>> deck1 = nullptr, deck2 = nullptr;
+  auto deck1 = initialize(defaultDeck, &b);
+  auto deck2 = deck1;
 
   // read command line arguments
   for (int i = 1; i < argc; i++) {
@@ -30,8 +33,7 @@ int main(int argc, char const *argv[]) {
         }
       }
       if (cmd == "-init") {
-        infile >> name1;
-        infile >> name2;
+        init = true;
         actionInput = infile;
       }
       if (cmd == "-testing") {
@@ -39,7 +41,22 @@ int main(int argc, char const *argv[]) {
       }
     }
   }
-  // read action inputs
+  if (!init) actionInput = std::cin;
 
+  std::string command;
+
+  actionInput >> name1;
+  actionInput >> name2;
+  auto p1 = std::make_shared<Player>(name1,deck1);
+  auto p2 = std::make_shared<Player>(name2,deck2);
+  b.setPlayer(1,p1);
+  b.setPlayer(2,p2);
+  
+
+  while (actionInput >> command && init) {
+    if (command == "play") {
+      int i;
+    }
+  }
 
 }
