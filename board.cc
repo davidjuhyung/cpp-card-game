@@ -29,7 +29,7 @@ void Board::startTurn()
 {
   auto activePlayer = getPlayer(active);
   activePlayer->startTurn();
-  APNAP();
+  APNAP(When::Start);
 }
 
 void Board::endturn()
@@ -84,23 +84,23 @@ void Board::showHand()
 
 }
 
-void Board::APNAP(int playedminion, When when) 
+void Board::APNAP(When when, int playedMinion) 
 {
   if (active == 1) {
-    for (int i = 1; i <= player1->getNumMinions(); ++i) {
-      if (i == playedminion) continue;
-      player1->getMinion(i)->useTriggered(1,playedminion,true,when);
+    for (int i = 0; i < player1->getNumMinions(); ++i) {
+      if (i == playedMinion) continue;
+      player1->getMinion(i)->useTriggered(1,playedMinion,true,when);
     }
-    player1->getRitual()->useAbility(1,playedminion,true,when);
-    for (int i = 1; i <= player2->getNumMinions(); ++i) player2->getMinion(i)->useTriggered(2,playedminion,false,when);
-    player2->getRitual()->useAbility(2,playedminion,false,when);
+    player1->getRitual()->useAbility(1,playedMinion,true,when);
+    for (int i = 0; i < player2->getNumMinions(); ++i) player2->getMinion(i)->useTriggered(2,playedMinion,false,when);
+    player2->getRitual()->useAbility(2,playedMinion,false,when);
   } else {
-    for (int i = 1; i <= player2->getNumMinions(); ++i) {
-      if (i == playedminion) continue;
-      player2->getMinion(i)->useTriggered(2,playedminion,true,when);
+    for (int i = 0; i < player2->getNumMinions(); ++i) {
+      if (i == playedMinion) continue;
+      player2->getMinion(i)->useTriggered(2,playedMinion,true,when);
     }
-    player2->getRitual()->useAbility(1,playedminion,true,when);
-    for (int i = 1; i <= player1->getNumMinions(); ++i) player1->getMinion(i)->useTriggered(1,playedminion,false,when);
-    player1->getRitual()->useAbility(1,playedminion,false,when);
+    player2->getRitual()->useAbility(1,playedMinion,true,when);
+    for (int i = 0; i < player1->getNumMinions(); ++i) player1->getMinion(i)->useTriggered(1,playedMinion,false,when);
+    player1->getRitual()->useAbility(1,playedMinion,false,when);
   }
 }

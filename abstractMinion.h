@@ -15,7 +15,7 @@ class AbstractMinion : public Card
   public:
   	AbstractMinion(std::string name, Board* board);
   	void attackPlayer(int player);
-  	void attackMinion(int player, int minion);
+  	void attackMinion(int ownPosition, int player, int target);
     // decrease defence by d
   	void damage(int d);
   	int getDefence() const;
@@ -29,9 +29,9 @@ class AbstractMinion : public Card
   	void setAction();
   	virtual void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false);
   	// remember, active player as param. Use minions activated ability
-    virtual void useAbility(int activeplayer, int target = -1) = 0;
+    virtual void useAbility(int activePlayer, int target = -1) = 0;
     // activate trigger
-  	virtual void useTriggered(int owner, int playedminion, bool isOwnerActive, When when) = 0;
+  	virtual void useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) = 0;
     virtual std::shared_ptr<AbstractMinion> getMinion() const = 0;
 };
 

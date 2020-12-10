@@ -20,6 +20,6 @@ void Delay::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	board->getPlayer(targetPlayer)->replaceMinion(minion,m);
 }
 
-void Delay::useAbility(int activeplayer, int target) { minion->useAbility(activeplayer,target); }
+void Delay::useAbility(int activePlayer, int target) { minion->useAbility(activePlayer,target); }
 
-void Delay::useTriggered(int owner, int playedminion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedminion,isOwnerActive,when); }
+void Delay::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedMinion,isOwnerActive,when); }

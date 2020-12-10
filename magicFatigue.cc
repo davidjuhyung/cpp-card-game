@@ -19,5 +19,5 @@ void MagicFatigue::play(int owner, int targetPlayer, int minion, bool actOnRitua
 	m->activationCost = m->minion->getActivationCost() + 2;
     board->getPlayer(targetPlayer)->replaceMinion(minion,m);
 }
-void MagicFatigue::useAbility(int activeplayer, int target) { minion->useAbility(activeplayer,target); }
-void MagicFatigue::useTriggered(int owner, int playedminion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedminion,isOwnerActive,when); }
+void MagicFatigue::useAbility(int activePlayer, int target) { minion->useAbility(activePlayer,target); }
+void MagicFatigue::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedMinion,isOwnerActive,when); }

@@ -54,9 +54,17 @@ void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
         //deal 2 damage to all minions
         for (int i = 0; i < board->getPlayer(owner)->getNumMinions(); i++ ){
             board->getPlayer(owner)->getMinion(i)->damage(2);
+            if (board->getPlayer(owner)->getMinion(i)->getDefence() <= 0) {
+                board->APNAP(When::Death);
+                board->getPlayer(owner)->removeMinion(i,true);
+            }
         }
         for (int i = 0; i < board->getPlayer(owner%2+1)->getNumMinions(); i++ ){
-            board->getPlayer(owner)->getMinion(i)->damage(2);
+            board->getPlayer(owner%2+1)->getMinion(i)->damage(2);
+            if (board->getPlayer(owner%2+1)->getMinion(i)->getDefence() <= 0) {
+                board->APNAP(When::Death);
+                board->getPlayer(owner%2+1)->removeMinion(i,true);
+            }
         }
     }
 }
