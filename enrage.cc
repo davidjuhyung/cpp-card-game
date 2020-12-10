@@ -1,6 +1,9 @@
 #include "enrage.h"
 
-Enrage::Enrage(std::string name = "Enrage", Board* board) : Enchantment{name,board}, enchantmentName{"Enrage"}, cost{2} {}
+Enrage::Enrage(std::string name = "Enrage", Board* board) : Enchantment{name,board} {
+	enchantmentName = "Enrage";
+	cost = 2;
+}
 
 void Enrage::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	if (cost > board->getPlayer(owner)->getMagic()) return;

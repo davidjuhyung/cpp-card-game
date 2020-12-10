@@ -1,6 +1,9 @@
 #include "delay.h"
 
-Delay::Delay(std::string name = "Delay", Board* board) : Enchantment{name,board}, enchantmentName{"Delay"}, cost{1} {}
+Delay::Delay(std::string name = "Delay", Board* board) : Enchantment{name,board} {
+	enchantmentName = "Delay";
+	cost = 1;
+}
 
 void Delay::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	//enchanted minion doesn't gain an action on their next turn. automatically destroyed after 1 turn

@@ -1,6 +1,9 @@
 #include "silence.h"
 
-Silence::Silence(std::string name = "Silence", Board* board) : Enchantment{name, board}, enchantmentName{"Silence"}, cost{1} {}
+Silence::Silence(std::string name = "Silence", Board* board) : Enchantment{name, board} {
+	enchantmentName = "Silence";
+	cost = 1;
+}
 
 void Silence::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
     //enchanted minion cannot use ability

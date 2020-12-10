@@ -1,7 +1,10 @@
 
 #include "magicfatigue.h"
 
-MagicFatigue::MagicFatigue(std::string name = "Magic Fatigue", Board* board) : Enchantment{name, board}, cost{0} {}
+MagicFatigue::MagicFatigue(std::string name = "Magic Fatigue", Board* board) : Enchantment{name, board} {
+	enchantmentName = "Magic Fatigue"
+	cost = 0;
+}
 
 void MagicFatigue::play(int owner, int targetPlayer, int minion, bool actOnRitual){
     //enchanted minion's activated ability costs 2 more
