@@ -10,7 +10,7 @@ class Delay : public Enchantment
   
   public:
   
-  	Delay(std::string name = "Delay", Board* board);
+  	Delay(std::string name, Board* board);
 
   	void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false) override;
 

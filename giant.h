@@ -10,7 +10,7 @@ class GiantStrength : public Enchantment
   
   public:
 
-  	GiantStrength(std::string name = "Giant Strength", Board* board);
+  	GiantStrength(std::string name, Board* board);
 
   	void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false) override;
 

@@ -1,7 +1,7 @@
 
 #include "magicfatigue.h"
 
-MagicFatigue::MagicFatigue(std::string name = "Magic Fatigue", Board* board) : Enchantment{name, board} {
+MagicFatigue::MagicFatigue(std::string name, Board* board) : Enchantment{name, board} {
 	enchantmentName = "Magic Fatigue"
 	cost = 0;
 }

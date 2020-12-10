@@ -1,6 +1,6 @@
 #include "silence.h"
 
-Silence::Silence(std::string name = "Silence", Board* board) : Enchantment{name, board} {
+Silence::Silence(std::string name, Board* board) : Enchantment{name, board} {
 	enchantmentName = "Silence";
 	cost = 1;
 }

@@ -1,6 +1,6 @@
 #include "delay.h"
 
-Delay::Delay(std::string name = "Delay", Board* board) : Enchantment{name,board} {
+Delay::Delay(std::string name, Board* board) : Enchantment{name,board} {
 	enchantmentName = "Delay";
 	cost = 1;
 }

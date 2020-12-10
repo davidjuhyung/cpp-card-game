@@ -1,6 +1,6 @@
 #include "giant.h"
 
-GiantStrength::GiantStrength(std::string name = "Giant Strength", Board* board) : Enchantment{name,board} {
+GiantStrength::GiantStrength(std::string name, Board* board) : Enchantment{name,board} {
 	enchantmentName = "Giant Strength";
 	cost = 1;
 }

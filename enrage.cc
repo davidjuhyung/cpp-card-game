@@ -1,6 +1,6 @@
 #include "enrage.h"
 
-Enrage::Enrage(std::string name = "Enrage", Board* board) : Enchantment{name,board} {
+Enrage::Enrage(std::string name, Board* board) : Enchantment{name,board} {
 	enchantmentName = "Enrage";
 	cost = 2;
 }
