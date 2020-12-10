@@ -2,6 +2,8 @@
 #define DECK_H
 
 #include <istream>
+#include <vector>
+#include <memory>
 
 class Card;
 class AbstractMinion;

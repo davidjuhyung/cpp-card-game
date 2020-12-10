@@ -1,4 +1,3 @@
-
 #include "magicFatigue.h"
 
 MagicFatigue::MagicFatigue(std::string name, Board* board) : Enchantment{name, board} {

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 // our libraries
 class Card;
 class AbstractMinion;
