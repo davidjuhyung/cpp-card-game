@@ -1,43 +1,59 @@
 #include "spell.h"
 
-void Spell::play(int player, int minion, bool actOnRitual) {
-    if (description == "Banish"){
-        //destroy target minion or ritual *****
-        getCost() -= 2;
-        board->getPlayer(player)->removeMinion();
-        board->getPlayer(player)->removeRitual();
+Spell(std::string name, Board* board) : Card{name,board} {
+	if (name == "Banish") {
+		cost = 2;
+		description = "Destroy target minion or ritual";
+	} else if (name == "Unsommon") {
+		cost = 1;
+		description = "Return target minion to its owner's hand";
+	} else if (name == "Recharge") {
+		cost = 1;
+		description = "Your ritual gains 3 charges";
+	} else if (name == "Disenchant") {
+		cost = 1;
+		description = "Destroy the top enchantment on target minion";
+	} else if (name == "Raise Dead") {
+		cost = 1;
+		description = "Resurrect the top minion in your graveyard and set its defence to 1";
+	} else {
+		cost = 3;
+		description = "Deal 2 damage to all minions";
+	}
+}
+
+void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
+	if (cost > board->getPlayer(owner)->getMagic()) return;
+    board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()-cost);
+    if (name == "Banish"){
+        //destroy target minion or ritual
+        if (actOnRitual) board->getPlayer(targetplayer)->removeRitual();
+        else board->getPlayer(targetplayer)->removeMinion(minion);
     }
-    else if (description == "Unsommon"){
+    else if (name == "Unsommon"){
         //return target minion to its owner's hand
-        getCost()--;
-        board->getPlayer(player)->moveToHand(minion);
+        board->getPlayer(targetplayer)->moveToHand(minion);
     }
-    else if (description == "Recharge"){
+    else if (name == "Recharge"){
         //ritual gains 3 charges
-        getCost()--;
-        board->getPlayer(player)->getRitual()->getCharges() += 3;
+        board->getPlayer(owner)->getRitual()->recharge();
     }
-    else if (description == "Disenchant"){
+    else if (name == "Disenchant"){
         //destroy the top enchantment on target minion
-        getCost()--;
-        auto m = board->getPlayer(player)->getMinon(minion)->getMinion(); 
-        board->getPlayer(player)->replaceMinion(minion, m)
+        auto m = board->getPlayer(targetplayer)->getMinon(minion)->getMinion(); 
+        board->getPlayer(targetPlayer)->replaceMinion(minion, m)
     }
-    else if (description == "Raise Dead"){
+    else if (name == "Raise Dead"){
         //resurrect the top minion in your graveyard and set its defence to 1
-        getCost()--;
-        board->getPlayer(player)->resurect();
-        int num = board->getPlayer(player)->getNumMinions();
-        board->getPlayer(player)->getMinion(num)->setDefence(1);
+        board->getPlayer(owner)->resurect();
     }
-    else if (description == "Blizzard"){
-        //deal 2 damage to all minion
-        getCost()--;
-        for (int i = 1; i <= board->getPlayer(player)->getNumMinions(); i++ ){
-            board->getPlayer(player)->getMinion(1)->damage(2);
+    else if (name == "Blizzard"){
+        //deal 2 damage to all minions
+        for (int i = 0; i < board->getPlayer(owner)->getNumMinions(); i++ ){
+            board->getPlayer(owner)->getMinion(i)->damage(2);
         }
-        for (int i = 1; i <= board->getPlayer(player%2+1)->getNumMinions(); i++ ){
-            board->getPlayer(player)->getMinion(2)->damage(2);
+        for (int i = 0; i < board->getPlayer(owner%2+1)->getNumMinions(); i++ ){
+            board->getPlayer(owner)->getMinion(i)->damage(2);
         }
     }
 }

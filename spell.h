@@ -8,7 +8,8 @@
 class Spell : public Card {
 	std::string description;
 	public:
-	void play(int owner, int targetPlayer, int minion = 0, bool actOnRitual = false) override;
+	Spell(std::string name, Board* board);
+	void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false) override;
 };
 
 #endif

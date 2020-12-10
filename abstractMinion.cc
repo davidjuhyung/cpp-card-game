@@ -60,7 +60,9 @@ void AbstractMinion::attackMinion(int player, int minion) {
 
 void AbstractMinion::damage(int d) { defence -= d; }
 
-void AbstractMinion::play(int owner, int targetPlayer, int minion = 0, bool actOnRitual = false) {
+void AbstractMinion::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
+	if (cost > board->getPlayer(owner)->getMagic()) return;
+    board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()-cost);
 	auto m = std::make_shared<Minion>(name,board);
 	m->setAttack(attack);
 	m->setDefence(defence);

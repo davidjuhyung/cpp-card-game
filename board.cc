@@ -31,12 +31,12 @@ void Board::startTurn()
 
 void Board::endturn()
 {
-
+  APNAP(0, When::End);
 }
 
 void Board::attack(int i)
 {
-
+  
 }
 
 void Board::attack(int i, int j)
