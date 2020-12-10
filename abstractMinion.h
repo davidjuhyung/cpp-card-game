@@ -16,10 +16,8 @@ class AbstractMinion : public Card
 
   	AbstractMinion(std::string name, Board* board);
 
-  	// pass target playernum as param
   	void attackPlayer(int player);
 
-  	// pass target playernum as param
   	void attackMinion(int player, int minion);
 
     // decrease defence by d

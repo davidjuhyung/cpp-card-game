@@ -5,7 +5,6 @@
 #include "abstractMinion.h"
 #include "enchantment.h"
 
-#include 
 class MagicFatigue : public Enchantment {
   public:
 	MagicFatigue(std::string name = "Magic Fatigue", Board* board);

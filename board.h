@@ -9,10 +9,12 @@ class Board
 {
 private:
   int active = 1;
-  std::shared_ptr<Player> player1 = nullptr;
+  std::shared_ptr<Player> player1 = nullptr; // unique_ptr ? since it's exclusively owned by board only. Do we ever share this pointer?
   std::shared_ptr<Player> player2 = nullptr;
 public:
-  void setPlayer(int player, std::shared_ptr<Player> player);
+  std::shared_ptr<Player> getPlayer(int p);
+  void setPlayer(int p, std::shared_ptr<Player> player);
+  void startTurn();
   void endturn();
   void attack(int i);
   void attack(int i, int j);
@@ -20,30 +22,10 @@ public:
   void play(int i, int p, char t);
   void use(int i);
   void use(int i, int p, int t);
-  Player* getPlayer(int p);
   void inspect(int i);
   void display();
   void showHand();
-
-  void APNAP(int playedminion = -1, When when = When::Start) {
-    if (active == 1) {
-      for (int i = 0; i < player1->getNumMinions(); ++i) {
-        if (i == playedminion) continue;
-        player1->getMinion(i)->useTriggered(1,playedminion,true,when);
-      }
-      player1->getRitual()->useAbility(1,playedminion,true,when);
-      for (int i = 0; i <= player2->getNumMinions(); ++i) player2->getMinion(i)->useTriggered(2,playedminion,false,when);
-      player2->getRitual()->useAbility(2,playedminion,false,when);
-    } else {
-      for (int i = 0; i <= player2->getNumMinions(); ++i) {
-        if (i == playedminion) continue;
-        player2->getMinion(i)->useTriggered(2,playedminion,true,when);
-      }
-      player2->getRitual()->useAbility(1,playedminion,true,when);
-      for (int i = 0; i <= player1->getNumMinions(); ++i) player1->getMinion(i)->useTriggered(1,playedminion,false,when);
-      player1->getRitual()->useAbility(1,playedminion,false,when);
-    }
-  }
+  void APNAP(int playedminion = 0, When when = When::Start);
 };
 
 
