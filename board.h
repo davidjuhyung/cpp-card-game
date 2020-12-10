@@ -19,7 +19,7 @@ public:
   void attack(int i);
   void attack(int i, int j);
   void play(int i);
-  void play(int i, int p, char t);
+  void play(int i, int p, int t);
   void use(int i);
   void use(int i, int p, int t);
   void inspect(int i);

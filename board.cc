@@ -36,32 +36,32 @@ void Board::endturn()
 
 void Board::attack(int i)
 {
-  
+  getPlayer(active)->attack(i, active);
 }
 
 void Board::attack(int i, int j)
 {
-
+  getPlayer(active)->attack(i, j, active); // third param active?
 }
 
 void Board::play(int i)
 {
-
+  getPlayer(active)->play(i, active);
 }
 
 void Board::play(int i, int p, char t)
 {
-
+  getPlayer(active)->play(i, p, t);
 }
 
 void Board::use(int i)
 {
-
+  getPlayer(active)->use(i, active);
 }
 
-void Board::use(int i, int p, int t)
+void Board::use(int i, int p, char t)
 {
-
+  getPlayer(active)->play(i, p, t);
 }
 
 
@@ -90,7 +90,7 @@ void Board::showHand()
   {
     if (n->type == CardType::minion)
     {
-    
+      currentPlayer->getMinion();
     }
     else if (n->type == CardType::enchantment)
     {
@@ -98,7 +98,7 @@ void Board::showHand()
     }
     else if (n->type == CardType::ritual)
     {
-
+      currentPlayer->getRitual()
     }
     else if (n->type == CardType::spell)
     {
