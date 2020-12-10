@@ -5,7 +5,6 @@
 #include "board.h"
 
 class Card
-
 {	
 	std::string name;
 

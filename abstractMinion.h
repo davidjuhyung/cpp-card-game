@@ -16,11 +16,11 @@ class AbstractMinion : public Card
 
   	AbstractMinion(std::string name, Board* board);
 
-  	// pass target playernum as param
-  	void attackPlayer(int player);
+  	// attacks the opposing player p
+  	void attackPlayer(int p);
 
-  	// pass target playernum as param
-  	void attackMinion(int player, int minion);
+  	// attacks the opposing player p's minion m
+  	void attackMinion(int p, int m);
 
     // decrease defence by d
   	void damage(int d);

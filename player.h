@@ -2,12 +2,16 @@
 #define PLAYER_H
 
 #include <string>
+#include <vector>
 // our libraries
 #include "card.h"
 #include "abstractMinion.h"
+#include "ritual.h"
 
 class Player
 {
+  static int maxHandSize = 5;
+  static int maxMinionSize = 5;
 private:
   std::string name;
   int life;
@@ -21,26 +25,28 @@ private:
 public:
   Player(std::string name, std::vector<std::shared_ptr<Card>> deck);
   void startTurn();
-  void endTurn();
   void attack(int i, int p);
   void attack(int i, int p, char t);
   void play(int i, int p);
-  void play(int i, int p, char t);
+  void play(int a, int i, int p, char t);
   void use(int i, int p);
   void use(int i, int p, char t);
 
-  void getName();
+  std::string getName();
+  std::vector<std::shared_ptr<Card>> getHand();  
+  std::vector<std::shared_ptr<AbstractMinion>> getMinions();
+  std::vector<std::shared_ptr<AbstractMinion>> getGraveyard();
 
-  void moveToHand(int i);  // ith minion goes back to hand
+  void moveToHand(int i);
   void resurrect();
   
-  void getLife();
-  void damage(int d); // decrease life by d
+  int getLife();
+  void damage(int d);
 
   int getMagic();
-  void setMagic(int m)
+  void setMagic(int m);
 
-  std::shared_ptr<Ritual> getRiutal();
+  std::shared_ptr<Ritual> getRitual();
   void setRitual(std::shared_ptr<Ritual> ritual);
   void removeRitual();
 
