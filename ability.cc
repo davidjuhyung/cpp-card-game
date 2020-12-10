@@ -17,12 +17,12 @@ void Ability::play(int owner, int targetPlayer, int minion, bool actOnRitual) {}
 void Ability::useAbility(int activeplayer, int target) {
 	if (actions == 0) return;
 	Player* p = board->getPlayer(activeplayer);
-	int m = p->getMagic();
-	if (m < activationCost) return;
+	int magic = p->getMagic();
+	if (magic < activationCost) return;
 	if (name == "Novice Pyromancer") {
 		board->getPlayer(activeplayer%2+1)->getMinion(target)->damage(1);
 		actions--;
-		p->setMagic(m-activationCost);
+		p->setMagic(magic-activationCost);
 	} else if (name == "Apprentice Summoner") {
 		int num = p->getNumMinions();
 		if (num == Player::maxMinionSize) return;
@@ -31,7 +31,7 @@ void Ability::useAbility(int activeplayer, int target) {
 		p->addMinion(a);
 		board->APNAP(num,When::Play);
 		actions--;
-		p->setMagic(m-activationCost);
+		p->setMagic(magic-activationCost);
 	} else if (name == "Master Summoner") {
 		int num = p->getNumMinions();
 		if (num == Player::maxMinionSize) return;
@@ -42,7 +42,7 @@ void Ability::useAbility(int activeplayer, int target) {
 			board->APNAP(num+i,When::Play);
 		}
 		actions--;
-		p->setMagic(m-activationCost);
+		p->setMagic(magic-activationCost);
 	}
 }
 
