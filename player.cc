@@ -31,12 +31,9 @@ void Player::attack(int i, int o)
 }
 
 // orders the active player’s minion i to attack the opposing player o’s minion t.
-void Player::attack(int i, int o, char t)
+void Player::attack(int i, int o, int t)
 {
-  std::stringstream str;
-  str << t;
-  int m = t;
-  minions.at(i)->attackMinion(o, m);
+  minions.at(i)->attackMinion(o, t);
 }
 
 // plays the ith card in the active player’s hand with no target.

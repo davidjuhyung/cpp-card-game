@@ -78,37 +78,7 @@ void Board::display()
 //   std::vector<std::shared_ptr<Card>> hand;
 void Board::showHand()
 {
-  auto currentPlayer = getPlayer(active);
-  auto hand = currentPlayer->getHand();
 
-  for (auto n : hand) 
-  {
-    std::cout << n->getName() << std::endl; // for debugging
-  }
-
-  for (auto n : hand) 
-  {
-    if (n->type == CardType::minion)
-    {
-      currentPlayer->getMinions();
-    }
-    else if (n->type == CardType::enchantment)
-    {
-
-    }
-    else if (n->type == CardType::ritual)
-    {
-      currentPlayer->getRitual()
-    }
-    else if (n->type == CardType::spell)
-    {
-
-    }
-    else 
-    {
-      throw;
-    }
-  }
 }
 
 void Board::APNAP(int playedminion = 0, When when = When::Start) 
