@@ -85,6 +85,4 @@ bool AbstractMinion::gaining() const { return gainAction; }
 
 int getActivationCost() const { return activationCost; }
 
-void AbstractMinion::incrementAttack() { attack++; }
-
 int AbstractMinion::setAction() { gainActions ? actions = 1; }

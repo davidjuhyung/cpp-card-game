@@ -56,7 +56,7 @@ void Ability::useTriggered(int owner, int playedminion, bool isOwnerActive, When
 		if (when != When::End) return;
 		int num = p->getNumMinions();
 		for (int i = 0; i <  num; ++i) {
-			p->getMinion(i)->incrementAttack();
+			p->getMinion(i)->setAttack(p->getMinion(i)->getAttack()+1);
 		}
 	} else if (name == "Fire Elemental") {
 		if (when != When::Play) return;

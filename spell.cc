@@ -46,6 +46,7 @@ void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
     else if (name == "Raise Dead"){
         //resurrect the top minion in your graveyard and set its defence to 1
         board->getPlayer(owner)->resurect();
+        board->getPlayer(owner)->getMinion(board->getPlayer(owner)->getNumMinion()-1)->setDefence(1);
     }
     else if (name == "Blizzard"){
         //deal 2 damage to all minions

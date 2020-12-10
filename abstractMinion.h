@@ -38,9 +38,6 @@ class AbstractMinion : public Card
 
   	int getActivationCost() const;
 
-    // increase attack by 1
-    void incrementAttack();
-
   	void setAction();
 
   	virtual void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false);
@@ -52,8 +49,6 @@ class AbstractMinion : public Card
   	virtual void useTriggered(int owner, int playedminion, bool isOwnerActive, When when) = 0;
 
     virtual std::shared_ptr<AbstractMinion> getMinion() const = 0;
-
-    void resurrect() { defence = 1; }
 };
 
 #endif
