@@ -45,11 +45,4 @@ int main(int argc, char const *argv[]) {
       }
     }
   }
-
-  // create Players
-  Player p1{name1};
-  Player p2{name2};
-
-  std::cout << "Player 1's name: " << p1.name << std::endl;
-  std::cout << "Player 2's name: " << p2.name << std::endl;
 }

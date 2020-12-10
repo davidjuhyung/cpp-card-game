@@ -4,9 +4,9 @@
 #include <string>
 #include <vector>
 // our libraries
-#include "card.h"
-#include "abstractMinion.h"
-#include "ritual.h"
+class Card;
+class AbstractMinion;
+class Ritual;
 
 class Player
 {

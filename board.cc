@@ -1,5 +1,8 @@
 #include "board.h"
-#include "cardType.h"
+#include "card.h"
+#include "player.h"
+#include "minion.h"
+#include "ritual.h"
 
 Player* Board::getPlayer(int p)
 {
@@ -81,7 +84,7 @@ void Board::showHand()
 
 }
 
-void Board::APNAP(int playedminion = 0, When when = When::Start) 
+void Board::APNAP(int playedminion, When when) 
 {
   if (active == 1) {
     for (int i = 1; i <= player1->getNumMinions(); ++i) {

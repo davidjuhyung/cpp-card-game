@@ -1,4 +1,7 @@
 #include "player.h"
+#include "card.h"
+#include "abstractMinion.h"
+#include "ritual.h"
 #include <sstream>
 
 Player::Player(std::string name, std::vector<std::shared_ptr<Card>> deck)

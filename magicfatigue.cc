@@ -1,17 +1,17 @@
 
-#include "magicfatigue.h"
+#include "magicFatigue.h"
 
 MagicFatigue::MagicFatigue(std::string name, Board* board) : Enchantment{name, board} {
-	enchantmentName = "Magic Fatigue"
+	enchantmentName = "Magic Fatigue";
 	cost = 0;
 }
 
 void MagicFatigue::play(int owner, int targetPlayer, int minion, bool actOnRitual){
-    //enchanted minion's activated ability costs 2 more
-    if (cost > board->getPlayer(owner)->getMagic()) return;
-    board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()-cost);
-    auto m = std::make_share<MagicFatigue>(name,board);
-    m->minion = board->getPlayer(targetPlayer)->getMinion(minion);
+	//enchanted minion's activated ability costs 2 more
+	if (cost > board->getPlayer(owner)->getMagic()) return;
+	board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()-cost);
+	auto m = std::make_shared<MagicFatigue>(name,board);
+	m->minion = board->getPlayer(targetPlayer)->getMinion(minion);
 	m->actions = m->minion->getAction();
 	m->attack = m->minion->getAttack();
 	m->defence = m->minion->getDefence();

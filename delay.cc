@@ -8,7 +8,7 @@ Delay::Delay(std::string name, Board* board) : Enchantment{name,board} {
 void Delay::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	//enchanted minion doesn't gain an action on their next turn. automatically destroyed after 1 turn
 	if (cost > board->getPlayer(owner)->getMagic()) return;
-    board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()-cost);
+	board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()-cost);
 	auto m = std::make_shared<Delay>(name,board);
 	m->minion = board->getPlayer(targetPlayer)->getMinion(minion);
 	m->actions = m->minion->getAction();
