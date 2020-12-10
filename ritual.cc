@@ -35,7 +35,7 @@ void Ritual::useAbility(int owner, int playedMinion, bool isOwnerActive, When wh
         if (!isOwnerActive || when!=When::Play) return;
         charges -= activationCost;
         board->getPlayer(owner)->getMinion(playedMinion)->setAttack(board->getPlayer(owner)->getMinion(playedMinion)->getAttack()+1);
-        board->getPlayer(owner)->getMinion(playedMinion)->setDefence(board->getPlayer(owner)->getMinion(playedMinion)->Defence()+1);
+        board->getPlayer(owner)->getMinion(playedMinion)->setDefence(board->getPlayer(owner)->getMinion(playedMinion)->getDefence()+1);
     }
     else if (name == "Standstill") {
         //whenever a minion enter a play, destroy it
