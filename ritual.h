@@ -5,11 +5,14 @@
 #include "card.h"
 #include "abstractMinion.h"
 
-class Ritual : public Card {
+class Ritual : public Card 
+{
 	std::string description;
 	int activationCost;
 	int charges;
+
   public:
+  
   	Ritual(std::string name, Board* board);
 
   	void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false) override;

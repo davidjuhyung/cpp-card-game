@@ -178,5 +178,3 @@ void Player::replaceMinion(int i, std::shared_ptr<AbstractMinion> m)
 void Player::removeMinion(int i) {
   minions.erase(minions.begin() + i);
 }
-
-

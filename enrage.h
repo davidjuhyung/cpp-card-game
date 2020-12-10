@@ -6,7 +6,6 @@
 
 class Enrage : public Enchantment
 {
-  
   public:
   
   	Enrage(std::string name, Board* board);

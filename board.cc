@@ -90,7 +90,7 @@ void Board::showHand()
   {
     if (n->type == CardType::minion)
     {
-      currentPlayer->getMinion();
+      currentPlayer->getMinions();
     }
     else if (n->type == CardType::enchantment)
     {

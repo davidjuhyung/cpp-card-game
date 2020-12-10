@@ -7,7 +7,6 @@
 
 class GiantStrength : public Enchantment
 {
-  
   public:
 
   	GiantStrength(std::string name, Board* board);

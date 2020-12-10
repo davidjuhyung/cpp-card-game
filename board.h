@@ -21,12 +21,11 @@ public:
   void play(int i);
   void play(int i, int p, int t);
   void use(int i);
-  void use(int i, int p, int t);
+  void use(int i, int p, char t);
   void inspect(int i);
   void display();
   void showHand();
   void APNAP(int playedminion = 0, When when = When::Start);
 };
-
 
 #endif
