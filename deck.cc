@@ -1,6 +1,22 @@
 #include "deck.h"
+#include "card.h"
+#include "abstractMinion.h"
+#include "delay.h"
+#include "enchantment.h"
+#include "enrage.h"
+#include "giantStrength.h"
+#include "magicFatigue.h"
+#include "silence.h"
+#include "spell.h"
+#include "ritual.h"
 
-std::vector<std::shared_ptr<Card>> initialize(std::istream &in,Board* b) {
+#include <set>
+#include <memory>
+#include <algorithm>
+#include <random>
+#include <chrono>
+/*
+std::vector<std::shared_ptr<Card>> initialize(std::istream &in, Board* b) {
 	std::set<std::string> minions = {"Air Elemental","Apprentice Summoner","Bomb","Earth Elemental","Fire Elemental","Master Summoner","Novice Pyromancer","Potion Seller"};
 	std::set<std::string> enchantments = {"Delay","Enrage","Giant Strength","Magic Fatigue","Silence"};
 	std::set<std::string> spells = {"Banish","Blizzard","Disenchant","Raise Dead","Recharge","Unsommon"};
@@ -35,3 +51,4 @@ std::vector<std::shared_ptr<Card>> initialize(std::istream &in,Board* b) {
 	}
 	return deck;
 }
+*/

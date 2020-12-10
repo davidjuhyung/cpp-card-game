@@ -6,9 +6,9 @@ Silence::Silence(std::string name, Board* board) : Enchantment{name, board} {
 }
 
 void Silence::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
-    //enchanted minion cannot use ability
-    if (cost > board->getPlayer(owner)->getMagic()) return;
-    board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()-cost);
+	//enchanted minion cannot use ability
+	if (cost > board->getPlayer(owner)->getMagic()) return;
+	board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()-cost);
 	auto m = std::make_shared<Silence>(name,board);
 	m->minion = board->getPlayer(targetPlayer)->getMinion(minion);
 	m->actions = m->minion->getAction();

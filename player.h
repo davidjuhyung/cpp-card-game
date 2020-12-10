@@ -3,10 +3,11 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 // our libraries
-#include "card.h"
-#include "abstractMinion.h"
-#include "ritual.h"
+class Card;
+class AbstractMinion;
+class Ritual;
 
 class Player
 {

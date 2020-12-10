@@ -1,7 +1,8 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include "player.h"
+#include <memory>
+class Player;
 
 enum class When {Start = 0, End, Play, Death};
 

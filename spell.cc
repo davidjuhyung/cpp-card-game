@@ -1,6 +1,8 @@
 #include "spell.h"
+#include "ritual.h"
+#include "minion.h"
 
-Spell(std::string name, Board* board) : Card{name,board} {
+Spell::Spell(std::string name, Board* board) : Card{name,board} {
 	if (name == "Banish") {
 		cost = 2;
 		description = "Destroy target minion or ritual";
@@ -27,12 +29,12 @@ void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
     board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()-cost);
     if (name == "Banish"){
         //destroy target minion or ritual
-        if (actOnRitual) board->getPlayer(targetplayer)->removeRitual();
-        else board->getPlayer(targetplayer)->removeMinion(minion);
+        if (actOnRitual) board->getPlayer(targetPlayer)->removeRitual();
+        else board->getPlayer(targetPlayer)->removeMinion(minion);
     }
     else if (name == "Unsommon"){
         //return target minion to its owner's hand
-        board->getPlayer(targetplayer)->moveToHand(minion);
+        board->getPlayer(targetPlayer)->moveToHand(minion);
     }
     else if (name == "Recharge"){
         //ritual gains 3 charges
@@ -40,13 +42,13 @@ void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
     }
     else if (name == "Disenchant"){
         //destroy the top enchantment on target minion
-        auto m = board->getPlayer(targetplayer)->getMinon(minion)->getMinion(); 
-        board->getPlayer(targetPlayer)->replaceMinion(minion, m)
+        auto m = board->getPlayer(targetPlayer)->getMinion(minion)->getMinion(); 
+        board->getPlayer(targetPlayer)->replaceMinion(minion, m);
     }
     else if (name == "Raise Dead"){
         //resurrect the top minion in your graveyard and set its defence to 1
-        board->getPlayer(owner)->resurect();
-        board->getPlayer(owner)->getMinion(board->getPlayer(owner)->getNumMinion()-1)->setDefence(1);
+        board->getPlayer(owner)->resurrect();
+        //board->getPlayer(owner)->getMinion(board->getPlayer(owner)->getMinion()-1)->setDefence(1);
     }
     else if (name == "Blizzard"){
         //deal 2 damage to all minions
