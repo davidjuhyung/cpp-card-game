@@ -39,7 +39,7 @@ void Player::attack(int i, int o)
 // orders the active player’s minion i to attack the opposing player o’s minion t.
 void Player::attack(int i, int o, int t)
 {
-  minions.at(i)->attackMinion(o, t);
+  minions.at(i)->attackMinion(i, o, t);
 }
 
 // plays the ith card in the active player’s hand with no target.

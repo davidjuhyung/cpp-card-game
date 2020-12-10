@@ -24,12 +24,12 @@ void Board::startTurn()
 {
   auto activePlayer = getPlayer(active);
   activePlayer->startTurn();
-  APNAP();
+  APNAP(When::Start);
 }
 
 void Board::endturn()
 {
-  APNAP(-1, When::End);
+  APNAP(When::End);
 }
 
 void Board::attack(int i)
@@ -79,7 +79,7 @@ void Board::showHand()
 
 }
 
-void Board::APNAP(int playedMinion, When when) 
+void Board::APNAP(When when, int playedMinion) 
 {
   if (active == 1) {
     for (int i = 0; i < player1->getNumMinions(); ++i) {

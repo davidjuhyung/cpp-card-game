@@ -47,13 +47,21 @@ void AbstractMinion::attackPlayer(int player) {
 	actions--;
 }
 
-void AbstractMinion::attackMinion(int player, int minion) {
+void AbstractMinion::attackMinion(int ownPosition, int player, int target) {
 	if (actions == 0) return;
 	Player* p = board->getPlayer(player);
-	auto m = p->getMinion(minion);
+	auto m = p->getMinion(target);
 	if (actions == 0) return;
 	m->damage(attack);
+	if (m->getDefence() <= 0) {
+		board->APNAP(When::Death);
+		p->removeMinion(target,true);
+	}
 	defence -= m->getAttack();
+	if (defence <= 0) {
+		board->APNAP(When::Death);
+		board->getPlayer(player%2+1)->removeMinion(ownPosition,true);
+	}
 	actions--;
 }
 
@@ -67,7 +75,7 @@ void AbstractMinion::play(int owner, int targetPlayer, int minion, bool actOnRit
 	m->setDefence(defence);
 	auto a = std::make_shared<Ability>(name,board,m);
 	board->getPlayer(owner)->addMinion(a);
-	board->APNAP(board->getPlayer(owner)->getNumMinions(),When::Play);
+	board->APNAP(When::Play,board->getPlayer(owner)->getNumMinions()-1);
 }
 
 int AbstractMinion::getDefence() const { return defence; }
