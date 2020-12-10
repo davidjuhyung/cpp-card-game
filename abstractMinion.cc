@@ -16,26 +16,35 @@ AbstractMinion::AbstractMinion(std::string name, Board* board) : Card{name,board
 		attack = 1;
 		defence = 2;
 		cost = 2;
+		abilityDescription = "Deals damage to all opponent minions equal to its attack value when it dies";
 	} else if (name == "Fire Elemental") {
 		attack = 2;
 		defence = 2;
 		cost = 2;
+		abilityDescription = "Whenever an opponent's minion enters play deal 1 damage to it";
 	} else if (name == "Potion Seller") {
 		attack = 1;
 		defence = 3;
 		cost = 2;
+		abilityDescription = "At the end of your turn, all your minions gain +0/+1";
 	} else if (name == "Novice Pyromancer") {
 		attack = 0;
 		defence = 1;
 		cost = 1;
+		activationCost = 1;
+		abilityDescription = "Deal 1 damage to target minion";
 	} else if (name == "Apprentice Summoner") {
 		attack = 1;
 		defence = 1;
 		cost = 1;
+		activationCost = 1;
+		abilityDescription = "Summon a 1/1 Air Elemental";
 	} else {
 		attack = 2;
 		defence = 3;
 		cost = 3;
+		activationCost = 2;
+		abilityDescription = "Summon up to 3 1/1 Air Elementals";
 	}
 }
 

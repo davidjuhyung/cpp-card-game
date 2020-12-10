@@ -8,9 +8,7 @@ Ability::Ability(std::string name, Board* board, std::shared_ptr<AbstractMinion>
 	defence = minion->getDefence();
 	actions = minion->getAction();
 	name = minion->getName();
-	if (name == "Novice Pyromancer" || name == "Apprentice Summoner") activationCost = 1;
-	else if (name == "Master Summoner") activationCost = 2;
-	else activationCost = 0;
+	enchantmentDescription = "Not actually an enchantment";
 }
 
 void Ability::play(int owner, int targetPlayer, int minion, bool actOnRitual) {}
@@ -80,4 +78,8 @@ void Ability::useTriggered(int owner, int playedMinion, bool isOwnerActive, When
 			enemy->removeMinion(playedMinion,true);
 		}
 	}
+}
+
+std::shared_ptr<AbstractMinion> Ability::getMinion() {
+	return minion;
 }

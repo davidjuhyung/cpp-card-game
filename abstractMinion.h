@@ -11,6 +11,7 @@ class AbstractMinion : public Card
 		int actions;
 		bool gainAction = true;
 		int activationCost = 0;
+    std::string abilityDescription = "";
 
   public:
   	AbstractMinion(std::string name, Board* board);
@@ -32,7 +33,8 @@ class AbstractMinion : public Card
     virtual void useAbility(int activePlayer, int target = -1) = 0;
     // activate trigger
   	virtual void useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) = 0;
-    virtual std::shared_ptr<AbstractMinion> getMinion() const = 0;
+    virtual std::shared_ptr<AbstractMinion> getMinion() = 0;
+    virtual std::vector<card_template_t> inspectMinion() = 0;
 };
 
 #endif
