@@ -3,38 +3,43 @@
 #include <sstream>
 #include <fstream>
 
+// our files
+#include "player.h"
+#include "deck.h"
+#include "board.h"
+
 int main(int argc, char const *argv[]) {
-  std::string deck1;
-  std::string deck2;
+  bool testingMode = false;
+  std::istream actionInput;
+  Board b;
+  std::string name1 = "", name2 = "";
+  std::vector<std::shared_ptr<Card>> deck1 = nullptr, deck2 = nullptr;
 
   // read command line arguments
   for (int i = 1; i < argc; i++) {
     std::string cmd{argv[i]};
     if (cmd.at(0) == '-') {
+      std::string fileName = argv[++i]; 
+      std::ifstream infile{fileName}; 
       if (cmd == "-deck1" || cmd == "-deck2") {
-        std::string fileName = argv[++i]; // Note: Assume when there is a deck1 command line argument, it is followed by a filename. 
-        std::ifstream infile{fileName}; 
+        auto deck = initialize(infile, &b);
         if (cmd == "-deck1") {
-          // [TODO] assign the deck to player 1
-          deck1 = fileName;
-          std::cout << "Player 1's deck is composed of: " << std::endl;
+          deck1 = deck;
         } else {
-          // [TODO] assign the deck to player 2
-          deck2 = fileName;
-          std::cout << "Player 2's deck is composed of: " << std::endl;
-        }
-        // Echo back the cards in the deck
-        std::string cardName;
-        while (infile >> cardName) {
-          std::cout << cardName << std::endl;
+          deck2 = deck;
         }
       }
       if (cmd == "-init") {
-        std::cout << "-init entered" << std::endl;
+        infile >> name1;
+        infile >> name2;
+        actionInput = infile;
       }
       if (cmd == "-testing") {
-        std::cout << "-testing entered" << std::endl;
+        testingMode = true;
       }
     }
   }
+  // read action inputs
+
+
 }
