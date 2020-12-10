@@ -54,9 +54,42 @@ int main(int argc, char const *argv[]) {
   
 
   while (actionInput >> command && init) {
+    if (command == "help"){
+      std::cout << "Commands: help -- Display this message." << std::endl;
+
+    }
+    if (command == "end") {
+
+    }
+    if (command == "quit") {
+      break;
+    }
+    if (command == "draw") {
+
+    }
+    if (command == "discard") {
+
+    }
+    if (command == "attack") {
+      attack();
+    }
     if (command == "play") {
       int i;
     }
-  }
+    if (command == "use") {
 
+    }
+    if (command == "describe") {
+      
+    }
+    if (command == "hand") {
+
+    }
+    if (command == "board") {
+      
+    }
+    else{
+      std::cerr << "Invalid command."<< std::endl;
+    }
+  }
 }
