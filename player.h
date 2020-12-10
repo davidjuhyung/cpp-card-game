@@ -3,10 +3,11 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 // our libraries
-#include "card.h"
-#include "abstractMinion.h"
-#include "ritual.h"
+class Card;
+class AbstractMinion;
+class Ritual;
 
 class Player
 {
@@ -14,6 +15,7 @@ public:
   static const int maxHandSize = 5;
   static const int maxMinionSize = 5;
 private:
+  int playerNum;
   std::string name;
   int life;
   int magic;
@@ -24,15 +26,22 @@ private:
   std::shared_ptr<Ritual> ritual;
 
 public:
-  Player(std::string name, std::vector<std::shared_ptr<Card>> deck);
+  Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card>> deck);
+  // i = ith minion
+  // o = opposing player
+  // a = active player
+  // t = target minion or ritual
+  // p = target player
   void startTurn();
-  void attack(int i, int p);
-  void attack(int i, int p, char t);
-  void play(int i, int p);
+  void attack(int i, int o);
+  void attack(int i, int o, int t);
+  void play(int a, int i);
   void play(int a, int i, int p, char t);
   void use(int i, int p);
   void use(int i, int p, char t);
+  void display();
 
+  int getPlayerNum();
   std::string getName();
   std::vector<std::shared_ptr<Card>> getHand();  
   std::vector<std::shared_ptr<AbstractMinion>> getMinions();
@@ -55,7 +64,7 @@ public:
   int getNumMinions();
   void addMinion(std::shared_ptr<AbstractMinion> m);
   void replaceMinion(int i, std::shared_ptr<AbstractMinion> m);
-  void removeMinion(int i);
+  void removeMinion(int i, bool moveToGrave = false);
 };
 
 #endif

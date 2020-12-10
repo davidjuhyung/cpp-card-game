@@ -1,14 +1,14 @@
 #include "silence.h"
 
-Silence::Silence(std::string name = "Silence", Board* board) : Enchantment{name, board} {
+Silence::Silence(std::string name, Board* board) : Enchantment{name, board} {
 	enchantmentName = "Silence";
 	cost = 1;
 }
 
 void Silence::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
-    //enchanted minion cannot use ability
-    if (cost > board->getPlayer(owner)->getMagic()) return;
-    board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()-cost);
+	//enchanted minion cannot use ability
+	if (cost > board->getPlayer(owner)->getMagic()) return;
+	board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()-cost);
 	auto m = std::make_shared<Silence>(name,board);
 	m->minion = board->getPlayer(targetPlayer)->getMinion(minion);
 	m->actions = m->minion->getAction();
@@ -20,6 +20,6 @@ void Silence::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	board->getPlayer(targetPlayer)->replaceMinion(minion,m);
 }
 
-void Silence::useAbility(int activeplayer, int target) {}
+void Silence::useAbility(int activePlayer, int target) {}
 
-void Silence::useTriggered(int owner, int playedminion, bool isOwnerActive, When when) {}
+void Silence::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) {}

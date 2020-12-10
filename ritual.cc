@@ -1,4 +1,5 @@
 #include "ritual.h"
+#include "minion.h"
 
 Ritual::Ritual(std::string name, Board* board) : Card{name,board} {
 	if (name == "Dark Ritual") {

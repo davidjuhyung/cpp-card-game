@@ -1,8 +1,14 @@
 #include "player.h"
+#include "card.h"
+#include "abstractMinion.h"
+#include "ritual.h"
+// #include "/codeForStudents/ascii_graphics.h"
+
 #include <sstream>
 
-Player::Player(std::string name, std::vector<std::shared_ptr<Card>> deck)
-  : name{name}
+Player::Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card>> deck)
+  : playerNum{playerNum}
+  , name{name}
   , life{20}
   , magic{3}
   , deck{deck}
@@ -31,12 +37,9 @@ void Player::attack(int i, int o)
 }
 
 // orders the active player’s minion i to attack the opposing player o’s minion t.
-void Player::attack(int i, int o, char t)
+void Player::attack(int i, int o, int t)
 {
-  std::stringstream str;
-  str << t;
-  int m = t;
-  minions.at(i)->attackMinion(o, m);
+  minions.at(i)->attackMinion(i, o, t);
 }
 
 // plays the ith card in the active player’s hand with no target.
@@ -62,21 +65,29 @@ void Player::play(int a, int p, int i, char t)
   hand.at(i)->play(a, p, m);
 }
 
-// i refers to the ith minion owned by the current (active) player, a
+// i refers to the ith minion owned by the current player
 // and the command orders that minion to use its activated ability on the provided target (or on no target).
-// Using a minion spends one action point and decreases the player’s magic by the ability’s activation cost. 
-// Thus, a minion can only be used if they have an action point remaining and the player has enough magic to spend.
-void Player::use(int i, int a)
+// If no target = the current player itself
+void Player::use(int i, int p)
 {
-  minions[i]->useAbility(a);
+  minions[i]->useAbility(p);
 }
 
-void Player::use(int i, int a, char t)
+void Player::use(int i, int p, char t)
 {
   std::stringstream str;
   str << t;
   int m = t;
-  minions[i]->useAbility(a, m);
+  minions[i]->useAbility(p, m);
+}
+
+// void Player::display() {
+//   display_player_card(playerNum, name, life, magic);
+// }
+
+int Player::getPlayerNum()
+{
+  return playerNum;
 }
 
 std::string Player::getName()
@@ -175,8 +186,10 @@ void Player::replaceMinion(int i, std::shared_ptr<AbstractMinion> m)
   minions.at(i) = m;
 }
 
-void Player::removeMinion(int i) {
+void Player::removeMinion(int i, bool moveToGrave) {
+  if (moveToGrave) {
+    auto minion = minions.at(i);
+    graveyard.push_back(minion);
+  }
   minions.erase(minions.begin() + i);
 }
-
-

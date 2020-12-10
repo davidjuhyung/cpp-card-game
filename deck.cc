@@ -1,6 +1,23 @@
 #include "deck.h"
+#include "card.h"
+#include "abstractMinion.h"
+#include "delay.h"
+#include "enchantment.h"
+#include "enrage.h"
+#include "giantStrength.h"
+#include "magicFatigue.h"
+#include "silence.h"
+#include "spell.h"
+#include "ritual.h"
+#include "minion.h"
 
-std::vector<std::shared_ptr<Card>> initialize(std::istream &in,Board* b) {
+#include <set>
+#include <memory>
+#include <algorithm>
+#include <random>
+#include <chrono>
+
+std::vector<std::shared_ptr<Card>> initialize(std::istream &in, Board* b) {
 	std::set<std::string> minions = {"Air Elemental","Apprentice Summoner","Bomb","Earth Elemental","Fire Elemental","Master Summoner","Novice Pyromancer","Potion Seller"};
 	std::set<std::string> enchantments = {"Delay","Enrage","Giant Strength","Magic Fatigue","Silence"};
 	std::set<std::string> spells = {"Banish","Blizzard","Disenchant","Raise Dead","Recharge","Unsommon"};
@@ -9,16 +26,25 @@ std::vector<std::shared_ptr<Card>> initialize(std::istream &in,Board* b) {
 	std::string name;
 	while (getline(in,name)) {
 		if (minions.find(name)!=minions.end()) {
-			auto card = std::make_shared<AbstractMinion>(name,b);
+			auto card = std::make_shared<Minion>(name,b);
 			deck.push_back(card);
 		} else if (enchantments.find(name)!=enchantments.end()) {
-			auto card = std::make_shared<Enchantment>(name,b);
-			if (name=="Delay") card = std::make_shared<Delay>(name,b);
-			else if (name=="Enrage") card = std::make_shared<Enrage>(name,b);
-			else if (name=="Giant Strength") card = std::make_shared<GiantStrength>(name,b);
-			else if (name=="Magic Fatigue") card = std::make_shared<MagicFatigue>(name,b);
-			else card = std::make_shared<Silence>(name,b);
-			deck.push_back(card);
+			if (name=="Delay") {
+				auto card = std::make_shared<Delay>(name,b);
+				deck.push_back(card);
+			} else if (name=="Enrage") {
+				auto card = std::make_shared<Enrage>(name,b);
+				deck.push_back(card);
+			} else if (name=="Giant Strength") {
+				auto card = std::make_shared<GiantStrength>(name,b);
+				deck.push_back(card);
+			} else if (name=="Magic Fatigue") {
+				auto card = std::make_shared<MagicFatigue>(name,b);
+				deck.push_back(card);
+			} else {
+				auto card = std::make_shared<Silence>(name,b);
+				deck.push_back(card);
+			}
 		} else if (spells.find(name)!=spells.end()) {
 			auto card = std::make_shared<Spell>(name,b);
 			deck.push_back(card);
