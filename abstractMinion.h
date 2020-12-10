@@ -6,6 +6,8 @@
 
 class AbstractMinion : public Card
 {
+protected:
+  
 	int attack;
 	int defence;
 	int actions;

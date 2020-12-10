@@ -8,6 +8,8 @@
 
 class Enchantment : public AbstractMinion
 {
+protected:
+	
 	std::string enchantmentName;
 	std::shared_ptr<AbstractMinion> minion = nullptr;
 

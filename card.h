@@ -5,12 +5,14 @@
 #include "board.h"
 
 class Card
-{	
-	std::string name;
+{
+  protected:
 
-	Board* board;
+	 std::string name;
 
-	int cost;
+	 Board* board;
+
+	 int cost;
 
   public:
 
