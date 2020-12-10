@@ -26,23 +26,23 @@ void Ritual::useAbility(int owner, int playedMinion, bool isOwnerActive, When wh
     if (charges < activationCost) { return; }
     if (name == "Dark Ritual"){
         //At the start of your turn, gain 1 magic
-        (!isOwnerActive || when!=When::Start) ? return;
+        if (!isOwnerActive || when!=When::Start) return;
         charges -= activationCost;
         board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()+1);
     }
     else if (name == "Aura Of Power") {
         //whenever a minion enter a play under your control, it gains +1/+1
-        (!isOwnerActive || when!=When::Play) ? return;
+        if (!isOwnerActive || when!=When::Play) return;
         charges -= activationCost;
-        board->getPlayer(owner)->getMinion(minion)->setAttack(board->getPlayer(owner)->getMinion(minion)->getAttack()+1);
-        board->getPlayer(owner)->getMinion(minion)->setDefence(board->getPlayer(owner)->getMinion(minion)->Defence()+1);
+        board->getPlayer(owner)->getMinion(playedMinion)->setAttack(board->getPlayer(owner)->getMinion(playedMinion)->getAttack()+1);
+        board->getPlayer(owner)->getMinion(playedMinion)->setDefence(board->getPlayer(owner)->getMinion(playedMinion)->Defence()+1);
     }
     else if (name == "Standstill") {
         //whenever a minion enter a play, destroy it
-        (when!=When::Play) ? return;
+        if (when!=When::Play) return;
         int p = isOwnerActive ? owner : owner%2+1;
         charges -= activationCost;
-        board->getPlayer(p)->removeMinion(board->getPlayer(p)->getNumMinions()-1);
+        board->getPlayer(p)->removeMinion(playedMinion);
     }
 }
 
