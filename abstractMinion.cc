@@ -51,7 +51,7 @@ void AbstractMinion::attackPlayer(int player) {
 void AbstractMinion::attackMinion(int player, int minion) {
 	if (actions == 0) return;
 	Player* p = board->getPlayer(player);
-	AbstractMinion* m = p->getMinion(minion);
+	auto m = p->getMinion(minion);
 	if (actions == 0) return;
 	m->damage(attack);
 	defence -= m->getAttack();
@@ -75,14 +75,14 @@ int AbstractMinion::getDefence() const { return defence; }
 
 int AbstractMinion::getAttack() const { return attack; }
 
-void setDefence(int d) { defence = d; }
+void AbstractMinion::setDefence(int d) { defence = d; }
 
-void setAttack(int a) { attack = a; }
+void AbstractMinion::setAttack(int a) { attack = a; }
 
 int AbstractMinion::getAction() const {return actions; }
 
 bool AbstractMinion::gaining() const { return gainAction; }
 
-int getActivationCost() const { return activationCost; }
+int AbstractMinion::getActivationCost() const { return activationCost; }
 
-int AbstractMinion::setAction() { gainActions ? actions = 1; }
+void AbstractMinion::setAction() { if (gainAction) actions = 1; }

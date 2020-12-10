@@ -10,8 +10,9 @@
 
 class Player
 {
-  static int maxHandSize = 5;
-  static int maxMinionSize = 5;
+public:
+  static const int maxHandSize = 5;
+  static const int maxMinionSize = 5;
 private:
   std::string name;
   int life;
