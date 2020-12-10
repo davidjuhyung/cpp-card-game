@@ -12,7 +12,7 @@ private:
   std::shared_ptr<Player> player1 = nullptr; // unique_ptr ? since it's exclusively owned by board only. Do we ever share this pointer?
   std::shared_ptr<Player> player2 = nullptr;
 public:
-  std::shared_ptr<Player> getPlayer(int p);
+  Player* getPlayer(int p);
   void setPlayer(int p, std::shared_ptr<Player> player);
   void startTurn();
   void endturn();

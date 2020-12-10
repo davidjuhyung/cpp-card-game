@@ -1,6 +1,6 @@
 #include "deck.h"
 
-std::vector<std::shared_prt<Card>> initialize(std::istream &in,Board* b) {
+std::vector<std::shared_ptr<Card>> initialize(std::istream &in,Board* b) {
 	std::set<std::string> minions = {"Air Elemental","Apprentice Summoner","Bomb","Earth Elemental","Fire Elemental","Master Summoner","Novice Pyromancer","Potion Seller"};
 	std::set<std::string> enchantments = {"Delay","Enrage","Giant Strength","Magic Fatigue","Silence"};
 	std::set<std::string> spells = {"Banish","Blizzard","Disenchant","Raise Dead","Recharge","Unsommon"};

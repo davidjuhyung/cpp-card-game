@@ -1,13 +1,13 @@
 #include "board.h"
 #include "cardType.h"
 
-std::shared_ptr<Player> Board::getPlayer(int p)
+Player* Board::getPlayer(int p)
 {
   if (p == 1) 
   {
-    return player1;
+    return player1.get();
   }
-  return player2;
+  return player2.get();
 }
 
 void Board::setPlayer(int p, std::shared_ptr<Player> player)
@@ -49,7 +49,7 @@ void Board::play(int i)
 
 }
 
-void Board::play(int i, int p, int t)
+void Board::play(int i, int p, char t)
 {
 
 }
