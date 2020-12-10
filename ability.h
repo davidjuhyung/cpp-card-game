@@ -7,6 +7,8 @@
 
 class Ability : public Enchantment
 {
+	int activationCost;
+
   public:
 
   	Ability(std::string name, Board* board, std::shared_ptr<AbstractMinion> minion);
