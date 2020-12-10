@@ -12,11 +12,12 @@ std::vector<std::shared_ptr<Card>> initialize(std::istream &in,Board* b) {
 			auto card = std::make_shared<AbstractMinion>(name,b);
 			deck.push_back(card);
 		} else if (enchantments.find(name)!=enchantments.end()) {
-			if (name=="Delay") auto card = std::make_shared<Delay>(name,b);
-			else if (name=="Enrage") auto card = std::make_shared<Enrage>(name,b);
-			else if (name=="Giant Strength") auto card = std::make_shared<GiantStrength>(name,b);
-			else if (name=="Magic Fatigue") auto card = std::make_shared<MagicFatigue>(name,b);
-			else auto card = std::make_shared<Silence>(name,b);
+			auto card;
+			if (name=="Delay") card = std::make_shared<Delay>(name,b);
+			else if (name=="Enrage") card = std::make_shared<Enrage>(name,b);
+			else if (name=="Giant Strength") card = std::make_shared<GiantStrength>(name,b);
+			else if (name=="Magic Fatigue") card = std::make_shared<MagicFatigue>(name,b);
+			else card = std::make_shared<Silence>(name,b);
 			deck.push_back(card);
 		} else if (spells.find(name)!=spells.end()) {
 			auto card = std::make_shared<Spell>(name,b);
