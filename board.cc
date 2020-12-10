@@ -87,6 +87,7 @@ void Board::APNAP(When when, int playedMinion)
       player1->getMinion(i)->useTriggered(1,playedMinion,true,when);
     }
     player1->getRitual()->useAbility(1,playedMinion,true,when);
+    if (when == When::Start || when == When::End) return;
     for (int i = 0; i < player2->getNumMinions(); ++i) player2->getMinion(i)->useTriggered(2,playedMinion,false,when);
     player2->getRitual()->useAbility(2,playedMinion,false,when);
   } else {
@@ -95,6 +96,7 @@ void Board::APNAP(When when, int playedMinion)
       player2->getMinion(i)->useTriggered(2,playedMinion,true,when);
     }
     player2->getRitual()->useAbility(1,playedMinion,true,when);
+    if (when == When::Start || when == When::End) return;
     for (int i = 0; i < player1->getNumMinions(); ++i) player1->getMinion(i)->useTriggered(1,playedMinion,false,when);
     player1->getRitual()->useAbility(1,playedMinion,false,when);
   }
