@@ -26,7 +26,7 @@ public:
   void inspect(int i);
   void display();
   void showHand();
-  void APNAP(When when = When::Start, int playedminion = -1);
+  void APNAP(When when = When::Start, int playedMinion = -1);
 };
 
 #endif
