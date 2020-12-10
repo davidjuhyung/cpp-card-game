@@ -5,7 +5,7 @@ std::vector<std::shared_ptr<Card>> initialize(std::istream &in,Board* b) {
 	std::set<std::string> enchantments = {"Delay","Enrage","Giant Strength","Magic Fatigue","Silence"};
 	std::set<std::string> spells = {"Banish","Blizzard","Disenchant","Raise Dead","Recharge","Unsommon"};
 	std::set<std::string> rituals = {"Aura of Power","Dark Ritual","Standstill"};
-	std::vector<Card> deck;
+	std::vector<std::shared_ptr<Card>> deck;
 	std::string name;
 	while (getline(in,name)) {
 		if (minions.find(name)!=minions.end()) {
