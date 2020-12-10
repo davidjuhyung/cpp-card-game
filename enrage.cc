@@ -23,6 +23,6 @@ void Enrage::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	}
 }
 
-void Enrage::useAbility(int activeplayer, int target) { minion->useAbility(activeplayer,target); }
+void Enrage::useAbility(int activePlayer, int target) { minion->useAbility(activePlayer,target); }
 
-void Enrage::useTriggered(int owner, int playedminion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedminion,isOwnerActive,when); }
+void Enrage::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedMinion,isOwnerActive,when); }

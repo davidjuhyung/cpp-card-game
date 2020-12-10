@@ -3,9 +3,9 @@
 
 Minion::Minion(std::string name, Board* board) : AbstractMinion{name,board} {}
 
-void Minion::useAbility(int activeplayer, int target) {}
+void Minion::useAbility(int activePlayer, int target) {}
 
-void Minion::useTriggered(int owner, int playedminion, bool isOwnerActive, When when) {}
+void Minion::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) {}
 
 std::shared_ptr<AbstractMinion> Minion::getMinion() const {
 	auto m = std::make_shared<Minion>(name,board);

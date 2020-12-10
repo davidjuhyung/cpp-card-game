@@ -15,16 +15,16 @@ Ability::Ability(std::string name, Board* board, std::shared_ptr<AbstractMinion>
 
 void Ability::play(int owner, int targetPlayer, int minion, bool actOnRitual) {}
 
-void Ability::useAbility(int activeplayer, int target) {
+void Ability::useAbility(int activePlayer, int target) {
 	if (actions == 0) return;
-	Player* p = board->getPlayer(activeplayer);
+	Player* p = board->getPlayer(activePlayer);
 	int magic = p->getMagic();
 	if (magic < activationCost) return;
 	if (name == "Novice Pyromancer") {
-		board->getPlayer(activeplayer%2+1)->getMinion(target)->damage(1);
-		if (board->getPlayer(activeplayer%2+1)->getMinion(target)->getDefence() <= 0) {
+		board->getPlayer(activePlayer%2+1)->getMinion(target)->damage(1);
+		if (board->getPlayer(activePlayer%2+1)->getMinion(target)->getDefence() <= 0) {
 			board->APNAP(When::Death);
-			board->getPlayer(activeplayer%2+1)->removeMinion(target,true);
+			board->getPlayer(activePlayer%2+1)->removeMinion(target,true);
 		}
 		actions--;
 		p->setMagic(magic-activationCost);
@@ -51,7 +51,7 @@ void Ability::useAbility(int activeplayer, int target) {
 	}
 }
 
-void Ability::useTriggered(int owner, int playedminion, bool isOwnerActive, When when) {
+void Ability::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) {
 	Player* p = board->getPlayer(owner);
 	Player* enemy = board->getPlayer(owner%2+1);
 	if (name == "Bomb") {
@@ -74,10 +74,10 @@ void Ability::useTriggered(int owner, int playedminion, bool isOwnerActive, When
 	} else if (name == "Fire Elemental") {
 		if (when != When::Play) return;
 		if (isOwnerActive) return;
-		enemy->getMinion(playedminion)->damage(1);
-		if (enemy->getMinion(playedminion)->getDefence() <= 0) {
+		enemy->getMinion(playedMinion)->damage(1);
+		if (enemy->getMinion(playedMinion)->getDefence() <= 0) {
 			board->APNAP(When::Death);
-			enemy->removeMinion(playedminion,true);
+			enemy->removeMinion(playedMinion,true);
 		}
 	}
 }

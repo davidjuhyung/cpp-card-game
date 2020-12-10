@@ -20,6 +20,6 @@ void Silence::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	board->getPlayer(targetPlayer)->replaceMinion(minion,m);
 }
 
-void Silence::useAbility(int activeplayer, int target) {}
+void Silence::useAbility(int activePlayer, int target) {}
 
-void Silence::useTriggered(int owner, int playedminion, bool isOwnerActive, When when) {}
+void Silence::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) {}
