@@ -56,7 +56,7 @@ public:
   int getNumMinions();
   void addMinion(std::shared_ptr<AbstractMinion> m);
   void replaceMinion(int i, std::shared_ptr<AbstractMinion> m);
-  void removeMinion(int i);
+  void removeMinion(int i, bool moveToGrave = false);
 };
 
 #endif

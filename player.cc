@@ -175,6 +175,10 @@ void Player::replaceMinion(int i, std::shared_ptr<AbstractMinion> m)
   minions.at(i) = m;
 }
 
-void Player::removeMinion(int i) {
+void Player::removeMinion(int i, bool moveToGrave) {
+  if (moveToGrave) {
+    auto minion = minions.at(i);
+    graveyard.push_back(minion);
+  }
   minions.erase(minions.begin() + i);
 }
