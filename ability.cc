@@ -22,6 +22,10 @@ void Ability::useAbility(int activeplayer, int target) {
 	if (magic < activationCost) return;
 	if (name == "Novice Pyromancer") {
 		board->getPlayer(activeplayer%2+1)->getMinion(target)->damage(1);
+		if (board->getPlayer(activeplayer%2+1)->getMinion(target)->getDefence() <= 0) {
+			board->APNAP(When::Death);
+			board->getPlayer(activeplayer%2+1)->removeMinion(target,true);
+		}
 		actions--;
 		p->setMagic(magic-activationCost);
 	} else if (name == "Apprentice Summoner") {
@@ -30,7 +34,7 @@ void Ability::useAbility(int activeplayer, int target) {
 		auto m = std::make_shared<Minion>("Air Elemental",board);
 		auto a = std::make_shared<Ability>(name,board,m);
 		p->addMinion(a);
-		board->APNAP(num,When::Play);
+		board->APNAP(When::Play,num);
 		actions--;
 		p->setMagic(magic-activationCost);
 	} else if (name == "Master Summoner") {
@@ -40,7 +44,7 @@ void Ability::useAbility(int activeplayer, int target) {
 			auto m = std::make_shared<Minion>("Air Elemental",board);
 			auto a = std::make_shared<Ability>(name,board,m);
 			p->addMinion(a);
-			board->APNAP(num+i,When::Play);
+			board->APNAP(When::Play,num+i);
 		}
 		actions--;
 		p->setMagic(magic-activationCost);
@@ -56,6 +60,10 @@ void Ability::useTriggered(int owner, int playedminion, bool isOwnerActive, When
 		int num = enemy->getNumMinions();
 		for (int i = 0; i < num; ++i) {
 			enemy->getMinion(i)->damage(attack);
+			if (enemy->getMinion(i)->getDefence() <= 0) {
+				board->APNAP(When::Death);
+				enemy->removeMinion(i,true);
+			}
 		}
 	} else if (name == "PotionSeller") {
 		if (when != When::End) return;
@@ -67,5 +75,9 @@ void Ability::useTriggered(int owner, int playedminion, bool isOwnerActive, When
 		if (when != When::Play) return;
 		if (isOwnerActive) return;
 		enemy->getMinion(playedminion)->damage(1);
+		if (enemy->getMinion(playedminion)->getDefence() <= 0) {
+			board->APNAP(When::Death);
+			enemy->removeMinion(playedminion,true);
+		}
 	}
 }

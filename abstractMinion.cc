@@ -47,13 +47,21 @@ void AbstractMinion::attackPlayer(int player) {
 	actions--;
 }
 
-void AbstractMinion::attackMinion(int player, int minion) {
+void AbstractMinion::attackMinion(int player, int minion, int pos) {
 	if (actions == 0) return;
 	Player* p = board->getPlayer(player);
 	auto m = p->getMinion(minion);
 	if (actions == 0) return;
 	m->damage(attack);
+	if (m->getDefence() <= 0) {
+		board->APNAP(When::Death);
+		p->removeMinion(minion,true);
+	}
 	defence -= m->getAttack();
+	if (defence <= 0) {
+		board->APNAP(When::Death);
+		board->getPlayer(player%2+1)->removeMinion(pos,true);
+	}
 	actions--;
 }
 
