@@ -2,8 +2,6 @@
 
 Enchantment::Enchantment(std::string name, Board* board) : AbstractMinion{name,board} {}
 
-std::shared_ptr<AbstractMinion> Enchantment::getMinion() const { return minion; }
-
 card_template_t Enchantment::displayCard() const {
 	card_template_t vec;
 	if (enchantmentName == "Enrage") {
@@ -14,4 +12,10 @@ card_template_t Enchantment::displayCard() const {
 		vec = display_enchantment(EnchantmentName,cost,enchantmentDescription);
 	}
     return vec;
+}
+
+std::vector<card_template_t> Enchantment::inspectMinion() {
+	std::vector<card_template_t> vec = minion->inspectMinion();
+	if (enchantmentName != "Ability") vec.insert(vec.begin(),displayCard());
+	return vec;
 }
