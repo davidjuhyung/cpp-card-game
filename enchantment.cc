@@ -16,6 +16,6 @@ card_template_t Enchantment::displayCard() const {
 
 std::vector<card_template_t> Enchantment::inspectMinion() {
 	std::vector<card_template_t> vec = minion->inspectMinion();
-	if (enchantmentName != "Ability") vec.insert(vec.begin(),displayCard());
+	if (enchantmentName != "Ability") vec.push_back(displayCard());
 	return vec;
 }
