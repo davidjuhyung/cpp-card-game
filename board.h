@@ -25,22 +25,22 @@ public:
   void display();
   void showHand();
 
-  void APNAP(int playedminion = 0, When when = When::Start) {
+  void APNAP(int playedminion = -1, When when = When::Start) {
     if (active == 1) {
-      for (int i = 1; i <= player1->getNumMinions(); ++i) {
+      for (int i = 0; i < player1->getNumMinions(); ++i) {
         if (i == playedminion) continue;
         player1->getMinion(i)->useTriggered(1,playedminion,true,when);
       }
       player1->getRitual()->useAbility(1,playedminion,true,when);
-      for (int i = 1; i <= player2->getNumMinions(); ++i) player2->getMinion(i)->useTriggered(2,playedminion,false,when);
+      for (int i = 0; i <= player2->getNumMinions(); ++i) player2->getMinion(i)->useTriggered(2,playedminion,false,when);
       player2->getRitual()->useAbility(2,playedminion,false,when);
     } else {
-      for (int i = 1; i <= player2->getNumMinions(); ++i) {
+      for (int i = 0; i <= player2->getNumMinions(); ++i) {
         if (i == playedminion) continue;
         player2->getMinion(i)->useTriggered(2,playedminion,true,when);
       }
       player2->getRitual()->useAbility(1,playedminion,true,when);
-      for (int i = 1; i <= player1->getNumMinions(); ++i) player1->getMinion(i)->useTriggered(1,playedminion,false,when);
+      for (int i = 0; i <= player1->getNumMinions(); ++i) player1->getMinion(i)->useTriggered(1,playedminion,false,when);
       player1->getRitual()->useAbility(1,playedminion,false,when);
     }
   }

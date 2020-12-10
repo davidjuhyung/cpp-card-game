@@ -10,9 +10,15 @@ class Ritual : public Card {
 	int activationCost
 	int charges;
   public:
-  	void play(int player, int minion = 0, bool actOnRitual = false) override;
+  	Ritual(std::string name, Board* board);
+
+  	void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false) override;
   	// if isOwnerActive is false, then the playedminion is owned by the enemy
 	void useAbility(int owner, int playedminion, bool isOwnerActive, When when);
+
+	int getCharges() const;
+
+	void recharge() { charges += 3; }
 };
 
 #endif
