@@ -36,8 +36,8 @@ public:
   void startTurn();
   void attack(int i, int o);
   void attack(int i, int o, int t);
-  void play(int a, int i);
-  void play(int a, int i, int p, char t);
+  void play(int i);
+  void play(int i, int p, char t);
   void use(int i, int p);
   void use(int i, int p, char t);
   card_template_t display();

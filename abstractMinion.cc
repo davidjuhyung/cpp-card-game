@@ -57,10 +57,16 @@ void AbstractMinion::attackPlayer(int player) {
 }
 
 void AbstractMinion::attackMinion(int ownPosition, int player, int target) {
-	if (actions == 0) return;
+	int lastNum1 = board->getPlayer(player%2+1)->getNumMinions()-1;
+	int lastNum2 = board->getPlayer(player)->getNumMinions()-1;
+	if (0 > ownPosition || lastNum1 < ownPosition) {
+		throw InputException("You have no minion at position " + std::to_string(ownPosition+1));
+	} else if (0 > target || lastNum2 < target) {
+		throw InputException("Enemy have no minion at position " + std::to_string(target+1));
+	}
+	if (actions == 0) throw InputException("Minion doesn't have any actions remaining");
 	Player* p = board->getPlayer(player);
 	auto m = p->getMinion(target);
-	if (actions == 0) return;
 	m->damage(attack);
 	defence -= m->getAttack();
 	if (m->getDefence() <= 0) {
@@ -77,14 +83,17 @@ void AbstractMinion::attackMinion(int ownPosition, int player, int target) {
 void AbstractMinion::damage(int d) { defence -= d; }
 
 void AbstractMinion::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
-	if (cost > board->getPlayer(owner)->getMagic()) return;
-    board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()-cost);
+	int playerMagic = board->getPlayer(owner)->getMagic();
+	if (cost > playerMagic) throw InputException{"Player doesn't have enough magic"};
+	int numMinions = board->getPlayer(owner)->getNumMinions();
+	if (numMinions >= 5) throw InputException{"Minion slots filled"};
+    board->getPlayer(owner)->setMagic(playerMagic-cost);
 	auto m = std::make_shared<Minion>(name,board);
 	m->setAttack(attack);
 	m->setDefence(defence);
 	auto a = std::make_shared<Ability>(name,board,m);
 	board->getPlayer(owner)->addMinion(a);
-	board->APNAP(When::Play,board->getPlayer(owner)->getNumMinions()-1);
+	board->APNAP(When::Play,numMinions-1);
 }
 
 int AbstractMinion::getDefence() const { return defence; }

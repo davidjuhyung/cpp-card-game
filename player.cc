@@ -39,9 +39,9 @@ void Player::attack(int i, int o, int t)
 }
 
 // plays the ith card in the active player’s hand with no target.
-void Player::play(int i, int a)
+void Player::play(int i)
 {
-  hand.at(i)->play(a, a);
+  hand.at(i)->play(playerNum, playerNum);
   hand.erase(hand.begin()+i);
 }
 
@@ -50,14 +50,14 @@ void Player::play(int i, int a)
 // t is either 1, 2, 3, 4, 5 (the ith minion owned by player p) or
 // r (the ritual owned by player p). 
 // This can be used to play enchantments and spells with targets.
-void Player::play(int a, int p, int i, char t)
+void Player::play(int i, int p, char t)
 {
   if (t == 'r') {
-    hand.at(i)->play(a, p, -1, true); // true = attack on ritual
+    hand.at(i)->play(playerNum, p, -1, true); // true = attack on ritual
     return;
   }
   int m = t - '0';
-  hand.at(i)->play(a, p, m-1);
+  hand.at(i)->play(playerNum, p, m-1);
   hand.erase(hand.begin()+i);
 }
 

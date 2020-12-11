@@ -10,7 +10,7 @@ class Minion : public AbstractMinion
   	void useAbility(int activePlayer, int target = -1) override;
   	void useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) override;
   	std::shared_ptr<AbstractMinion> getMinion(bool forDisplay = false) override;
-  	card_template_t displayCard() override;
+  	card_template_t displayCard(bool forInspect = false) override;
   	std::vector<card_template_t> inspectMinion() override;
 };
 
