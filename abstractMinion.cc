@@ -95,6 +95,10 @@ void AbstractMinion::play(int owner, int targetPlayer, int minion, bool actOnRit
 	auto a = std::make_shared<Ability>(name,board,m);
 	p->addMinion(a);
 	board->APNAP(When::Play,numMinions-1);
+	if (a->defence <= 0) {
+		board->APNAP(When::Death);
+		p->removeMinion(numMinions-1,true);
+	}
 }
 
 int AbstractMinion::getDefence() const { return defence; }
