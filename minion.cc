@@ -16,7 +16,7 @@ std::shared_ptr<AbstractMinion> Minion::getMinion(bool forDisplay) {
 	return a;
 }
 
-card_template_t Minion::displayCard() const {
+card_template_t Minion::displayCard() {
 	card_template_t vec;
 	if (name == "Air Elemental" || name == "Earth Elemental") {
 		vec = display_minion_no_ability(name,cost,attack,defence);

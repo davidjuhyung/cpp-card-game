@@ -51,7 +51,7 @@ int Ritual::getCharges() const { return charges; }
 
 void Ritual::recharge() { charges += 3; }
 
-card_template_t Ritual::displayCard() const {
+card_template_t Ritual::displayCard() {
     card_template_t vec = display_ritual(name,cost,activationCost,description,charges);
     return vec;
 }

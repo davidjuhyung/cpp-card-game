@@ -18,7 +18,7 @@ class Ritual : public Card
 	void useAbility(int owner, int playedMinion, bool isOwnerActive, When when);
 	int getCharges() const;
 	void recharge();
-	card_template_t displayCard() const override;
+	card_template_t displayCard() override;
 };
 
 #endif

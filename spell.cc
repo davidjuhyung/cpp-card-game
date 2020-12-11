@@ -73,7 +73,7 @@ void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
     }
 }
 
-card_template_t Spell::displayCard() const { 
+card_template_t Spell::displayCard() { 
     card_template_t vec = display_spell(name,cost,description);
     return vec;
 }

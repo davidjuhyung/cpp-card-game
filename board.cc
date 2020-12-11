@@ -25,7 +25,7 @@ void Board::startTurn()
 {
   auto activePlayer = getPlayer(active);
   activePlayer->startTurn();
-  APNAP(When::Start);
+  APNAP();
 }
 
 void Board::endturn()
@@ -75,11 +75,11 @@ void Board::inspect(int i)
   for (auto line : card) std::cout << line << std::endl;
   int numLines = numEnchantments / 5;
   if (numEnchantments%5 != 0) numLines++;
-  for (int i = 0; i < numLines; ++i) {
+  for (int f = 0; f < numLines; ++f) {
     for (int j = 0; j < cardSize; ++j) {
       for (int k = 1; k <= 5; ++k) {
-        if (k+i*5 > numEnchantments) break;
-        std::cout << m.at(k+i*5).at(j);
+        if (k+f*5 > numEnchantments) break;
+        std::cout << m.at(k+f*5).at(j);
       }
       std::cout << std::endl;
     }

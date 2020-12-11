@@ -11,7 +11,7 @@ class Enchantment : public AbstractMinion
 	std::shared_ptr<AbstractMinion> minion = nullptr;
   public:
   	Enchantment(std::string name, Board* board);
-  	card_template_t displayCard() const override;
+  	card_template_t displayCard() override;
   	std::vector<card_template_t> inspectMinion() override;
 };
 
