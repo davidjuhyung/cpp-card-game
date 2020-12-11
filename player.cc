@@ -18,15 +18,10 @@ Player::Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card
   {};
 
 // The player gains 1 magic.
-// The player draws a card if their deck is non-empty and their hand has less than 5 cards.
 void Player::startTurn()
 {
   magic++;
-  if (deck.size() != 0 && hand.size() < 5) {
-    auto deckTopCard = deck.at(deck.size()-1);
-    hand.push_back(deckTopCard);
-    deck.erase(deck.end());
-  }
+  draw();
 }
 
 // orders minion i to attack the opposing player o
