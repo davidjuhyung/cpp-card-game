@@ -29,7 +29,7 @@ void Enrage::useAbility(int activePlayer, int target) { minion->useAbility(activ
 void Enrage::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedMinion,isOwnerActive,when); }
 
 std::shared_ptr<AbstractMinion> Enrage::getMinion() {
-	minion->setDefence(minion->getDefence()+2);
-	minion->setAttack(minion->getAttack()/2);
+	minion->setDefence(defence+2);
+	minion->setAttack(attack/2);
 	return minion;
 }
