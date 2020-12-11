@@ -2,7 +2,6 @@
 #define SPELL_H
 
 #include "card.h"
-#include "codeForStudents/ascii_graphics.h"
 // needs a bord class declaration and the include in .cc
 // needs a player include in .cc
 class Spell : public Card 

@@ -1,7 +1,6 @@
 #ifndef ENCHANTMENT_H
 #define ENCHANTMENT_H
 
-#include "codeForStudents/ascii_graphics.h"
 #include "abstractMinion.h"
 
 class Enchantment : public AbstractMinion
