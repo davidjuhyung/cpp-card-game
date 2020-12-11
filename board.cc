@@ -3,6 +3,7 @@
 #include "player.h"
 #include "minion.h"
 #include "ritual.h"
+#include "inputException.h"
 #include <iostream>
 
 
@@ -35,26 +36,35 @@ void Board::endturn()
   startTurn();
 }
 
+// orders minion i to attack the opposing player
 void Board::attack(int i)
 {
   getPlayer(active)->attack(i-1, active%2+1);
 }
 
+// orders the active player’s minion i to attack the opposing player’s minion t.
 void Board::attack(int i, int t)
 {
   getPlayer(active)->attack(i-1, active%2+1, t-1);
 }
 
+// plays the ith card in the active player’s hand with no target.
 void Board::play(int i)
 {
   getPlayer(active)->play(i-1);
 }
 
+// plays the ith card in the active player’s hand on card t owned by player p. 
+// p may be equal to 1 or 2 to represent player 1 or 2 respectively.
+// t is either 1, 2, 3, 4, 5 (the ith minion owned by player p) or
+// r (the ritual owned by player p). 
 void Board::play(int i, int p, char t)
 {
   getPlayer(active)->play(i-1, p, t);
 }
 
+// i refers to the ith minion owned by the current player
+// and the command orders that minion to use its activated ability on the provided target (or on no target).
 void Board::use(int i)
 {
   getPlayer(active)->use(i-1, active);
@@ -65,6 +75,22 @@ void Board::use(int i, int p, char t)
   getPlayer(active)->use(i-1, p, t);
 }
 
+/////// testing mode only ////////
+
+// draws a card if their deck is non-empty and their hand has less than 5 cards.
+void Board::draw() {
+  getPlayer(active)->draw();
+}
+
+// discards the ith card in the player’s hand, simply removing it from their hand and destroying it.
+void Board::discard(int i) {
+  auto player = getPlayer(active);
+  if (i >= 1 && i <= player->maxHandSize) {
+    getPlayer(active)->discard(i-1);
+  } else {
+    throw InputException("the paramater must be between 1 and " + std::to_string(player->maxHandSize));
+  }
+}
 
 void Board::inspect(int i)
 {
@@ -191,15 +217,6 @@ void Board::APNAP(When when, int playedMinion)
     for (int i = 0; i < player1->getNumMinions(); ++i) player1->getMinion(i)->useTriggered(1,playedMinion,false,when);
     if (player1->hasRitual()) player1->getRitual()->useAbility(1,playedMinion,false,when);
   }
-}
-
-/////// testing mode only ////////
-void Board::draw() {
-  getPlayer(active)->draw();
-}
-
-void Board::discard(int i) {
-  getPlayer(active)->discard(i-1);
 }
 
 void Board::displayPlayerDeck() {

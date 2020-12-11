@@ -2,13 +2,16 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <exception>
+
 // our files
 #include "player.h"
 #include "deck.h"
 #include "board.h"
 #include "inputException.h"
 
-void readAction(std::string action, std::vector<std::string> params, Board &b) 
+
+void readAction(std::string action, std::vector<std::string> params, Board &b, bool testingMode) 
 {
   if (action == "help")
   {
@@ -30,45 +33,67 @@ void readAction(std::string action, std::vector<std::string> params, Board &b)
   {
     throw InputException("Terminating the program...", true);
   } 
-  else if (action == "draw") 
-  {
-    b.draw();
-  }
-  else if (action == "discard") 
-  {
-    if (params.size() == 1) {
-      b.discard(std::stoi(params[0]));
-    }
-  } 
   else if (action == "attack") 
   {
-    if (params.size() == 1) {
-      b.attack(std::stoi(params[0]));
-    } else if (params.size() == 2) {
-      b.attack(std::stoi(params[0]), std::stoi(params[1]));
+    try {
+      if (params.size() == 1) {
+        b.attack(std::stoi(params[0]));
+      } else if (params.size() == 2) {
+        b.attack(std::stoi(params[0]), std::stoi(params[1]));
+      } else {
+        throw InputException("invalid number of paramaters");
+      }
+    } catch (InputException err) {
+      throw;
+    } catch (...) {
+      throw InputException("the parameter is not a valid number");
     }
   } 
   else if (action == "play") 
   {
-    if (params.size() == 1) {
-      b.play(std::stoi(params[0]));
-    } else if (params.size() == 3) {
-      b.play(std::stoi(params[0]), std::stoi(params[1]), params[2][0]);
+    try {
+      if (params.size() == 1) {
+        b.play(std::stoi(params[0]));
+      } else if (params.size() == 3) {
+        b.play(std::stoi(params[0]), std::stoi(params[1]), params[2][0]);
+      } else {
+        throw InputException("invalid number of paramaters");
+      }
+    } catch (InputException err) {
+      throw;
+    } catch (...) {
+      throw InputException("the parameter is not a valid number");
     }
   } 
   else if (action == "use") 
   {
-    if (params.size() == 1) {
-      b.use(std::stoi(params[0]));
-    } else if (params.size() == 3) {
-      b.use(std::stoi(params[0]), std::stoi(params[1]), params[2][0]);
+    try {
+      if (params.size() == 1) {
+        b.use(std::stoi(params[0]));
+      } else if (params.size() == 3) {
+        b.use(std::stoi(params[0]), std::stoi(params[1]), params[2][0]);
+      } else {
+        throw InputException("invalid number of paramaters");
+      }
+    } catch (InputException err) {
+      throw;
+    } catch (...) {
+      throw InputException("the parameter is not a valid number");
     }
   } 
   else if (action == "inspect") 
   {
-    if (params.size() == 1) {
-      b.inspect(std::stoi(params[0]));
-    } 
+    try {
+      if (params.size() == 1) {
+        b.inspect(std::stoi(params[0]));
+      } else {
+        throw InputException("invalid number of paramaters");
+      }
+    } catch (InputException err) {
+      throw;
+    } catch (...) {
+      throw InputException("the parameter is not a valid number");
+    }
   } 
   else if (action == "hand") 
   {
@@ -82,9 +107,27 @@ void readAction(std::string action, std::vector<std::string> params, Board &b)
   {
     b.displayPlayerDeck();
   }
+  else if (action == "draw" && testingMode) 
+  {
+    b.draw();
+  }
+  else if (action == "discard" && testingMode) 
+  {
+    try { 
+      if (params.size() == 1) {
+        b.discard(std::stoi(params[0]));
+      } else {
+        throw InputException("invalid number of paramaters");
+      }
+    } catch (InputException err) {
+      throw;
+    } catch (...) {
+      throw InputException("the parameter is not a valid number");
+    }
+  }
   else 
   {
-    std::cerr << "Invalid action." << std::endl;
+    throw InputException("invalid command, type help for information");
   }
 }
 
@@ -103,18 +146,17 @@ int main(int argc, const char *argv[])
   for (int i = 1; i < argc; i++) {
     std::string cmd{argv[i]};
     if (cmd.at(0) == '-') {
-      std::string fileName = argv[++i]; 
-      std::ifstream infile{fileName}; 
-      if (cmd == "-deck1" || cmd == "-deck2") {
+      if (cmd == "-deck1" || cmd == "-deck2" || cmd == "-init") {
+        std::string fileName = argv[++i]; 
+        std::ifstream infile{fileName}; 
         auto deck = initialize(infile, &b, 3);
         if (cmd == "-deck1") {
           deck1 = deck;
-        } else {
+        } else if (cmd == "-deck2"){
           deck2 = deck;
+        } else if (cmd == "-init") {
+          actionInput = new std::ifstream{fileName}; // must be deleted after
         }
-      }
-      if (cmd == "-init") {
-        actionInput = new std::ifstream{fileName}; // must be deleted after
       }
       if (cmd == "-testing") {
         testingMode = true;
@@ -140,7 +182,7 @@ int main(int argc, const char *argv[])
       while(stream >> s) {
         params.push_back(s);
       }
-      readAction(action, params, b);
+      readAction(action, params, b, testingMode);
       if (actionInput->eof() && actionInput != &std::cin) {
         delete actionInput;
         actionInput = &std::cin;
