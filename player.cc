@@ -81,9 +81,9 @@ void Player::use(int i, int p, char t)
   minions[i]->useAbility(p, m);
 }
 
-// void Player::display() {
-//   display_player_card(playerNum, name, life, magic);
-// }
+card_template_t Player::display() {
+  return display_player_card(playerNum, name, life, magic);
+}
 
 int Player::getPlayerNum()
 {
