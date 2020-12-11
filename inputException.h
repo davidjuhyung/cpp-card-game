@@ -1,3 +1,6 @@
+#ifndef INPUT_EXCEPTION_H
+#define INPUT_EXCEPTION_H
+
 #include <string>
 
 class InputException {
@@ -9,3 +12,5 @@ class InputException {
     std::string getReason() const { return reason; }
     bool getQuit() const { return quit; }
 };
+
+#endif

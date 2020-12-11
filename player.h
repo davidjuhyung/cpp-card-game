@@ -40,14 +40,10 @@ public:
   void play(int i, int p, char t);
   void use(int i, int p);
   void use(int i, int p, char t);
-  card_template_t display();
-  std::vector<card_template_t> displayMinions();
-  std::vector<card_template_t> inspectMinion(int i);
-  std::vector<card_template_t> displayHand();
-  // if graveyard is empty return empty card template
-  card_template_t showTopGraveyard();
-  // if no ritual is present, return empty card template
-  card_template_t showRitual();
+  // testing mode
+  void draw();
+  void discard(int i);
+  std::vector<card_template_t> displayDeck();
 
   int getPlayerNum();
   std::string getName();
@@ -75,10 +71,17 @@ public:
   void replaceMinion(int i, std::shared_ptr<AbstractMinion> m);
   void removeMinion(int i, bool moveToGrave = false);
 
-  // testing mode
-  void draw();
-  void discard(int i);
-  std::vector<card_template_t> displayDeck();
+  bool isGraveyardEmpty();
+
+  // display
+  card_template_t display();
+  std::vector<card_template_t> displayMinions();
+  std::vector<card_template_t> inspectMinion(int i);
+  std::vector<card_template_t> displayHand();
+  // if graveyard is empty return empty card template
+  card_template_t showTopGraveyard();
+  // if no ritual is present, return empty card template
+  card_template_t showRitual();
 };
 
 #endif

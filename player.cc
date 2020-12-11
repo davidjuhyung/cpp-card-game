@@ -45,7 +45,7 @@ void Player::play(int i)
   hand.erase(hand.begin()+i);
 }
 
-// plays the ith card in the active player a’s hand on card t owned by player p. 
+// plays the ith card in the active player’s hand on card t owned by player p. 
 // p may be equal to 1 or 2 to represent player 1 or 2 respectively.
 // t is either 1, 2, 3, 4, 5 (the ith minion owned by player p) or
 // r (the ritual owned by player p). 
@@ -75,40 +75,20 @@ void Player::use(int i, int p, char t)
   minions.at(i)->useAbility(p, m-1);
 }
 
-card_template_t Player::display() {
-  return display_player_card(playerNum, name, life, magic);
+/////// testing mode only ////////
+
+// draws a card if their deck is non-empty and their hand has less than 5 cards.
+void Player::draw() {
+  if (deck.size() != 0 && hand.size() < 5) {
+  	auto deckTopCard = deck.at(deck.size()-1);
+  	hand.push_back(deckTopCard);
+  	deck.pop_back();
+  }
 }
 
-std::vector<card_template_t> Player::displayMinions() {
-  std::vector<card_template_t> vec;
-  for (auto m : minions) vec.push_back(m->displayCard());
-  return vec;
-}
-
-std::vector<card_template_t> Player::inspectMinion(int i) {
-  std::vector<card_template_t> vec;
-  if (minions.size() == 0) return vec;
-  return minions.at(i-1)->inspectMinion();
-}
-
-std::vector<card_template_t> Player::displayHand() {
-  std::vector<card_template_t> vec;
-  for (auto c : hand) vec.push_back(c->displayCard());
-  return vec;
-}
-  
-card_template_t Player::showTopGraveyard() {
-  card_template_t vec = CARD_TEMPLATE_BORDER;
-  if (graveyard.size() == 0) return vec;
-  else vec = graveyard.at(graveyard.size()-1)->displayCard();
-  return vec;
-}
-
-card_template_t Player::showRitual() {
-  card_template_t vec = CARD_TEMPLATE_BORDER;
-  if (ritual == nullptr) return vec;
-  else vec = ritual->displayCard();
-  return vec;
+// discards the ith card in the player’s hand, simply removing it from their hand and destroying it.
+void Player::discard(int i) {
+  hand.erase(hand.begin() + i);
 }
 
 int Player::getPlayerNum()
@@ -222,20 +202,44 @@ void Player::removeMinion(int i, bool moveToGrave) {
   minions.erase(minions.begin() + i);
 }
 
-/////// testing mode only ////////
-
-// draws a card if their deck is non-empty and their hand has less than 5 cards.
-void Player::draw() {
-  if (deck.size() != 0 && hand.size() < 5) {
-  	auto deckTopCard = deck.at(deck.size()-1);
-  	hand.push_back(deckTopCard);
-  	deck.pop_back();
-  }
+bool Player::isGraveyardEmpty() {
+  return graveyard.size() == 0;
 }
 
-// discards the ith card in the player’s hand, simply removing it from their hand and destroying it.
-void Player::discard(int i) {
-  hand.erase(hand.begin() + i);
+card_template_t Player::display() {
+  return display_player_card(playerNum, name, life, magic);
+}
+
+std::vector<card_template_t> Player::displayMinions() {
+  std::vector<card_template_t> vec;
+  for (auto m : minions) vec.push_back(m->displayCard());
+  return vec;
+}
+
+std::vector<card_template_t> Player::inspectMinion(int i) {
+  std::vector<card_template_t> vec;
+  if (minions.size() == 0) return vec;
+  return minions.at(i-1)->inspectMinion();
+}
+
+std::vector<card_template_t> Player::displayHand() {
+  std::vector<card_template_t> vec;
+  for (auto c : hand) vec.push_back(c->displayCard());
+  return vec;
+}
+  
+card_template_t Player::showTopGraveyard() {
+  card_template_t vec = CARD_TEMPLATE_BORDER;
+  if (graveyard.size() == 0) return vec;
+  else vec = graveyard.at(graveyard.size()-1)->displayCard();
+  return vec;
+}
+
+card_template_t Player::showRitual() {
+  card_template_t vec = CARD_TEMPLATE_BORDER;
+  if (ritual == nullptr) return vec;
+  else vec = ritual->displayCard();
+  return vec;
 }
 
 std::vector<card_template_t> Player::displayDeck() {
