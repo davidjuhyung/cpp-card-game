@@ -36,32 +36,32 @@ void Board::endturn()
 
 void Board::attack(int i)
 {
-  getPlayer(active)->attack(i, active%2+1);
+  getPlayer(active)->attack(i-1, active%2+1);
 }
 
 void Board::attack(int i, int t)
 {
-  getPlayer(active)->attack(i, active%2+1, t);
+  getPlayer(active)->attack(i-1, active%2+1, t-1);
 }
 
 void Board::play(int i)
 {
-  getPlayer(active)->play(i,active);
+  getPlayer(active)->play(i-1,active);
 }
 
 void Board::play(int i, int p, char t)
 {
-  getPlayer(active)->play(active, i, p, t);
+  getPlayer(active)->play(active, i-1, p, t);
 }
 
 void Board::use(int i)
 {
-  getPlayer(active)->use(i, active);
+  getPlayer(active)->use(i-1, active);
 }
 
 void Board::use(int i, int p, char t)
 {
-  getPlayer(active)->use(i, p, t);
+  getPlayer(active)->use(i-1, p, t);
 }
 
 
@@ -155,7 +155,7 @@ void Board::display()
 
 //   std::vector<std::shared_ptr<Card>> hand;
 void Board::showHand()
-{
+{ 
   std::vector<card_template_t> m = getPlayer(active)->displayHand();
   int num = m.size();
   if (num == 0) return; // This is not possible so remove this line if you want
@@ -198,5 +198,5 @@ void Board::draw() {
 }
 
 void Board::discard(int i) {
-  getPlayer(active)->discard(i);
+  getPlayer(active)->discard(i-1);
 }

@@ -39,14 +39,14 @@ void Player::attack(int i, int o)
 // orders the active player’s minion i to attack the opposing player o’s minion t.
 void Player::attack(int i, int o, int t)
 {
-  minions.at(i-1)->attackMinion(i-1, o, t-1);
+  minions.at(i)->attackMinion(i, o, t);
 }
 
 // plays the ith card in the active player’s hand with no target.
 void Player::play(int i, int a)
 {
-  hand.at(i-1)->play(a, a);
-  hand.erase(hand.begin()+i-1);
+  hand.at(i)->play(a, a);
+  hand.erase(hand.begin()+i);
 }
 
 // plays the ith card in the active player a’s hand on card t owned by player p. 
@@ -61,8 +61,8 @@ void Player::play(int a, int p, int i, char t)
     return;
   }
   int m = t - '0';
-  hand.at(i-1)->play(a, p, m-1);
-  hand.erase(hand.begin()+i-1);
+  hand.at(i)->play(a, p, m-1);
+  hand.erase(hand.begin()+i);
 }
 
 // i refers to the ith minion owned by the current player
@@ -70,13 +70,13 @@ void Player::play(int a, int p, int i, char t)
 // If no target = the current player itself
 void Player::use(int i, int p)
 {
-  minions.at(i-1)->useAbility(p);
+  minions.at(i)->useAbility(p);
 }
 
 void Player::use(int i, int p, char t)
 {
   int m = t - '0';
-  minions.at(i-1)->useAbility(p, m-1);
+  minions.at(i)->useAbility(p, m-1);
 }
 
 card_template_t Player::display() {
@@ -239,5 +239,5 @@ void Player::draw() {
 
 // discards the ith card in the player’s hand, simply removing it from their hand and destroying it.
 void Player::discard(int i) {
-  hand.erase(hand.begin() + i - 1);
+  hand.erase(hand.begin() + i);
 }
