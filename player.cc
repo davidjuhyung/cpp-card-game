@@ -11,7 +11,6 @@ Player::Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card
   , life{20}
   , magic{3}
   , deck{deck}
-  , ritual{nullptr}
   {
     while (hand.size() != 5) {
       auto deckTopCard = deck.at(deck.size()-1);
@@ -109,7 +108,7 @@ card_template_t Player::showTopGraveyard() {
 
 card_template_t Player::showRitual() {
   card_template_t vec = CARD_TEMPLATE_BORDER;
-  if (ritual.get() == nullptr) return vec;
+  if (ritual == nullptr) return vec;
   else vec = ritual->displayCard();
   return vec;
 }
