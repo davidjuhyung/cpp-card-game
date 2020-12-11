@@ -167,9 +167,9 @@ void Board::display()
   for (int i = 0; i < height; ++i) {
     std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
     for (int j = 0; j < 5; ++j) {
-      if (j == 0) std::cout << grave2.at(i);
+      if (j == 4) std::cout << grave2.at(i);
       else if (j == 2) std::cout << p2.at(i);
-      else if (j == 4) std::cout << ritual2.at(i);
+      else if (j == 0) std::cout << ritual2.at(i);
       else for (int empty = 0; empty < width; empty++) std::cout << " ";
     }
     std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;

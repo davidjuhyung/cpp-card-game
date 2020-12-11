@@ -171,6 +171,7 @@ int main(int argc, const char *argv[])
   auto p2 = std::make_shared<Player>(2, name2, deck2);
   b.setPlayer(p1);
   b.setPlayer(p2);
+  b.startTurn();
 
   std::string action;
   while (std::getline(*actionInput, action)) {
