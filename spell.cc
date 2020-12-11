@@ -25,42 +25,56 @@ Spell::Spell(std::string name, Board* board) : Card{name,board} {
 }
 
 void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
-	if (cost > board->getPlayer(owner)->getMagic()) return;
-    board->getPlayer(owner)->setMagic(board->getPlayer(owner)->getMagic()-cost);
+    Player* p = board->getPlayer(owner);
+    Player* t = board->getPlayer(targetPlayer);
+	int playerMagic = p->getMagic();
+    if (cost > playerMagic) throw InputException{"Player doesn't have enough magic"};  
     if (name == "Banish"){
         //destroy target minion or ritual
-        if (actOnRitual) board->getPlayer(targetPlayer)->removeRitual();
-        else board->getPlayer(targetPlayer)->removeMinion(minion);
+        if (actOnRitual) {
+            if (t->hasRitual() == false) throw InputException{"Target doesn't have ritual"};
+            t->removeRitual();
+        } else {
+            int lastMinion = t->getNumMinions() - 1;
+            if (minion < 0 || minion > lastMinion) throw InputException{"Target has no minion at position " + std::to_string(ownPosition+1)};
+            t->removeMinion(minion);
+        }
     }
-    else if (name == "Unsommon"){
+    else if (name == "Unsommon") {
         //return target minion to its owner's hand
-        board->getPlayer(targetPlayer)->moveToHand(minion);
+        int lastMinion = t->getNumMinions() - 1;
+        if (minion < 0 || minion > lastMinion) throw InputException{"Target has no minion at position " + std::to_string(ownPosition+1)};
+        t->moveToHand(minion);
     }
-    else if (name == "Recharge"){
+    else if (name == "Recharge") {
         //ritual gains 3 charges
-        board->getPlayer(owner)->getRitual()->recharge();
+        if (p->hasRitual() == false) throw InputException{"You don't have ritual"};
+        p->getRitual()->recharge();
     }
-    else if (name == "Disenchant"){
+    else if (name == "Disenchant") {
         //destroy the top enchantment on target minion
-        auto m = board->getPlayer(targetPlayer)->getMinion(minion)->getMinion(); 
+        int lastMinion = t->getNumMinions() - 1;
+        if (minion < 0 || minion > lastMinion) throw InputException{"Target has no minion at position " + std::to_string(ownPosition+1)};
+        auto m = t->getMinion(minion)->getMinion(); 
         board->getPlayer(targetPlayer)->replaceMinion(minion, m);
         if (m->getDefence() <= 0) {
             board->APNAP(When::Death);
-            board->getPlayer(targetPlayer)->removeMinion(minion,true);
+            t->removeMinion(minion,true);
         }
     }
-    else if (name == "Raise Dead"){
+    else if (name == "Raise Dead") {
         //resurrect the top minion in your graveyard and set its defence to 1
-        board->getPlayer(owner)->resurrect();
-        board->getPlayer(owner)->getMinion(board->getPlayer(owner)->getNumMinions()-1)->setDefence(1);
+        if (p->isGraveyardEmpty) throw InputException{"Graveyard is Empty"};
+        p->resurrect();
+        p->getMinion(board->getPlayer(owner)->getNumMinions()-1)->setDefence(1);
     }
     else if (name == "Blizzard"){
         //deal 2 damage to all minions
-        for (int i = 0; i < board->getPlayer(owner)->getNumMinions(); i++ ){
-            board->getPlayer(owner)->getMinion(i)->damage(2);
-            if (board->getPlayer(owner)->getMinion(i)->getDefence() <= 0) {
+        for (int i = 0; i < p->getNumMinions(); i++ ){
+            p->getMinion(i)->damage(2);
+            if (p->getMinion(i)->getDefence() <= 0) {
                 board->APNAP(When::Death);
-                board->getPlayer(owner)->removeMinion(i,true);
+                p->removeMinion(i,true);
             }
         }
         for (int i = 0; i < board->getPlayer(owner%2+1)->getNumMinions(); i++ ){
@@ -71,6 +85,7 @@ void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
             }
         }
     }
+    p->setMagic(playerMagic-cost);
 }
 
 card_template_t Spell::displayCard(bool forInspect) { 
