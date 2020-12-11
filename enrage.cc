@@ -2,6 +2,7 @@
 
 Enrage::Enrage(std::string name, Board* board) : Enchantment{name,board} {
 	enchantmentName = "Enrage";
+	enchantmentDescription = "";
 	cost = 2;
 }
 
@@ -26,3 +27,9 @@ void Enrage::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 void Enrage::useAbility(int activePlayer, int target) { minion->useAbility(activePlayer,target); }
 
 void Enrage::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedMinion,isOwnerActive,when); }
+
+std::shared_ptr<AbstractMinion> Enrage::getMinion() {
+	minion->setDefence(minion->getDefence()+2);
+	minion->setAttack(minion->getAttack()/2);
+	return minion;
+}

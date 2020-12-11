@@ -11,6 +11,7 @@ class Spell : public Card
 	public:	
 		Spell(std::string name, Board* board);	
 		void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false) override;
+		card_template_t displayCard() const override;
 };
 
 #endif

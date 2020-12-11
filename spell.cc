@@ -44,6 +44,10 @@ void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
         //destroy the top enchantment on target minion
         auto m = board->getPlayer(targetPlayer)->getMinion(minion)->getMinion(); 
         board->getPlayer(targetPlayer)->replaceMinion(minion, m);
+        if (m->getDefence() <= 0) {
+            board->APNAP(When::Death);
+            board->getPlayer(targetPlayer)->removeMinion(minion,true);
+        }
     }
     else if (name == "Raise Dead"){
         //resurrect the top minion in your graveyard and set its defence to 1
@@ -67,4 +71,9 @@ void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
             }
         }
     }
+}
+
+card_template_t Spell::displayCard() const { 
+    card_template_t vec = display_spell(name,cost,description);
+    return vec;
 }
