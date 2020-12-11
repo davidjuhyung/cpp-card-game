@@ -46,7 +46,8 @@ void readAction(std::string action, std::vector<std::string> params, Board &b, b
     } catch (InputException err) {
       throw;
     } catch (...) {
-      throw InputException("the parameter is not a valid number");
+      throw;
+      //throw InputException("the parameter is not a valid number");
     }
   } 
   else if (action == "play") 

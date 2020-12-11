@@ -94,7 +94,7 @@ void Board::discard(int i) {
 
 void Board::inspect(int i)
 {
-  std::vector<card_template_t> m = getPlayer(active)->inspectMinion(i);
+  std::vector<card_template_t> m = getPlayer(active)->inspectMinion(i-1);
   int numEnchantments = m.size() - 1;
   if (numEnchantments < 0) return;
   card_template_t card = m.at(0);

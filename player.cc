@@ -29,7 +29,7 @@ void Player::startTurn()
 // orders minion i to attack the opposing player o
 void Player::attack(int i, int o)
 {
-  minions.at(i-1)->attackPlayer(o);
+  minions.at(i)->attackPlayer(o);
 }
 
 // orders the active player’s minion i to attack the opposing player o’s minion t.
@@ -219,7 +219,7 @@ std::vector<card_template_t> Player::displayMinions() {
 std::vector<card_template_t> Player::inspectMinion(int i) {
   std::vector<card_template_t> vec;
   if (minions.size() == 0) return vec;
-  return minions.at(i-1)->inspectMinion();
+  return minions.at(i)->inspectMinion();
 }
 
 std::vector<card_template_t> Player::displayHand() {
