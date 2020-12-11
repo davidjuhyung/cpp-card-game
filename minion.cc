@@ -7,7 +7,7 @@ void Minion::useAbility(int activePlayer, int target) {}
 
 void Minion::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) {}
 
-std::shared_ptr<AbstractMinion> Minion::getMinion(bool forDisplay = false) {
+std::shared_ptr<AbstractMinion> Minion::getMinion(bool forDisplay) {
 	auto m = std::make_shared<Minion>(name,board);
 	m->setAttack(attack);
 	m->setDefence(defence);
