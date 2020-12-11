@@ -28,8 +28,13 @@ void Enrage::useAbility(int activePlayer, int target) { minion->useAbility(activ
 
 void Enrage::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedMinion,isOwnerActive,when); }
 
-std::shared_ptr<AbstractMinion> Enrage::getMinion() {
-	minion->setDefence(defence+2);
-	minion->setAttack(attack/2);
+std::shared_ptr<AbstractMinion> Enrage::getMinion(bool forDisplay) {
+	if (forDisplay) {
+		minion->setDefence(defence);
+		minion->setAttack(attack);
+	} else {
+		minion->setDefence(defence+2);
+		minion->setAttack(attack/2);
+	}
 	return minion;
 }

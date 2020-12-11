@@ -25,6 +25,8 @@ void Silence::useAbility(int activePlayer, int target) {}
 
 void Silence::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) {}
 
-std::shared_ptr<AbstractMinion> Silence::getMinion() {
+std::shared_ptr<AbstractMinion> Silence::getMinion(bool forDisplay) {
+	minion->setDefence(defence);
+	minion->setAttack(attack);
 	return minion;
 }
