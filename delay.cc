@@ -25,6 +25,8 @@ void Delay::useAbility(int activePlayer, int target) { minion->useAbility(active
 
 void Delay::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedMinion,isOwnerActive,when); }
 
-std::shared_ptr<AbstractMinion> Delay::getMinion() {
+std::shared_ptr<AbstractMinion> Delay::getMinion(bool forDisplay) {
+	minion->setDefence(defence);
+	minion->setAttack(attack);
 	return minion;
 }

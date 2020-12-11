@@ -23,6 +23,8 @@ void MagicFatigue::play(int owner, int targetPlayer, int minion, bool actOnRitua
 void MagicFatigue::useAbility(int activePlayer, int target) { minion->useAbility(activePlayer,target); }
 void MagicFatigue::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedMinion,isOwnerActive,when); }
 
-std::shared_ptr<AbstractMinion> MagicFatigue::getMinion() {
+std::shared_ptr<AbstractMinion> MagicFatigue::getMinion(bool forDisplay) {
+	minion->setDefence(defence);
+	minion->setAttack(attack);
 	return minion;
 }

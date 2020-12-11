@@ -2,7 +2,6 @@
 #include "card.h"
 #include "abstractMinion.h"
 #include "ritual.h"
-// #include "/codeForStudents/ascii_graphics.h"
 
 #include <sstream>
 
@@ -78,6 +77,34 @@ void Player::use(int i, int p, char t)
 
 card_template_t Player::display() {
   return display_player_card(playerNum, name, life, magic);
+}
+
+std::vector<card_template_t> Player::displayMinions() {
+  std::vector<card_template_t> vec;
+  for (auto m : minions) vec.push_back(m->displayCard());
+  return vec;
+}
+
+std::vector<card_template_t> Player::inspectMinion(int i) {
+  std::vector<card_template_t> vec;
+  if (minions.size() == 0) return vec;
+  return minions.at(i)->inspectMinion();
+}
+
+std::vector<card_template_t> Player::displayHand() {
+  std::vector<card_template_t> vec;
+  for (auto c : hand) vec.push_back(c->displayCard());
+  return vec;
+}
+  
+card_template_t Player::showTopGraveyard() {
+  if (graveyard.size() == 0) return CARD_TEMPLATE_EMPTY;
+  else return graveyard.at(graveyard.size()-1)->displayCard();
+}
+
+card_template_t Player::showRitual() {
+  if (ritual == nullptr) return CARD_TEMPLATE_EMPTY;
+  else return ritual->displayCard();
 }
 
 int Player::getPlayerNum()

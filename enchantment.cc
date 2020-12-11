@@ -15,7 +15,7 @@ card_template_t Enchantment::displayCard() const {
 }
 
 std::vector<card_template_t> Enchantment::inspectMinion() {
-	std::vector<card_template_t> vec = getMinion()->inspectMinion();
+	std::vector<card_template_t> vec = getMinion(true)->inspectMinion();
 	if (enchantmentName != "Ability") vec.push_back(displayCard());
 	return vec;
 }

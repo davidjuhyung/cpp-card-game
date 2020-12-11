@@ -41,6 +41,13 @@ public:
   void use(int i, int p);
   void use(int i, int p, char t);
   card_template_t display();
+  std::vector<card_template_t> displayMinions();
+  std::vector<card_template_t> inspectMinion(int i);
+  std::vector<card_template_t> displayHand();
+  // if graveyard is empty return empty card template
+  card_template_t showTopGraveyard();
+  // if no ritual is present, return empty card template
+  card_template_t showRitual();
 
   int getPlayerNum();
   std::string getName();
