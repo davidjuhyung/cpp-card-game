@@ -42,6 +42,7 @@ void Player::attack(int i, int o, int t)
 void Player::play(int i, int a)
 {
   hand.at(i)->play(a, a);
+  hand.erase(hand.begin()+i);
 }
 
 // plays the ith card in the active player a’s hand on card t owned by player p. 
@@ -59,6 +60,7 @@ void Player::play(int a, int p, int i, char t)
   str << t;
   int m = t;
   hand.at(i)->play(a, p, m);
+  hand.erase(hand.begin()+i);
 }
 
 // i refers to the ith minion owned by the current player
