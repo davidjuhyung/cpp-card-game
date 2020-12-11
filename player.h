@@ -4,7 +4,8 @@
 #include <string>
 #include <vector>
 #include <memory>
-// our libraries
+#include "codeForStudents/ascii_graphics.h"
+
 class Card;
 class AbstractMinion;
 class Ritual;
@@ -39,7 +40,7 @@ public:
   void play(int a, int i, int p, char t);
   void use(int i, int p);
   void use(int i, int p, char t);
-  void display();
+  card_template_t display();
 
   int getPlayerNum();
   std::string getName();
