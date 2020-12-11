@@ -11,11 +11,16 @@ Player::Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card
   , life{20}
   , magic{3}
   , deck{deck}
-  , hand{nullptr}
   , minions{nullptr}
   , graveyard{nullptr}
   , ritual{nullptr}
-  {};
+  {
+    while (hand.size() != 5) {
+      auto deckTopCard = deck.at(deck.size()-1);
+      hand.push_back(deckTopCard);
+      deck.erase(deck.end());
+    }
+  };
 
 // The player gains 1 magic.
 void Player::startTurn()
