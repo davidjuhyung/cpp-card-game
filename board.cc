@@ -101,3 +101,12 @@ void Board::APNAP(When when, int playedMinion)
     player1->getRitual()->useAbility(1,playedMinion,false,when);
   }
 }
+
+/////// testing mode only ////////
+void Board::draw() {
+  getPlayer(active)->draw();
+}
+
+void Board::discard(int i) {
+  getPlayer(active)->discard(i);
+}

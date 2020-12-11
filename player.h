@@ -66,6 +66,10 @@ public:
   void addMinion(std::shared_ptr<AbstractMinion> m);
   void replaceMinion(int i, std::shared_ptr<AbstractMinion> m);
   void removeMinion(int i, bool moveToGrave = false);
+
+  // testing mode
+  void draw();
+  void discard(int i);
 };
 
 #endif
