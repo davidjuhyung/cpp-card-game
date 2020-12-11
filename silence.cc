@@ -2,6 +2,7 @@
 
 Silence::Silence(std::string name, Board* board) : Enchantment{name, board} {
 	enchantmentName = "Silence";
+	enchantmentDescription = "Enchanted minion cannot use abilities";
 	cost = 1;
 }
 
@@ -23,3 +24,7 @@ void Silence::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 void Silence::useAbility(int activePlayer, int target) {}
 
 void Silence::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) {}
+
+std::shared_ptr<AbstractMinion> Silence::getMinion() {
+	return minion;
+}

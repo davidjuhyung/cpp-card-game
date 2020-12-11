@@ -2,6 +2,7 @@
 
 GiantStrength::GiantStrength(std::string name, Board* board) : Enchantment{name,board} {
 	enchantmentName = "Giant Strength";
+	enchantmentDescription = "";
 	cost = 1;
 }
 
@@ -22,3 +23,9 @@ void GiantStrength::play(int owner, int targetPlayer, int minion, bool actOnRitu
 void GiantStrength::useAbility(int activePlayer, int target) { minion->useAbility(activePlayer,target); }
 
 void GiantStrength::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedMinion,isOwnerActive,when); }
+
+std::shared_ptr<AbstractMinion> GiantStrength::getMinion() {
+	minion->setDefence(minion->getDefence()-2);
+	minion->setAttack(minion->getAttack()-2);
+	return minion;
+}

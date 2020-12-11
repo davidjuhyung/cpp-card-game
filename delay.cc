@@ -2,6 +2,7 @@
 
 Delay::Delay(std::string name, Board* board) : Enchantment{name,board} {
 	enchantmentName = "Delay";
+	enchantmentDescription = "Enchanted minion does not gain an action on their next turn. This enchantement is automatically destroyed after 1 turn";
 	cost = 1;
 }
 
@@ -23,3 +24,7 @@ void Delay::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 void Delay::useAbility(int activePlayer, int target) { minion->useAbility(activePlayer,target); }
 
 void Delay::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedMinion,isOwnerActive,when); }
+
+std::shared_ptr<AbstractMinion> Delay::getMinion() {
+	return minion;
+}

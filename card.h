@@ -1,6 +1,7 @@
 #ifndef CARD_H
 #define CARD_H
 
+#include "codeForStudents/ascii_graphics.h"
 #include <memory>
 #include "board.h"
 #include "player.h"
@@ -21,6 +22,7 @@ class Card
   	// This function is the play method for the card class. It
     // effects the board in some way depending on the type and specification
   	virtual void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false) = 0;
+    virtual card_template_t displayCard() const = 0;
 };
 
 #endif

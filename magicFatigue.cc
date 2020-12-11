@@ -2,6 +2,7 @@
 
 MagicFatigue::MagicFatigue(std::string name, Board* board) : Enchantment{name, board} {
 	enchantmentName = "Magic Fatigue";
+	enchantmentDescription = "Enchanted minion's activated ability costs 2 more";
 	cost = 0;
 }
 
@@ -21,3 +22,7 @@ void MagicFatigue::play(int owner, int targetPlayer, int minion, bool actOnRitua
 }
 void MagicFatigue::useAbility(int activePlayer, int target) { minion->useAbility(activePlayer,target); }
 void MagicFatigue::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedMinion,isOwnerActive,when); }
+
+std::shared_ptr<AbstractMinion> MagicFatigue::getMinion() {
+	return minion;
+}
