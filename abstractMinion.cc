@@ -87,7 +87,7 @@ void AbstractMinion::play(int owner, int targetPlayer, int minion, bool actOnRit
 	int playerMagic = p->getMagic();
 	if (cost > playerMagic) throw InputException{"Player doesn't have enough magic"};
 	int numMinions = p->getNumMinions();
-	if (numMinions >= Player::MaxMinionSize) throw InputException{"Minion slots filled"};
+	if (numMinions >= Player::maxMinionSize) throw InputException{"Minion slots filled"};
     p->setMagic(playerMagic-cost);
 	auto m = std::make_shared<Minion>(name,board);
 	m->setAttack(attack);

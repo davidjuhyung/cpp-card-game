@@ -21,7 +21,7 @@ void Ability::useAbility(int activePlayer, int target) {
 	if (magic < activationCost) throw InputException("Player doesn't have enough mana");
 	if (name == "Novice Pyromancer") {
 		int lastMinion = enemy->getNumMinions()-1;
-		if (target < 0 || target > lastMinion) throw{"Enemy have no minion at position " + std::to_string(target+1)};
+		if (target < 0 || target > lastMinion) throw InputException{"Enemy have no minion at position " + std::to_string(target+1)};
 		auto m = enemy->getMinion(target);
 		m->damage(1);
 		if (m->getDefence() <= 0) {
@@ -42,7 +42,7 @@ void Ability::useAbility(int activePlayer, int target) {
 	} else if (name == "Master Summoner") {
 		int numMinions = p->getNumMinions();
 		if (numMinions == Player::maxMinionSize) throw InputException{"Minion slots filled"};
-		for (int i = 0; i < Player::maxMinionSize - num && i < 3; ++i) {
+		for (int i = 0; i < Player::maxMinionSize - numMinions && i < 3; ++i) {
 			auto m = std::make_shared<Minion>("Air Elemental",board);
 			auto a = std::make_shared<Ability>(name,board,m);
 			p->addMinion(a);

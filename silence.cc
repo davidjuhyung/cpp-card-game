@@ -14,7 +14,7 @@ void Silence::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	if (cost > magic) throw InputException{"Player doesn't have enough magic"};
 	int lastMinion = t->getNumMinions()-1;
 	if (minion < 0 || minion > lastMinion) throw InputException{"Target doesn't have minion at " + std::to_string(minion+1)};
-	auto m = std::make_shared<GiantStrength>(name,board);
+	auto m = std::make_shared<Silence>(name,board);
 	m->minion = t->getMinion(minion);
 	m->actions = m->minion->getAction();
 	m->attack = m->minion->getAttack();
