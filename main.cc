@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <exception>
 
 // our files
 #include "player.h"
@@ -28,7 +29,7 @@ void readAction(std::string action, std::vector<std::string> params, Board &b)
   }
   else if (action == "quit") 
   {
-    throw;
+    throw "quit has been entered";
   } 
   else if (action == "draw") 
   {
@@ -151,7 +152,7 @@ int main(int argc, const char *argv[])
         params.push_back(s);
       }
       readAction(action, params, b);  
-    } catch (...) {
+    } catch (const char* msg) {
       break;
     }
   }
