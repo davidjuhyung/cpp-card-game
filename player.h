@@ -64,6 +64,7 @@ public:
   int getMagic();
   void setMagic(int m);
 
+  bool hasRitual();
   std::shared_ptr<Ritual> getRitual();
   void setRitual(std::shared_ptr<Ritual> ritual);
   void removeRitual();

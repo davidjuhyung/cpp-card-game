@@ -3,7 +3,7 @@
 #include "abstractMinion.h"
 #include "ritual.h"
 
-#include <sstream>
+#include <iostream>
 
 Player::Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card>> deck)
   : playerNum{playerNum}
@@ -23,26 +23,30 @@ Player::Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card
 void Player::startTurn()
 {
   magic++;
-  draw();
+  while (hand.size() != 5) {
+    auto deckTopCard = deck.at(deck.size()-1);
+    hand.push_back(deckTopCard);
+    deck.pop_back();
+  }
 }
 
 // orders minion i to attack the opposing player o
 void Player::attack(int i, int o)
 {
-  minions.at(i)->attackPlayer(o);
+  minions.at(i-1)->attackPlayer(o);
 }
 
 // orders the active player’s minion i to attack the opposing player o’s minion t.
 void Player::attack(int i, int o, int t)
 {
-  minions.at(i)->attackMinion(i, o, t);
+  minions.at(i-1)->attackMinion(i-1, o, t-1);
 }
 
 // plays the ith card in the active player’s hand with no target.
 void Player::play(int i, int a)
 {
-  hand.at(i)->play(a, a);
-  hand.erase(hand.begin()+i);
+  hand.at(i-1)->play(a, a);
+  hand.erase(hand.begin()+i-1);
 }
 
 // plays the ith card in the active player a’s hand on card t owned by player p. 
@@ -53,14 +57,12 @@ void Player::play(int i, int a)
 void Player::play(int a, int p, int i, char t)
 {
   if (t == 'r') {
-    hand.at(i)->play(a, p, 0, true); // true = attack on ritual
+    hand.at(i)->play(a, p, -1, true); // true = attack on ritual
     return;
   }
-  std::stringstream str;
-  str << t;
-  int m = t;
-  hand.at(i)->play(a, p, m);
-  hand.erase(hand.begin()+i);
+  int m = t - '0';
+  hand.at(i-1)->play(a, p, m-1);
+  hand.erase(hand.begin()+i-1);
 }
 
 // i refers to the ith minion owned by the current player
@@ -68,15 +70,13 @@ void Player::play(int a, int p, int i, char t)
 // If no target = the current player itself
 void Player::use(int i, int p)
 {
-  minions[i]->useAbility(p);
+  minions.at(i-1)->useAbility(p);
 }
 
 void Player::use(int i, int p, char t)
 {
-  std::stringstream str;
-  str << t;
-  int m = t;
-  minions[i]->useAbility(p, m);
+  int m = t - '0';
+  minions.at(i-1)->useAbility(p, m-1);
 }
 
 card_template_t Player::display() {
@@ -92,7 +92,7 @@ std::vector<card_template_t> Player::displayMinions() {
 std::vector<card_template_t> Player::inspectMinion(int i) {
   std::vector<card_template_t> vec;
   if (minions.size() == 0) return vec;
-  return minions.at(i)->inspectMinion();
+  return minions.at(i-1)->inspectMinion();
 }
 
 std::vector<card_template_t> Player::displayHand() {
@@ -179,6 +179,8 @@ void Player::setMagic(int m)
   magic = m;
 }
 
+bool Player::hasRitual() { return !(ritual == nullptr); }
+
 std::shared_ptr<Ritual> Player::getRitual()
 {
   return ritual;
@@ -201,6 +203,7 @@ std::shared_ptr<AbstractMinion> Player::getMinion(int i)
 
 int Player::getNumMinions()
 {
+  std::cout << minions.size() << std::endl;
   return minions.size();
 }
 
@@ -237,5 +240,5 @@ void Player::draw() {
 
 // discards the ith card in the player’s hand, simply removing it from their hand and destroying it.
 void Player::discard(int i) {
-  hand.erase(hand.begin() + i);
+  hand.erase(hand.begin() + i - 1);
 }

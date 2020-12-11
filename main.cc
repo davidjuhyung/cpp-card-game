@@ -131,12 +131,13 @@ int main(int argc, const char *argv[])
   while (std::getline(*actionInput, action)) {
     std::istringstream stream{action};
     std::vector<std::string> params;
-    stream >> action;
+    std::string a;
+    stream >> a;
     std::string s;
     while(stream >> s) {
       params.push_back(s);
     }
-    readAction(action, params, b);  
+    readAction(a, params, b);
   }
   if (actionInput != &std::cin) {
     delete actionInput;
@@ -146,11 +147,13 @@ int main(int argc, const char *argv[])
     try {
       std::istringstream stream{action};
       std::vector<std::string> params;
-      stream >> action;
+      std::string a;
+      stream >> a;
       std::string s;
       while(stream >> s) {
         params.push_back(s);
       }
+      readAction(a, params, b);
       readAction(action, params, b);  
     } catch (const char* msg) {
       break;

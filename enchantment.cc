@@ -8,6 +8,8 @@ card_template_t Enchantment::displayCard() const {
 		vec = display_enchantment_attack_defence(enchantmentName,cost,enchantmentDescription,"*2","-2");
 	} else if (enchantmentName == "Giant Strength") {
 		vec = display_enchantment_attack_defence(enchantmentName,cost,enchantmentDescription,"+2","+2");
+	} else if (enchantmentName == "Ability") {
+		vec = minion->displayCard();
 	} else {
 		vec = display_enchantment(enchantmentName,cost,enchantmentDescription);
 	}

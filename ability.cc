@@ -83,5 +83,5 @@ void Ability::useTriggered(int owner, int playedMinion, bool isOwnerActive, When
 std::shared_ptr<AbstractMinion> Ability::getMinion(bool forDisplay) {
 	minion->setDefence(defence);
 	minion->setAttack(attack);
-	return minion->getMinion();
+	return minion;
 }
