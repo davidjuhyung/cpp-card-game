@@ -203,7 +203,6 @@ std::shared_ptr<AbstractMinion> Player::getMinion(int i)
 
 int Player::getNumMinions()
 {
-  std::cout << minions.size() << std::endl;
   return minions.size();
 }
 
