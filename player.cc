@@ -101,14 +101,14 @@ std::vector<card_template_t> Player::displayHand() {
 }
   
 card_template_t Player::showTopGraveyard() {
-  card_template_t vec = CARD_TEMPLATE_EMPTY;
+  card_template_t vec = CARD_TEMPLATE_BORDER;
   if (graveyard.size() == 0) return vec;
   else vec = graveyard.at(graveyard.size()-1)->displayCard();
   return vec;
 }
 
 card_template_t Player::showRitual() {
-  card_template_t vec = CARD_TEMPLATE_EMPTY;
+  card_template_t vec = CARD_TEMPLATE_BORDER;
   if (ritual.get() == nullptr) return vec;
   else vec = ritual->displayCard();
   return vec;

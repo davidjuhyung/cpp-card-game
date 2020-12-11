@@ -119,7 +119,7 @@ void Board::display()
   for (int i = 0; i < height; ++i) {
     std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
     for (int j = 0; j < 5; ++j) {
-      if (j+1 > numMinions1) std::cout << CARD_TEMPLATE_EMPTY.at(i);
+      if (j+1 > numMinions1) std::cout << CARD_TEMPLATE_BORDER.at(i);
       else std::cout << minions1.at(j).at(i);
     }
     std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
@@ -131,7 +131,7 @@ void Board::display()
   for (int i = 0; i < height; ++i) {
     std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
     for (int j = 0; j < 5; ++j) {
-      if (j+1 > numMinions2) std::cout << CARD_TEMPLATE_EMPTY.at(i);
+      if (j+1 > numMinions2) std::cout << CARD_TEMPLATE_BORDER.at(i);
       else std::cout << minions2.at(j).at(i);
     }
     std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
