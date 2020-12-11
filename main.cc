@@ -159,7 +159,7 @@ int main(int argc, const char *argv[])
         params.push_back(s);
       }
       readAction(a, params, b);
-      readAction(action, params, b);  
+//      readAction(action, params, b);  
     } catch (const char* msg) {
       break;
     }
