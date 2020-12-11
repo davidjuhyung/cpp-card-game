@@ -126,7 +126,7 @@ void Board::display()
     std::cout << std::endl;
   }
 
-  for (auto line : CENTRE_GRAPHIC) std::cout << line << std::endl;
+  for (auto line : CENTRE_GRAPHIC) std::cout << line << std::endl;;
 
   for (int i = 0; i < height; ++i) {
     std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
