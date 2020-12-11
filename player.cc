@@ -11,8 +11,6 @@ Player::Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card
   , life{20}
   , magic{3}
   , deck{deck}
-  , minions{nullptr}
-  , graveyard{nullptr}
   , ritual{nullptr}
   {
     while (hand.size() != 5) {
@@ -103,13 +101,17 @@ std::vector<card_template_t> Player::displayHand() {
 }
   
 card_template_t Player::showTopGraveyard() {
-  if (graveyard.size() == 0) return CARD_TEMPLATE_EMPTY;
-  else return graveyard.at(graveyard.size()-1)->displayCard();
+  card_template_t vec = CARD_TEMPLATE_EMPTY;
+  if (graveyard.size() == 0) return vec;
+  else vec = graveyard.at(graveyard.size()-1)->displayCard();
+  return vec;
 }
 
 card_template_t Player::showRitual() {
-  if (ritual == nullptr) return CARD_TEMPLATE_EMPTY;
-  else return ritual->displayCard();
+  card_template_t vec = CARD_TEMPLATE_EMPTY;
+  if (ritual.get() == nullptr) return vec;
+  else vec = ritual->displayCard();
+  return vec;
 }
 
 int Player::getPlayerNum()
