@@ -78,7 +78,11 @@ void readAction(std::string action, std::vector<std::string> params, Board &b)
   else if (action == "board") 
   {
     b.display();
-  } 
+  }
+  else if (action == "deck") 
+  {
+    b.displayPlayerDeck();
+  }
   else 
   {
     std::cerr << "Invalid action." << std::endl;
@@ -88,12 +92,13 @@ void readAction(std::string action, std::vector<std::string> params, Board &b)
 int main(int argc, const char *argv[]) 
 {
   bool testingMode = false;
-  std::ifstream defaultDeck{"./codeForStudents/default.deck"};
+  std::ifstream defaultDeck1{"./codeForStudents/default.deck"};
+  std::ifstream defaultDeck2{"./codeForStudents/default.deck"};
   std::istream *actionInput = &std::cin;
   Board b;
   std::string name1 = "", name2 = "";
-  auto deck1 = initialize(defaultDeck, &b);
-  auto deck2 = deck1;
+  auto deck1 = initialize(defaultDeck1, &b, 1);
+  auto deck2 = initialize(defaultDeck2, &b, 2);
 
   // read action line arguments
   for (int i = 1; i < argc; i++) {
@@ -102,7 +107,7 @@ int main(int argc, const char *argv[])
       std::string fileName = argv[++i]; 
       std::ifstream infile{fileName}; 
       if (cmd == "-deck1" || cmd == "-deck2") {
-        auto deck = initialize(infile, &b);
+        auto deck = initialize(infile, &b, 3);
         if (cmd == "-deck1") {
           deck1 = deck;
         } else {

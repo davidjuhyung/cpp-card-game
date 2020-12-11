@@ -32,6 +32,7 @@ void Board::endturn()
 {
   APNAP(When::End);
   active = active % 2 + 1;
+  startTurn();
 }
 
 void Board::attack(int i)
@@ -199,4 +200,23 @@ void Board::draw() {
 
 void Board::discard(int i) {
   getPlayer(active)->discard(i-1);
+}
+
+void Board::displayPlayerDeck() {
+  std::vector<card_template_t> m = getPlayer(active)->displayDeck();
+  int num = m.size();
+  int numLines = num/5;
+  if (num%5 != 0) ++numLines;
+  if (num == 0) return; // This is not possible so remove this line if you want
+  card_template_t card = m.at(0);
+  int cardSize = card.size();
+  for (int f = 0; f < numLines; ++f) {
+    for (int j = 0; j < cardSize; ++j) {
+      for (int k = 0; k < 5; ++k) {
+        if (k+f*5 >= num) break;
+        std::cout << m.at(k+f*5).at(j);
+      }
+      std::cout << std::endl;
+    }
+  }
 }

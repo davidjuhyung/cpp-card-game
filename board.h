@@ -30,6 +30,7 @@ public:
   // testing mode only
   void draw();
   void discard(int i);
+  void displayPlayerDeck();
 };
 
 #endif

@@ -13,9 +13,9 @@ Player::Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card
   , deck{deck}
   {
     while (hand.size() != 5) {
-      auto deckTopCard = deck.at(deck.size()-1);
+      auto deckTopCard = this->deck.at(this->deck.size()-1);
       hand.push_back(deckTopCard);
-      deck.pop_back();
+      this->deck.pop_back();
     }
   }
 
@@ -240,4 +240,10 @@ void Player::draw() {
 // discards the ith card in the player’s hand, simply removing it from their hand and destroying it.
 void Player::discard(int i) {
   hand.erase(hand.begin() + i);
+}
+
+std::vector<card_template_t> Player::displayDeck() {
+  std::vector<card_template_t> vec;
+  for (auto c : deck) vec.push_back(c->displayCard());
+  return vec;
 }

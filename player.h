@@ -78,6 +78,7 @@ public:
   // testing mode
   void draw();
   void discard(int i);
+  std::vector<card_template_t> displayDeck();
 };
 
 #endif
