@@ -15,9 +15,9 @@ Player::Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card
     while (hand.size() != 5) {
       auto deckTopCard = deck.at(deck.size()-1);
       hand.push_back(deckTopCard);
-      deck.erase(deck.end());
+      deck.pop_back();
     }
-  };
+  }
 
 // The player gains 1 magic.
 void Player::startTurn()
@@ -153,7 +153,7 @@ void Player::moveToHand(int i)
 void Player::resurrect()
 {
   auto minion = graveyard.at(graveyard.size()-1);
-  graveyard.erase(graveyard.end());
+  graveyard.pop_back();
   minions.push_back(minion);
 }
 
@@ -229,7 +229,7 @@ void Player::draw() {
   if (deck.size() != 0 && hand.size() < 5) {
   auto deckTopCard = deck.at(deck.size()-1);
   hand.push_back(deckTopCard);
-  deck.erase(deck.end());
+  deck.pop_back();
   }
 }
 
