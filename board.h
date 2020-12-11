@@ -27,6 +27,9 @@ public:
   void display();
   void showHand();
   void APNAP(When when = When::Start, int playedMinion = -1);
+  // testing mode only
+  void draw();
+  void discard(int i);
 };
 
 #endif
