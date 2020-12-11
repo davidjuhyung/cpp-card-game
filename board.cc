@@ -47,12 +47,12 @@ void Board::attack(int i, int t)
 
 void Board::play(int i)
 {
-  getPlayer(active)->play(i-1,active);
+  getPlayer(active)->play(i-1);
 }
 
 void Board::play(int i, int p, char t)
 {
-  getPlayer(active)->play(active, i-1, p, t);
+  getPlayer(active)->play(i-1, p, t);
 }
 
 void Board::use(int i)

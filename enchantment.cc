@@ -2,9 +2,9 @@
 
 Enchantment::Enchantment(std::string name, Board* board) : AbstractMinion{name,board} {}
 
-card_template_t Enchantment::displayCard() {
+card_template_t Enchantment::displayCard(bool forInspect) {
 	card_template_t vec;
-	if (minion != nullptr) {
+	if (minion != nullptr && !forInspect) {
 		vec = getMinion(true)->displayCard();
 		return vec;
 	}

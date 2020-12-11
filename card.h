@@ -5,6 +5,7 @@
 #include <memory>
 #include "board.h"
 #include "player.h"
+#include "inputException.h"
 
 class Card
 {
@@ -22,7 +23,7 @@ class Card
   	// This function is the play method for the card class. It
     // effects the board in some way depending on the type and specification
   	virtual void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false) = 0;
-    virtual card_template_t displayCard() = 0;
+    virtual card_template_t displayCard(bool forInspect = false) = 0;
 };
 
 #endif
