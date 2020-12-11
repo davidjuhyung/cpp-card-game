@@ -5,11 +5,11 @@ Enchantment::Enchantment(std::string name, Board* board) : AbstractMinion{name,b
 card_template_t Enchantment::displayCard() const {
 	card_template_t vec;
 	if (enchantmentName == "Enrage") {
-		vec = display_enchantment_attack_defence(EnchantmentName,cost,enchantmentDescription,"*2","-2");
-	} else if (EnchantmentName == "Giant Strength") {
-		vec = display_enchantment_attack_defence(EnchantmentName,cost,enchantmentDescription,"+2","+2");
+		vec = display_enchantment_attack_defence(enchantmentName,cost,enchantmentDescription,"*2","-2");
+	} else if (enchantmentName == "Giant Strength") {
+		vec = display_enchantment_attack_defence(enchantmentName,cost,enchantmentDescription,"+2","+2");
 	} else {
-		vec = display_enchantment(EnchantmentName,cost,enchantmentDescription);
+		vec = display_enchantment(enchantmentName,cost,enchantmentDescription);
 	}
     return vec;
 }

@@ -2,6 +2,7 @@
 #define MINION_H
 
 #include "abstractMinion.h"
+
 class Minion : public AbstractMinion
 {
   public:

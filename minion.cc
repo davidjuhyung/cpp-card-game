@@ -22,7 +22,7 @@ card_template_t Minion::displayCard() const {
 	} else if (name == "Bomb" || name == "Fire Elemental" || name == "Potion Seller") {
 		vec = display_minion_triggered_ability(name,cost,attack,defence,abilityDescription);
 	} else {
-		vec = display_minion_activated_ability(name,cost,attack,defence,abilityCost,abilityDescription);
+		vec = display_minion_activated_ability(name,cost,attack,defence,activationCost,abilityDescription);
 	}
     return vec;
 }

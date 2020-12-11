@@ -2,6 +2,7 @@
 #define RITUAL_H
 
 #include "card.h"
+#include "codeForStudents/ascii_graphics.h"
 // needs a board class declaration + include for .cc
 // needs a player include for .cc
 class Ritual : public Card 

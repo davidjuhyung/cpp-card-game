@@ -1,7 +1,6 @@
 #include "spell.h"
 #include "ritual.h"
 #include "minion.h"
-#include "ascii_graphics.h"
 
 Spell::Spell(std::string name, Board* board) : Card{name,board} {
 	if (name == "Banish") {

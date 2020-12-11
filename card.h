@@ -1,7 +1,7 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include "ascii_graphics.h"
+#include "codeForStudents/ascii_graphics.h"
 #include <memory>
 #include "board.h"
 #include "player.h"
