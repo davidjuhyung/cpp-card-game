@@ -117,12 +117,10 @@ void Board::display()
     std::cout << std::endl;
   }
   for (int i = 0; i < height; ++i) {
-    std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
     for (int j = 0; j < 5; ++j) {
       if (j+1 > numMinions1) std::cout << CARD_TEMPLATE_BORDER.at(i);
       else std::cout << minions1.at(j).at(i);
     }
-    std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
     std::cout << std::endl;
   }
 
