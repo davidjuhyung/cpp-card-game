@@ -12,7 +12,7 @@ Player::Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card
   , magic{3}
   , deck{deck}
   {
-    while (hand.size() != 5) {
+    if (hand.size() < 5) {
       auto deckTopCard = this->deck.at(this->deck.size()-1);
       hand.push_back(deckTopCard);
       this->deck.pop_back();
@@ -23,11 +23,7 @@ Player::Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card
 void Player::startTurn()
 {
   magic++;
-  while (hand.size() != 5) {
-    auto deckTopCard = deck.at(deck.size()-1);
-    hand.push_back(deckTopCard);
-    deck.pop_back();
-  }
+  draw();
 }
 
 // orders minion i to attack the opposing player o
