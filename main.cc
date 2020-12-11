@@ -2,12 +2,11 @@
 #include <string>
 #include <sstream>
 #include <fstream>
-#include <exception>
-
 // our files
 #include "player.h"
 #include "deck.h"
 #include "board.h"
+#include "inputException.h"
 
 void readAction(std::string action, std::vector<std::string> params, Board &b) 
 {
@@ -29,7 +28,7 @@ void readAction(std::string action, std::vector<std::string> params, Board &b)
   }
   else if (action == "quit") 
   {
-    throw "quit has been entered";
+    throw InputException("Terminating the program...", true);
   } 
   else if (action == "draw") 
   {
@@ -122,8 +121,6 @@ int main(int argc, const char *argv[])
       }
     }
   }
-
-  // draw 5 cards
   
   std::getline(*actionInput, name1);
   std::getline(*actionInput, name2);
@@ -134,34 +131,24 @@ int main(int argc, const char *argv[])
 
   std::string action;
   while (std::getline(*actionInput, action)) {
-    std::istringstream stream{action};
-    std::vector<std::string> params;
-    std::string a;
-    stream >> a;
-    std::string s;
-    while(stream >> s) {
-      params.push_back(s);
-    }
-    readAction(a, params, b);
-  }
-  if (actionInput != &std::cin) {
-    delete actionInput;
-    actionInput = &std::cin;
-  }
-  while (std::getline(*actionInput, action)) {
     try {
       std::istringstream stream{action};
       std::vector<std::string> params;
-      std::string a;
-      stream >> a;
+      std::string action;
+      stream >> action;
       std::string s;
       while(stream >> s) {
         params.push_back(s);
       }
-      readAction(a, params, b);
-      readAction(action, params, b);  
-    } catch (const char* msg) {
-      break;
-    }
+      readAction(action, params, b);
+      if (actionInput->eof() && actionInput != &std::cin) {
+        delete actionInput;
+        actionInput = &std::cin;
+      }
+    } catch (InputException err) {
+      std::cout << err.getReason() << std::endl;
+      if (err.getQuit()) break;
+    } 
   }
 }
+ 
