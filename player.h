@@ -24,7 +24,7 @@ private:
   std::vector<std::shared_ptr<Card>> hand;
   std::vector<std::shared_ptr<AbstractMinion>> minions;
   std::vector<std::shared_ptr<AbstractMinion>> graveyard;
-  std::shared_ptr<Ritual> ritual;
+  std::shared_ptr<Ritual> ritual = nullptr;
 
 public:
   Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card>> deck);
