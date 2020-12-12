@@ -35,5 +35,12 @@ std::shared_ptr<AbstractMinion> Delay::getMinion(bool forDisplay) {
 	if (minion == nullptr) throw InputException{"Unexpected! Enchantment not attached to a minion"};
 	minion->setDefence(defence);
 	minion->setAttack(attack);
+	minion->setCurrentAction(actions);
+	minion->setActivationCost(activationCost);
+	if (forDisplay) {
+		minion->setGaining(gainAction);
+	} else {
+		minion->setGaining(true);
+	}
 	return minion;
 }

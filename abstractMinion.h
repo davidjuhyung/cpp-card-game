@@ -26,8 +26,11 @@ class AbstractMinion : public Card
   	int getAction() const;
     // return true if the minion will gain actions at the start of the turn
   	bool gaining() const;
+    void setGaining(bool gain);
   	int getActivationCost() const;
-  	void setAction();
+    void setActivationCost(int c);
+  	void setAction(int owner, int ownPosition);
+    void setCurrentAction(int a);
   	// remember, active player as param. Use minions activated ability
     virtual void useAbility(int activePlayer, int targetPlayer, int minion = -1) = 0;
     // activate trigger

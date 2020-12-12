@@ -97,5 +97,8 @@ std::shared_ptr<AbstractMinion> Ability::getMinion(bool forDisplay) {
 	if (minion == nullptr) throw InputException{"Unexpected! Ability not attached to a minion"};
 	minion->setDefence(defence);
 	minion->setAttack(attack);
+	minion->setCurrentAction(actions);
+	minion->setActivationCost(activationCost);
+	minion->setGaining(gainAction);
 	return minion;
 }

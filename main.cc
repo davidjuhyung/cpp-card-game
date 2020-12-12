@@ -43,12 +43,12 @@ void readAction(std::string action, std::vector<std::string> params, Board &b, b
       } else if (params.size() == 2) {
         b.attack(std::stoi(params[0]), std::stoi(params[1]));
       } else {
-        throw InputException("invalid number of paramaters");
+        throw InputException("Invalid number of paramaters");
       }
     } catch (InputException err) {
       throw;
     } catch (...) {
-      throw InputException("the parameter is not a valid number");
+      throw InputException("The parameter is not a valid number");
     }
   } 
   else if (action == "play") 
@@ -59,12 +59,12 @@ void readAction(std::string action, std::vector<std::string> params, Board &b, b
       } else if (params.size() == 3) {
         b.play(std::stoi(params[0]), std::stoi(params[1]), params[2][0]);
       } else {
-        throw InputException("invalid number of paramaters");
+        throw InputException("Invalid number of paramaters");
       }
     } catch (InputException err) {
       throw;
     } catch (...) {
-      throw InputException("the parameter is not a valid number");
+      throw InputException("The parameter is not a valid number");
     }
   } 
   else if (action == "use") 
@@ -75,12 +75,12 @@ void readAction(std::string action, std::vector<std::string> params, Board &b, b
       } else if (params.size() == 3) {
         b.use(std::stoi(params[0]), std::stoi(params[1]), params[2][0]);
       } else {
-        throw InputException("invalid number of paramaters");
+        throw InputException("Invalid number of paramaters");
       }
     } catch (InputException err) {
       throw;
     } catch (...) {
-      throw InputException("the parameter is not a valid number");
+      throw InputException("The parameter is not a valid number");
     }
   } 
   else if (action == "inspect") 
@@ -89,12 +89,12 @@ void readAction(std::string action, std::vector<std::string> params, Board &b, b
       if (params.size() == 1) {
         b.inspect(std::stoi(params[0]));
       } else {
-        throw InputException("invalid number of paramaters");
+        throw InputException("Invalid number of paramaters");
       }
     } catch (InputException err) {
       throw;
     } catch (...) {
-      throw InputException("the parameter is not a valid number");
+      throw InputException("The parameter is not a valid number");
     }
   } 
   else if (action == "hand") 
@@ -119,17 +119,17 @@ void readAction(std::string action, std::vector<std::string> params, Board &b, b
       if (params.size() == 1) {
         b.discard(std::stoi(params[0]));
       } else {
-        throw InputException("invalid number of paramaters");
+        throw InputException("Invalid number of paramaters");
       }
     } catch (InputException err) {
       throw;
     } catch (...) {
-      throw InputException("the parameter is not a valid number");
+      throw InputException("The parameter is not a valid number");
     }
   }
   else 
   {
-    throw InputException("invalid command, type help for information");
+    throw InputException("Invalid command, type help for information");
   }
 }
 

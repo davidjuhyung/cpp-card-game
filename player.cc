@@ -24,7 +24,7 @@ void Player::startTurn()
 {
   mana++;
   draw();
-  for (auto m : minions) m->setAction();
+  for (int i = 0; i < (int)minions.size(); ++i) minions.at(i)->setAction(playerNum,i);
 }
 
 // orders minion i to attack the opposing player o
