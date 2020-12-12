@@ -37,7 +37,7 @@ void Ritual::useAbility(int owner, int playedMinion, bool isOwnerActive, When wh
         charges -= activationCost;
         p->setMagic(p->getMagic()+1);
     }
-    else if (name == "Aura Of Power") {
+    else if (name == "Aura of Power") {
         //whenever a minion enter a play under your control, it gains +1/+1
         if (isOwnerActive == false || when != When::Play) return;
         charges -= activationCost;
