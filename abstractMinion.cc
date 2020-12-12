@@ -51,6 +51,7 @@ AbstractMinion::AbstractMinion(std::string name, Board* board) : Card{name,board
 void AbstractMinion::attackPlayer(int player) {
 	if (actions == 0) throw InputException("Minion doesn't have any actions remaining");
 	Player* p = board->getPlayer(player);
+	if (p->getNumMinions() == 0) throw InputException{"Oh no! The player's minions stopped your " + name + " from attacking them!"};
 	p->damage(attack);
 	if(p->getLife() <= 0) throw InputException{"Game over! Player " + std::to_string(player%2+1) + " wins! Congratulations!",true};
 	actions--;
