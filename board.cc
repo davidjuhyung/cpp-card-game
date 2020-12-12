@@ -49,30 +49,30 @@ void Board::attack(int i, int t)
 }
 
 // plays the ith card in the active player’s hand with no target.
-void Board::play(int i)
+void Board::play(int i, bool testing)
 {
-  getPlayer(active)->play(i-1);
+  getPlayer(active)->play(i-1, testing);
 }
 
 // plays the ith card in the active player’s hand on card t owned by player p. 
 // p may be equal to 1 or 2 to represent player 1 or 2 respectively.
 // t is either 1, 2, 3, 4, 5 (the ith minion owned by player p) or
 // r (the ritual owned by player p). 
-void Board::play(int i, int p, char t)
+void Board::play(int i, int p, char t, bool testing)
 {
-  getPlayer(active)->play(i-1, p, t);
+  getPlayer(active)->play(i-1, p, t, testing);
 }
 
 // i refers to the ith minion owned by the current player
 // and the command orders that minion to use its activated ability on the provided target (or on no target).
-void Board::use(int i)
+void Board::use(int i, bool testing)
 {
-  getPlayer(active)->use(i-1, active);
+  getPlayer(active)->use(i-1, testing);
 }
 
-void Board::use(int i, int p, char t)
+void Board::use(int i, int p, char t, bool testing)
 {
-  getPlayer(active)->use(i-1, p, t);
+  getPlayer(active)->use(i-1, p, t, testing);
 }
 
 /////// testing mode only ////////

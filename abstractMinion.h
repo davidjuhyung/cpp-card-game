@@ -32,7 +32,7 @@ class AbstractMinion : public Card
   	void setAction(int owner, int ownPosition);
     void setCurrentAction(int a);
   	// remember, active player as param. Use minions activated ability
-    virtual void useAbility(int activePlayer, int targetPlayer, int minion = -1) = 0;
+    virtual void useAbility(int activePlayer, int targetPlayer, int minion = -1, bool testing = false) = 0;
     // activate trigger
   	virtual void useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) = 0;
     virtual std::shared_ptr<AbstractMinion> getMinion(bool forDisplay = false) = 0;

@@ -40,9 +40,9 @@ void Player::attack(int i, int o, int t)
 }
 
 // plays the ith card in the active player’s hand with no target.
-void Player::play(int i)
+void Player::play(int i, bool testing)
 {
-  hand.at(i)->play(playerNum, playerNum);
+  hand.at(i)->play(playerNum, playerNum, testing);
   hand.erase(hand.begin()+i);
 }
 
@@ -51,29 +51,29 @@ void Player::play(int i)
 // t is either 1, 2, 3, 4, 5 (the ith minion owned by player p) or
 // r (the ritual owned by player p). 
 // This can be used to play enchantments and spells with targets.
-void Player::play(int i, int p, char t)
+void Player::play(int i, int p, char t, bool testing)
 {
   if (t == 'r') {
     hand.at(i)->play(playerNum, p, -1, true); // true = attack on ritual
     return;
   }
   int m = t - '0';
-  hand.at(i)->play(playerNum, p, m-1);
+  hand.at(i)->play(playerNum, p, m-1, testing);
   hand.erase(hand.begin()+i);
 }
 
 // i refers to the ith minion owned by the current player
 // and the command orders that minion to use its activated ability on the provided target (or on no target).
 // If no target = the current player itself
-void Player::use(int i, int p)
+void Player::use(int i, bool testing)
 {
-  minions.at(i)->useAbility(playerNum, p);
+  minions.at(i)->useAbility(playerNum, playerNum, testing);
 }
 
-void Player::use(int i, int p, char t)
+void Player::use(int i, int p, char t, bool testing)
 {
   int m = t - '0';
-  minions.at(i)->useAbility(playerNum, p, m-1);
+  minions.at(i)->useAbility(playerNum, p, m-1, testing);
 }
 
 /////// testing mode only ////////

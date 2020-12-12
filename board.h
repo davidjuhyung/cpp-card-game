@@ -19,10 +19,10 @@ public:
   void endturn();
   void attack(int i);
   void attack(int i, int t);
-  void play(int i);
-  void play(int i, int p, char t);
-  void use(int i);
-  void use(int i, int p, char t);
+  void play(int i, bool testing = false);
+  void play(int i, int p, char t, bool testing = false);
+  void use(int i, bool testing = false);
+  void use(int i, int p, char t, bool testing = false);
   void inspect(int i);
   void display();
   void showHand();

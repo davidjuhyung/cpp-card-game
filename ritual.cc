@@ -17,12 +17,13 @@ Ritual::Ritual(std::string name, Board* board) : Card{name,board} {
 	}
 }
 
-void Ritual::play(int owner, int targetPlayer, int minion, bool actOnRitual) 
+void Ritual::play(int owner, int targetPlayer, int minion, bool actOnRitual, bool testing) 
 {
     Player* p = board->getPlayer(owner);
     int mana = p->getMana();
-	if (cost > mana) throw InputException{"Player doesn't have enough mana"};
-    p->setMana(mana-cost);
+	if (cost > mana && testing == false) throw InputException{"Player doesn't have enough mana"};
+    if (cost > mana) p->setMana(0);
+    else p->setMana(mana-cost);
     auto r = std::make_shared<Ritual>(name,board);
     p->setRitual(r);
 }

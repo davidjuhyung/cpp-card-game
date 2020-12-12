@@ -3,13 +3,14 @@
 
 Minion::Minion(std::string name, Board* board) : AbstractMinion{name,board} {}
 
-void Minion::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
+void Minion::play(int owner, int targetPlayer, int minion, bool actOnRitual, bool testing) {
 	Player* p = board->getPlayer(owner);
 	int playerMana = p->getMana();
-	if (cost > playerMana) throw InputException{"Player doesn't have enough mana"};
+	if (cost > playerMana && testing == false) throw InputException{"Player doesn't have enough mana"};
 	int numMinions = p->getNumMinions();
 	if (numMinions >= Player::maxMinionSize) throw InputException{"Minion slots filled"};
-    p->setMana(playerMana-cost);
+	if (cost > playerMana) p->setMana(0);
+    else p->setMana(playerMana-cost);
 	auto m = std::make_shared<Minion>(name,board);
 	m->setAttack(attack);
 	m->setDefence(defence);
@@ -18,7 +19,7 @@ void Minion::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	board->APNAP(When::Play,numMinions);
 }
 
-void Minion::useAbility(int activePlayer, int targetPlayer, int minion) {}
+void Minion::useAbility(int activePlayer, int targetPlayer, int minion, bool testing) {}
 
 void Minion::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) {}
 

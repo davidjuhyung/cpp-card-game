@@ -24,12 +24,12 @@ Spell::Spell(std::string name, Board* board) : Card{name,board} {
 	}
 }
 
-void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
+void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual, bool testing) {
     Player* p = board->getPlayer(owner);
     Player* t = board->getPlayer(targetPlayer);
 	int playerMana = p->getMana();
-    if (cost > playerMana) throw InputException{"Player doesn't have enough mana"};  
-    if (name == "Banish"){
+    if (cost > playerMana && testing == false) throw InputException{"Player doesn't have enough mana"};  
+    if (name == "Banish") {
         //destroy target minion or ritual
         if (actOnRitual) {
             if (t->hasRitual() == false) throw InputException{"Target doesn't have ritual"};
@@ -92,7 +92,8 @@ void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
             }
         }
     }
-    p->setMana(playerMana-cost);
+    if (cost > playerMana) p->setMana(0);
+    else p->setMana(playerMana-cost);
 }
 
 card_template_t Spell::displayCard(bool forInspect) { 

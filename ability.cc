@@ -11,14 +11,14 @@ Ability::Ability(std::string name, Board* board, std::shared_ptr<AbstractMinion>
 	enchantmentDescription = "Not actually an enchantment";
 }
 
-void Ability::play(int owner, int targetPlayer, int minion, bool actOnRitual) {}
+void Ability::play(int owner, int targetPlayer, int minion, bool actOnRitual, bool testing) {}
 
-void Ability::useAbility(int activePlayer, int targetPlayer, int minion) {
+void Ability::useAbility(int activePlayer, int targetPlayer, int minion, bool testing) {
 	if (actions == 0) throw InputException("Minion doesn't have any actions remaining");
 	Player* p = board->getPlayer(activePlayer);
 	Player* t = board->getPlayer(targetPlayer);
 	int mana = p->getMana();
-	if (mana < activationCost) throw InputException("Player doesn't have enough mana");
+	if (mana < activationCost && testing == false) throw InputException("Player doesn't have enough mana");
 	if (name == "Novice Pyromancer") {
 		int lastMinion = t->getNumMinions()-1;
 		if (minion < 0) throw InputException{"Please specify a target to use this ability on"};
@@ -32,7 +32,8 @@ void Ability::useAbility(int activePlayer, int targetPlayer, int minion) {
 			t->removeMinion(minion,true);
 		}
 		actions--;
-		p->setMana(mana-activationCost);
+		if (mana < activationCost) p->setMana(0);
+		else p->setMana(mana-activationCost);
 	} else if (name == "Apprentice Summoner") {
 		int numMinions = p->getNumMinions();
 		if (numMinions == Player::maxMinionSize) throw InputException{"Minion slots filled"};
@@ -41,7 +42,8 @@ void Ability::useAbility(int activePlayer, int targetPlayer, int minion) {
 		p->addMinion(a);
 		board->APNAP(When::Play,numMinions);
 		actions--;
-		p->setMana(mana-activationCost);
+		if (mana < activationCost) p->setMana(0);
+		else p->setMana(mana-activationCost);
 	} else if (name == "Master Summoner") {
 		int numMinions = p->getNumMinions();
 		if (numMinions == Player::maxMinionSize) throw InputException{"Minion slots filled"};
@@ -52,7 +54,8 @@ void Ability::useAbility(int activePlayer, int targetPlayer, int minion) {
 			board->APNAP(When::Play,numMinions+i);
 		}
 		actions--;
-		p->setMana(mana-activationCost);
+		if (mana < activationCost) p->setMana(0);
+		else p->setMana(mana-activationCost);
 	}
 }
 

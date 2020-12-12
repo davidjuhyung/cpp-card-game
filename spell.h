@@ -10,7 +10,7 @@ class Spell : public Card
 		std::string description;
 	public:	
 		Spell(std::string name, Board* board);	
-		void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false) override;
+		void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false, bool testing = false) override;
 		card_template_t displayCard(bool forInspect = false) override;
 };
 

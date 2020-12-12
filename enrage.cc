@@ -6,11 +6,11 @@ Enrage::Enrage(std::string name, Board* board) : Enchantment{name,board} {
 	cost = 2;
 }
 
-void Enrage::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
+void Enrage::play(int owner, int targetPlayer, int minion, bool actOnRitual, bool testing) {
 	Player* p = board->getPlayer(owner);
 	Player* t = board->getPlayer(targetPlayer);
     int mana = p->getMana();
-	if (cost > mana) throw InputException{"Player doesn't have enough mana"};
+	if (cost > mana && testing == false) throw InputException{"Player doesn't have enough mana"};
 	int lastMinion = t->getNumMinions()-1;
 	if (minion < 0) throw InputException{"Please specify a target to play this card"};
 	if (minion > lastMinion) throw InputException{"Target doesn't have minion at " + std::to_string(minion+1)};
@@ -23,7 +23,8 @@ void Enrage::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	m->name = m->minion->getName();
 	m->activationCost = m->minion->getActivationCost();
 	t->replaceMinion(minion,m);
-	p->setMana(mana-cost);
+	if (cost > mana) p->setMana(0);
+	else p->setMana(mana-cost);
 	if (m->defence <= 0) {
 		board->APNAP(When::Death);
 		auto removed = m->removeAllEnchantments();
@@ -32,7 +33,7 @@ void Enrage::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	}
 }
 
-void Enrage::useAbility(int activePlayer, int targetPlayer, int minion) { this->minion->useAbility(activePlayer,targetPlayer,minion); }
+void Enrage::useAbility(int activePlayer, int targetPlayer, int minion, bool testing) { this->minion->useAbility(activePlayer,targetPlayer,minion,testing); }
 
 void Enrage::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) { minion->useTriggered(owner,playedMinion,isOwnerActive,when); }
 

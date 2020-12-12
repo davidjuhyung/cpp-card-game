@@ -55,9 +55,9 @@ void readAction(std::string action, std::vector<std::string> params, Board &b, b
   {
     try {
       if (params.size() == 1) {
-        b.play(std::stoi(params[0]));
+        b.play(std::stoi(params[0]), testingMode);
       } else if (params.size() == 3) {
-        b.play(std::stoi(params[0]), std::stoi(params[1]), params[2][0]);
+        b.play(std::stoi(params[0]), std::stoi(params[1]), params[2][0], testingMode);
       } else {
         throw InputException("Invalid number of paramaters");
       }
@@ -71,9 +71,9 @@ void readAction(std::string action, std::vector<std::string> params, Board &b, b
   {
     try {
       if (params.size() == 1) {
-        b.use(std::stoi(params[0]));
+        b.use(std::stoi(params[0]), testingMode);
       } else if (params.size() == 3) {
-        b.use(std::stoi(params[0]), std::stoi(params[1]), params[2][0]);
+        b.use(std::stoi(params[0]), std::stoi(params[1]), params[2][0], testingMode);
       } else {
         throw InputException("Invalid number of paramaters");
       }
