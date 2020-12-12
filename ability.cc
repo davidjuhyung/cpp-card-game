@@ -74,6 +74,7 @@ void Ability::useTriggered(int owner, int playedMinion, bool isOwnerActive, When
 		for (int i = 0; i < numMinions; ++i) {
 			p->getMinion(i)->setDefence(p->getMinion(i)->getDefence()+1);
 		}
+		defence--;
 	} else if (name == "Fire Elemental") {
 		if (when != When::Play) return;
 		if (isOwnerActive) return;
