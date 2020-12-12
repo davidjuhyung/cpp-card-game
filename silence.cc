@@ -10,8 +10,8 @@ void Silence::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	//enchanted minion cannot use ability
 	Player* p = board->getPlayer(owner);
 	Player* t = board->getPlayer(targetPlayer);
-    int magic = p->getMagic();
-	if (cost > magic) throw InputException{"Player doesn't have enough magic"};
+    int mana = p->getMana();
+	if (cost > mana) throw InputException{"Player doesn't have enough mana"};
 	int lastMinion = t->getNumMinions()-1;
 	if (minion < 0) throw InputException{"Please specify a target to play this card"};
 	if (minion > lastMinion) throw InputException{"Target doesn't have minion at " + std::to_string(minion+1)};
@@ -24,7 +24,7 @@ void Silence::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	m->name = m->minion->getName();
 	m->activationCost = m->minion->getActivationCost();
 	t->replaceMinion(minion,m);
-	p->setMagic(magic-cost);
+	p->setMana(mana-cost);
 }
 
 void Silence::useAbility(int activePlayer, int targetPlayer, int minion) {}

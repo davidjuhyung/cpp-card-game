@@ -5,11 +5,11 @@ Minion::Minion(std::string name, Board* board) : AbstractMinion{name,board} {}
 
 void Minion::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	Player* p = board->getPlayer(owner);
-	int playerMagic = p->getMagic();
-	if (cost > playerMagic) throw InputException{"Player doesn't have enough magic"};
+	int playerMana = p->getMana();
+	if (cost > playerMana) throw InputException{"Player doesn't have enough mana"};
 	int numMinions = p->getNumMinions();
 	if (numMinions >= Player::maxMinionSize) throw InputException{"Minion slots filled"};
-    p->setMagic(playerMagic-cost);
+    p->setMana(playerMana-cost);
 	auto m = std::make_shared<Minion>(name,board);
 	m->setAttack(attack);
 	m->setDefence(defence);

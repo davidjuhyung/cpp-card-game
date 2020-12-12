@@ -5,7 +5,7 @@ Ritual::Ritual(std::string name, Board* board) : Card{name,board} {
 	if (name == "Dark Ritual") {
 		cost = 0;
         activationCost = 1;
-		description = "At the start of your turn, gain 1 magic";
+		description = "At the start of your turn, gain 1 mana";
 	} else if (name == "Aura of Power") {
 		cost = 1;
         activationCost = 1;
@@ -20,9 +20,9 @@ Ritual::Ritual(std::string name, Board* board) : Card{name,board} {
 void Ritual::play(int owner, int targetPlayer, int minion, bool actOnRitual) 
 {
     Player* p = board->getPlayer(owner);
-    int magic = p->getMagic();
-	if (cost > magic) throw InputException{"Player doesn't have enough magic"};
-    p->setMagic(magic-cost);
+    int mana = p->getMana();
+	if (cost > mana) throw InputException{"Player doesn't have enough mana"};
+    p->setMana(mana-cost);
     auto r = std::make_shared<Ritual>(name,board);
     p->setRitual(r);
 }
@@ -32,10 +32,10 @@ void Ritual::useAbility(int owner, int playedMinion, bool isOwnerActive, When wh
     Player* p = board->getPlayer(owner);
     if (charges < activationCost) return;
     if (name == "Dark Ritual") {
-        //At the start of your turn, gain 1 magic
+        //At the start of your turn, gain 1 mana
         if (isOwnerActive == false || when!=When::Start) return;
         charges -= activationCost;
-        p->setMagic(p->getMagic()+1);
+        p->setMana(p->getMana()+1);
     }
     else if (name == "Aura of Power") {
         //whenever a minion enter a play under your control, it gains +1/+1

@@ -19,7 +19,7 @@ private:
   int playerNum;
   std::string name;
   int life;
-  int magic;
+  int mana;
   std::vector<std::shared_ptr<Card>> deck;
   std::vector<std::shared_ptr<Card>> hand;
   std::vector<std::shared_ptr<AbstractMinion>> minions;
@@ -57,8 +57,8 @@ public:
   int getLife();
   void damage(int d);
 
-  int getMagic();
-  void setMagic(int m);
+  int getMana();
+  void setMana(int m);
 
   bool hasRitual();
   std::shared_ptr<Ritual> getRitual();
