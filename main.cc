@@ -46,8 +46,7 @@ void readAction(std::string action, std::vector<std::string> params, Board &b, b
     } catch (InputException err) {
       throw;
     } catch (...) {
-      throw;
-      //throw InputException("the parameter is not a valid number");
+      throw InputException("the parameter is not a valid number");
     }
   } 
   else if (action == "play") 
@@ -135,11 +134,10 @@ void readAction(std::string action, std::vector<std::string> params, Board &b, b
 int main(int argc, const char *argv[]) 
 {
   bool testingMode = false;
+  Board b;
   std::ifstream defaultDeck1{"./codeForStudents/default.deck"};
   std::ifstream defaultDeck2{"./codeForStudents/default.deck"};
   std::istream *actionInput = &std::cin;
-  Board b;
-  std::string name1 = "", name2 = "";
   auto deck1 = initialize(defaultDeck1, &b, 1);
   auto deck2 = initialize(defaultDeck2, &b, 2);
 
@@ -164,11 +162,23 @@ int main(int argc, const char *argv[])
       }
     }
   }
-  
-  std::getline(*actionInput, name1);
-  std::getline(*actionInput, name2);
-  auto p1 = std::make_shared<Player>(1, name1, deck1);
-  auto p2 = std::make_shared<Player>(2, name2, deck2);
+
+  // game setup
+  const int NUMBER_OF_PLAYERS = 2;
+  std::string names[NUMBER_OF_PLAYERS] = {"", ""};
+  for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+    if (actionInput->eof() && actionInput != &std::cin) {
+      delete actionInput;
+      actionInput = &std::cin;
+    } 
+    if (actionInput == &std::cin) {
+      std::cout << "Enter the name of player " << i+1 << ": ";
+    }
+    std::getline(*actionInput, names[i]);
+    if (names[i].empty()) names[i] = "anon. player";
+  }
+  auto p1 = std::make_shared<Player>(1, names[0], deck1);
+  auto p2 = std::make_shared<Player>(2, names[1], deck2);
   b.setPlayer(p1);
   b.setPlayer(p2);
   b.startTurn();
