@@ -97,26 +97,6 @@ int Player::getPlayerNum()
   return playerNum;
 }
 
-std::string Player::getName()
-{
-  return name;
-}
-
-std::vector<std::shared_ptr<Card>> Player::getHand()
-{
-  return hand;
-}
-
-std::vector<std::shared_ptr<AbstractMinion>> Player::getMinions()
-{
-  return minions;
-}
-
-std::vector<std::shared_ptr<AbstractMinion>> Player::getGraveyard()
-{
-  return graveyard;
-}
-
 // Any action that would make a minion return to the player’s hand (e.g., Unsummon)
 // will instead make the minion vanish from play and be destroyed if the hand is already full.
 void Player::moveToHand(int i)

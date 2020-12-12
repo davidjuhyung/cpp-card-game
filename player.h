@@ -46,10 +46,6 @@ public:
   std::vector<card_template_t> displayDeck();
 
   int getPlayerNum();
-  std::string getName();
-  std::vector<std::shared_ptr<Card>> getHand();  
-  std::vector<std::shared_ptr<AbstractMinion>> getMinions();
-  std::vector<std::shared_ptr<AbstractMinion>> getGraveyard();
 
   void moveToHand(int i);
   void resurrect();
