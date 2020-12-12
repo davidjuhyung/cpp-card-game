@@ -167,15 +167,15 @@ int main(int argc, const char *argv[])
   const int NUMBER_OF_PLAYERS = 2;
   std::string names[NUMBER_OF_PLAYERS] = {"", ""};
   for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-    if (actionInput->eof() && actionInput != &std::cin) {
-      delete actionInput;
-      actionInput = &std::cin;
-    } 
     if (actionInput == &std::cin) {
       std::cout << "Enter the name of player " << i+1 << ": ";
     }
     std::getline(*actionInput, names[i]);
     if (names[i].empty()) names[i] = "anon. player";
+    if (actionInput->eof() && actionInput != &std::cin) {
+      delete actionInput;
+      actionInput = &std::cin;
+    } 
   }
   auto p1 = std::make_shared<Player>(1, names[0], deck1);
   auto p2 = std::make_shared<Player>(2, names[1], deck2);
