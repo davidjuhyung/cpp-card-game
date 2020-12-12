@@ -13,6 +13,7 @@ class Enchantment : public AbstractMinion
   	Enchantment(std::string name, Board* board);
   	card_template_t displayCard(bool forInspect = false) override;
   	std::vector<card_template_t> inspectMinion() override;
+  	std::shared_ptr<AbstractMinion> removeAllEnchantments() override;
 };
 
 #endif

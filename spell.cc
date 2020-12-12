@@ -77,6 +77,8 @@ void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
             p->getMinion(i)->damage(2);
             if (p->getMinion(i)->getDefence() <= 0) {
                 board->APNAP(When::Death);
+                auto removed = p->getMinion(i)->removeAllEnchantments();
+                p->replaceMinion(i,removed);
                 p->removeMinion(i,true);
             }
         }
@@ -84,6 +86,8 @@ void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
             board->getPlayer(owner%2+1)->getMinion(i)->damage(2);
             if (board->getPlayer(owner%2+1)->getMinion(i)->getDefence() <= 0) {
                 board->APNAP(When::Death);
+                auto removed = board->getPlayer(owner%2+1)->getMinion(i)->removeAllEnchantments();
+                board->getPlayer(owner%2+1)->replaceMinion(i,removed);
                 board->getPlayer(owner%2+1)->removeMinion(i,true);
             }
         }

@@ -25,3 +25,7 @@ std::vector<card_template_t> Enchantment::inspectMinion() {
 	if (enchantmentName != "Ability") vec.push_back(displayCard(true));
 	return vec;
 }
+
+std::shared_ptr<AbstractMinion> Enchantment::removeAllEnchantments() {
+	return getMinion();
+}

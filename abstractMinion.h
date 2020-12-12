@@ -34,6 +34,7 @@ class AbstractMinion : public Card
   	virtual void useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) = 0;
     virtual std::shared_ptr<AbstractMinion> getMinion(bool forDisplay = false) = 0;
     virtual std::vector<card_template_t> inspectMinion() = 0;
+    virtual std::shared_ptr<AbstractMinion> removeAllEnchantments() = 0;
 };
 
 #endif

@@ -73,10 +73,14 @@ void AbstractMinion::attackMinion(int ownPosition, int player, int target) {
 	defence -= m->getAttack();
 	if (m->getDefence() <= 0) {
 		board->APNAP(When::Death);
+		auto removed = m->removeAllEnchantments();
+		p->replaceMinion(target,removed);
 		p->removeMinion(target,true);
 	}
 	if (defence <= 0) {
 		board->APNAP(When::Death);
+		auto removed = removeAllEnchantments();
+		p->replaceMinion(ownPosition,removed);
 		board->getPlayer(player%2+1)->removeMinion(ownPosition,true);
 	}
 	actions--;

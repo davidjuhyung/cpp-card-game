@@ -47,3 +47,7 @@ std::vector<card_template_t> Minion::inspectMinion() {
 	std::vector<card_template_t> vec = {displayCard()};
 	return vec;
 }
+
+std::shared_ptr<AbstractMinion> Minion::removeAllEnchantments() {
+	return getMinion();
+}

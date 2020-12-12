@@ -27,6 +27,8 @@ void Ability::useAbility(int activePlayer, int targetPlayer, int minion) {
 		m->damage(1);
 		if (m->getDefence() <= 0) {
 			board->APNAP(When::Death);
+			auto removed = m->removeAllEnchantments();
+            t->replaceMinion(minion,removed);
 			t->removeMinion(minion,true);
 		}
 		actions--;
@@ -65,6 +67,8 @@ void Ability::useTriggered(int owner, int playedMinion, bool isOwnerActive, When
 			enemy->getMinion(i)->damage(attack);
 			if (enemy->getMinion(i)->getDefence() <= 0) {
 				board->APNAP(When::Death);
+				auto removed = enemy->getMinion(i)->removeAllEnchantments();
+            	enemy->replaceMinion(i,removed);
 				enemy->removeMinion(i,true);
 			}
 		}
@@ -82,6 +86,8 @@ void Ability::useTriggered(int owner, int playedMinion, bool isOwnerActive, When
 		enemy->getMinion(playedMinion)->damage(1);
 		if (enemy->getMinion(playedMinion)->getDefence() <= 0) {
 			board->APNAP(When::Death);
+			auto removed = enemy->getMinion(playedMinion)->removeAllEnchantments();
+            enemy->replaceMinion(playedMinion,removed);
 			enemy->removeMinion(playedMinion,true);
 		}
 	}

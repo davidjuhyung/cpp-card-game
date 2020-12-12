@@ -26,6 +26,8 @@ void Enrage::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	p->setMana(mana-cost);
 	if (m->defence <= 0) {
 		board->APNAP(When::Death);
+		auto removed = m->removeAllEnchantments();
+		t->replaceMinion(minion,removed);
 		t->removeMinion(minion,true);
 	}
 }
