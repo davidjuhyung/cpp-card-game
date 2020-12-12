@@ -10,11 +10,11 @@ class Board
 {
 private:
   int active = 1;
-  std::shared_ptr<Player> player1 = nullptr;
-  std::shared_ptr<Player> player2 = nullptr;
+  std::unique_ptr<Player> player1 = nullptr;
+  std::unique_ptr<Player> player2 = nullptr;
 public:
   Player* getPlayer(int p);
-  void setPlayer(std::shared_ptr<Player> player);
+  void setPlayer(std::unique_ptr<Player> player);
   void startTurn();
   void endturn();
   void attack(int i);

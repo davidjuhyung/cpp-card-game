@@ -16,10 +16,10 @@ Player* Board::getPlayer(int p)
   return player2.get();
 }
 
-void Board::setPlayer(std::shared_ptr<Player> player)
+void Board::setPlayer(std::unique_ptr<Player> player)
 {
-  if (player->getPlayerNum() == 1) player1 = player;
-  if (player->getPlayerNum() == 2) player2 = player;
+  if (player->getPlayerNum() == 1) std::swap(player1, player);
+  if (player->getPlayerNum() == 2) std::swap(player2, player);
 }
 
 void Board::startTurn()

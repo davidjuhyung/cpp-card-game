@@ -182,10 +182,10 @@ int main(int argc, const char *argv[])
     } 
   }
 
-  auto p1 = std::make_shared<Player>(1, names[0], deck1);
-  auto p2 = std::make_shared<Player>(2, names[1], deck2);
-  b.setPlayer(p1);
-  b.setPlayer(p2);
+  auto p1 = std::make_unique<Player>(1, names[0], deck1);
+  auto p2 = std::make_unique<Player>(2, names[1], deck2);
+  b.setPlayer(std::move(p1));
+  b.setPlayer(std::move(p2));
   b.startTurn();
 
 
