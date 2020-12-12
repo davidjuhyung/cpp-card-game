@@ -28,7 +28,6 @@ class AbstractMinion : public Card
   	bool gaining() const;
   	int getActivationCost() const;
   	void setAction();
-  	virtual void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false);
   	// remember, active player as param. Use minions activated ability
     virtual void useAbility(int activePlayer, int target = -1) = 0;
     // activate trigger

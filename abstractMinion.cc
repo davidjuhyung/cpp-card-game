@@ -82,25 +82,6 @@ void AbstractMinion::attackMinion(int ownPosition, int player, int target) {
 
 void AbstractMinion::damage(int d) { defence -= d; }
 
-void AbstractMinion::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
-	Player* p = board->getPlayer(owner);
-	int playerMagic = p->getMagic();
-	if (cost > playerMagic) throw InputException{"Player doesn't have enough magic"};
-	int numMinions = p->getNumMinions();
-	if (numMinions >= Player::maxMinionSize) throw InputException{"Minion slots filled"};
-    p->setMagic(playerMagic-cost);
-	auto m = std::make_shared<Minion>(name,board);
-	m->setAttack(attack);
-	m->setDefence(defence);
-	auto a = std::make_shared<Ability>(name,board,m);
-	p->addMinion(a);
-	board->APNAP(When::Play,numMinions-1);
-	if (a->defence <= 0) {
-		board->APNAP(When::Death);
-		p->removeMinion(numMinions-1,true);
-	}
-}
-
 int AbstractMinion::getDefence() const { return defence; }
 
 int AbstractMinion::getAttack() const { return attack; }

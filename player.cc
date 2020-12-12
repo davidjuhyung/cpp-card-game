@@ -24,6 +24,7 @@ void Player::startTurn()
 {
   magic++;
   draw();
+  for (auto m : minions) m->setAction();
 }
 
 // orders minion i to attack the opposing player o
@@ -66,13 +67,13 @@ void Player::play(int i, int p, char t)
 // If no target = the current player itself
 void Player::use(int i, int p)
 {
-  minions.at(i)->useAbility(p);
+  minions.at(i)->useAbility(playerNum);
 }
 
 void Player::use(int i, int p, char t)
 {
   int m = t - '0';
-  minions.at(i)->useAbility(p, m-1);
+  minions.at(i)->useAbility(playerNum, m-1);
 }
 
 /////// testing mode only ////////
@@ -155,7 +156,7 @@ void Player::setMagic(int m)
   magic = m;
 }
 
-bool Player::hasRitual() { return !(ritual == nullptr); }
+bool Player::hasRitual() { return (ritual != nullptr); }
 
 std::shared_ptr<Ritual> Player::getRitual()
 {

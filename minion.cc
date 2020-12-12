@@ -3,6 +3,21 @@
 
 Minion::Minion(std::string name, Board* board) : AbstractMinion{name,board} {}
 
+void Minion::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
+	Player* p = board->getPlayer(owner);
+	int playerMagic = p->getMagic();
+	if (cost > playerMagic) throw InputException{"Player doesn't have enough magic"};
+	int numMinions = p->getNumMinions();
+	if (numMinions >= Player::maxMinionSize) throw InputException{"Minion slots filled"};
+    p->setMagic(playerMagic-cost);
+	auto m = std::make_shared<Minion>(name,board);
+	m->setAttack(attack);
+	m->setDefence(defence);
+	auto a = std::make_shared<Ability>(name,board,m);
+	p->addMinion(a);
+	board->APNAP(When::Play,numMinions);
+}
+
 void Minion::useAbility(int activePlayer, int target) {}
 
 void Minion::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) {}
