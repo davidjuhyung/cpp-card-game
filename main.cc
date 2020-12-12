@@ -136,7 +136,6 @@ void readAction(std::string action, std::vector<std::string> params, Board &b, b
 int main(int argc, const char *argv[]) 
 {
   bool testingMode = false;
-  bool seedEnabled = false;
   Board b;
   std::istream *actionInput = &std::cin;
   std::string deck1File = "", deck2File = ""; 
@@ -158,9 +157,6 @@ int main(int argc, const char *argv[])
       if (cmd == "-testing") {
         testingMode = true;
       }
-      if (cmd == "-seed") {
-        seedEnabled = true;
-      }
     }
   }
     
@@ -168,8 +164,8 @@ int main(int argc, const char *argv[])
   std::ifstream defaultDeck2{"./codeForStudents/default.deck"};
   std::ifstream d1{deck1File};
   std::ifstream d2{deck2File};
-  auto deck1 = deck1File.empty() ? initialize(defaultDeck1, &b, PLAYER1_SEED, seedEnabled) : initialize(d1, &b, PLAYER1_SEED, seedEnabled);
-  auto deck2 = deck2File.empty() ? initialize(defaultDeck2, &b, PLAYER2_SEED, seedEnabled) : initialize(d2, &b, PLAYER2_SEED, seedEnabled);
+  auto deck1 = deck1File.empty() ? initialize(defaultDeck1, &b, PLAYER1_SEED, testingMode) : initialize(d1, &b, PLAYER1_SEED, testingMode);
+  auto deck2 = deck2File.empty() ? initialize(defaultDeck2, &b, PLAYER2_SEED, testingMode) : initialize(d2, &b, PLAYER2_SEED, testingMode);
 
   // game setup
   const int NUMBER_OF_PLAYERS = 2;
@@ -194,12 +190,13 @@ int main(int argc, const char *argv[])
 
 
   std::string action;
-  while (std::getline(*actionInput, action)) {
-    if (actionInput->eof() && actionInput != &std::cin) {
-      delete actionInput;
-      actionInput = &std::cin;
-    }
-    try {
+  while (std::getline(*actionInput, action) || action.empty() || !actionInput->eof()) { // to support both ctrl+D and quit command
+    try { 
+      if (actionInput->eof() && actionInput != &std::cin) {
+        delete actionInput;
+        actionInput = &std::cin;
+      } else if (actionInput->eof()) throw InputException("Terminating the program...", true);
+      if (action.empty()) continue;
       std::istringstream stream{action};
       std::vector<std::string> params;
       std::string action;
