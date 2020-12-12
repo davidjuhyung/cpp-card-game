@@ -13,7 +13,8 @@ void Silence::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
     int magic = p->getMagic();
 	if (cost > magic) throw InputException{"Player doesn't have enough magic"};
 	int lastMinion = t->getNumMinions()-1;
-	if (minion < 0 || minion > lastMinion) throw InputException{"Target doesn't have minion at " + std::to_string(minion+1)};
+	if (minion < 0) throw InputException{"Please specify a target to play this card"};
+	if (minion > lastMinion) throw InputException{"Target doesn't have minion at " + std::to_string(minion+1)};
 	auto m = std::make_shared<Silence>(name,board);
 	m->minion = t->getMinion(minion);
 	m->actions = m->minion->getAction();
@@ -26,7 +27,7 @@ void Silence::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	p->setMagic(magic-cost);
 }
 
-void Silence::useAbility(int activePlayer, int target) {}
+void Silence::useAbility(int activePlayer, int targetPlayer, int minion) {}
 
 void Silence::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) {}
 

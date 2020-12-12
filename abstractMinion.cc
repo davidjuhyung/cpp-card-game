@@ -60,9 +60,11 @@ void AbstractMinion::attackMinion(int ownPosition, int player, int target) {
 	int lastNum1 = board->getPlayer(player%2+1)->getNumMinions()-1;
 	int lastNum2 = board->getPlayer(player)->getNumMinions()-1;
 	if (0 > ownPosition || lastNum1 < ownPosition) {
-		throw InputException("You have no minion at position " + std::to_string(ownPosition+1));
-	} else if (0 > target || lastNum2 < target) {
-		throw InputException("Enemy have no minion at position " + std::to_string(target+1));
+		throw InputException{"You have no minion at position " + std::to_string(ownPosition+1)};
+	} else if (lastNum2 < target) {
+		throw InputException{"Enemy have no minion at position " + std::to_string(target+1)};
+	} else if (0 > target) {
+		throw InputException{"Please specify a target to attack"};
 	}
 	if (actions == 0) throw InputException("Minion doesn't have any actions remaining");
 	Player* p = board->getPlayer(player);

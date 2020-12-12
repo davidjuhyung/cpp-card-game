@@ -67,13 +67,13 @@ void Player::play(int i, int p, char t)
 // If no target = the current player itself
 void Player::use(int i, int p)
 {
-  minions.at(i)->useAbility(playerNum);
+  minions.at(i)->useAbility(playerNum, p);
 }
 
 void Player::use(int i, int p, char t)
 {
   int m = t - '0';
-  minions.at(i)->useAbility(playerNum, m-1);
+  minions.at(i)->useAbility(playerNum, p, m-1);
 }
 
 /////// testing mode only ////////

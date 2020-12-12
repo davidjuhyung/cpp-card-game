@@ -18,7 +18,7 @@ void Minion::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
 	board->APNAP(When::Play,numMinions);
 }
 
-void Minion::useAbility(int activePlayer, int target) {}
+void Minion::useAbility(int activePlayer, int targetPlayer, int minion) {}
 
 void Minion::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) {}
 

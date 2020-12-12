@@ -36,14 +36,16 @@ void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
             t->removeRitual();
         } else {
             int lastMinion = t->getNumMinions() - 1;
-            if (minion < 0 || minion > lastMinion) throw InputException{"Target has no minion at position " + std::to_string(minion+1)};
+            if (minion < 0) throw InputException{"Please specify a target to cast this spell on"};
+            if (minion > lastMinion) throw InputException{"Target has no minion at position " + std::to_string(minion+1)};
             t->removeMinion(minion);
         }
     }
     else if (name == "Unsommon") {
         //return target minion to its owner's hand
         int lastMinion = t->getNumMinions() - 1;
-        if (minion < 0 || minion > lastMinion) throw InputException{"Target has no minion at position " + std::to_string(minion+1)};
+        if (minion < 0) throw InputException{"Please specify a target to cast this spell on"};
+        if (minion > lastMinion) throw InputException{"Target has no minion at position " + std::to_string(minion+1)};
         t->moveToHand(minion);
     }
     else if (name == "Recharge") {
@@ -54,7 +56,8 @@ void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual) {
     else if (name == "Disenchant") {
         //destroy the top enchantment on target minion
         int lastMinion = t->getNumMinions() - 1;
-        if (minion < 0 || minion > lastMinion) throw InputException{"Target has no minion at position " + std::to_string(minion+1)};
+        if (minion < 0) throw InputException{"Please specify a target to cast this spell on"};
+        if (minion > lastMinion) throw InputException{"Target has no minion at position " + std::to_string(minion+1)};
         auto m = t->getMinion(minion)->getMinion(); 
         board->getPlayer(targetPlayer)->replaceMinion(minion, m);
         if (m->getDefence() <= 0) {

@@ -13,20 +13,21 @@ Ability::Ability(std::string name, Board* board, std::shared_ptr<AbstractMinion>
 
 void Ability::play(int owner, int targetPlayer, int minion, bool actOnRitual) {}
 
-void Ability::useAbility(int activePlayer, int target) {
+void Ability::useAbility(int activePlayer, int targetPlayer, int minion) {
 	if (actions == 0) throw InputException("Minion doesn't have any actions remaining");
 	Player* p = board->getPlayer(activePlayer);
-	Player* enemy = board->getPlayer(activePlayer%2+1);
+	Player* t = board->getPlayer(targetPlayer);
 	int magic = p->getMagic();
 	if (magic < activationCost) throw InputException("Player doesn't have enough mana");
 	if (name == "Novice Pyromancer") {
-		int lastMinion = enemy->getNumMinions()-1;
-		if (target < 0 || target > lastMinion) throw InputException{"Enemy have no minion at position " + std::to_string(target+1)};
-		auto m = enemy->getMinion(target);
+		int lastMinion = t->getNumMinions()-1;
+		if (minion < 0) throw InputException{"Please specify a target to use this ability on"};
+		if (minion > lastMinion) throw InputException{"Target has no minion at position " + std::to_string(minion+1)};
+		auto m = t->getMinion(minion);
 		m->damage(1);
 		if (m->getDefence() <= 0) {
 			board->APNAP(When::Death);
-			enemy->removeMinion(target,true);
+			t->removeMinion(minion,true);
 		}
 		actions--;
 		p->setMagic(magic-activationCost);
