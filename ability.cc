@@ -68,7 +68,7 @@ void Ability::useTriggered(int owner, int playedMinion, bool isOwnerActive, When
 				enemy->removeMinion(i,true);
 			}
 		}
-	} else if (name == "PotionSeller") {
+	} else if (name == "Potion Seller") {
 		if (when != When::End) return;
 		int numMinions = p->getNumMinions();
 		for (int i = 0; i < numMinions; ++i) {
