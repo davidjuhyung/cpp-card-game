@@ -45,5 +45,8 @@ std::shared_ptr<AbstractMinion> Enrage::getMinion(bool forDisplay) {
 		minion->setDefence(defence+2);
 		minion->setAttack(attack/2);
 	}
+	minion->setCurrentAction(actions);
+	minion->setActivationCost(activationCost);
+	minion->setGaining(gainAction);
 	return minion;
 }

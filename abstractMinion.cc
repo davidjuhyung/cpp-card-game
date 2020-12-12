@@ -100,6 +100,17 @@ int AbstractMinion::getAction() const {return actions; }
 
 bool AbstractMinion::gaining() const { return gainAction; }
 
+void AbstractMinion::setGaining(bool gain) { gainAction = gain; }
+
 int AbstractMinion::getActivationCost() const { return activationCost; }
 
-void AbstractMinion::setAction() { if (gainAction) actions = 1; }
+void AbstractMinion::setActivationCost(int c) { activationCost = c; }
+
+void AbstractMinion::setAction(int owner, int ownPosition) { 
+	if (gainAction) actions = 1;
+	else {
+		board->getPlayer(owner)->replaceMinion(ownPosition,getMinion());
+	}
+}
+
+void AbstractMinion::setCurrentAction(int a) { actions = a; }

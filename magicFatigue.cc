@@ -33,5 +33,12 @@ std::shared_ptr<AbstractMinion> MagicFatigue::getMinion(bool forDisplay) {
 	if (minion == nullptr) throw InputException{"Unexpected! Enchantment not attached to a minion"};
 	minion->setDefence(defence);
 	minion->setAttack(attack);
+	minion->setCurrentAction(actions);
+	if (forDisplay) {
+		minion->setActivationCost(activationCost);
+	} else {
+		minion->setActivationCost(activationCost-2);
+	}
+	minion->setGaining(gainAction);
 	return minion;
 }

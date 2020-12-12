@@ -35,5 +35,8 @@ std::shared_ptr<AbstractMinion> Silence::getMinion(bool forDisplay) {
 	if (minion == nullptr) throw InputException{"Unexpected! Enchantment not attached to a minion"};
 	minion->setDefence(defence);
 	minion->setAttack(attack);
+	minion->setCurrentAction(actions);
+	minion->setActivationCost(activationCost);
+	minion->setGaining(gainAction);
 	return minion;
 }
