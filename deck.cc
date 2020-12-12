@@ -17,7 +17,7 @@
 #include <random>
 #include <chrono>
 
-std::vector<std::shared_ptr<Card>> initialize(std::istream &in, Board* b, int s) {
+std::vector<std::shared_ptr<Card>> initialize(std::istream &in, Board* b, int seed, bool fixedSeed) {
 	std::set<std::string> minions = {"Air Elemental","Apprentice Summoner","Bomb","Earth Elemental","Fire Elemental","Master Summoner","Novice Pyromancer","Potion Seller"};
 	std::set<std::string> enchantments = {"Delay","Enrage","Giant Strength","Magic Fatigue","Silence"};
 	std::set<std::string> spells = {"Banish","Blizzard","Disenchant","Raise Dead","Recharge","Unsommon"};
@@ -53,8 +53,9 @@ std::vector<std::shared_ptr<Card>> initialize(std::istream &in, Board* b, int s)
 			deck.push_back(card);
 		}
 	}
-	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count()+s;
-	std::default_random_engine rng{seed};
+	unsigned s = std::chrono::system_clock::now().time_since_epoch().count()+seed;
+	if (fixedSeed) s = seed;
+	std::default_random_engine rng{s};
 	for ( int i = 0; i < 1000; i++ ) {
 		//std::shuffle( v.begin(), v.end(), std::default_random_engine(seed) );
 		std::shuffle( deck.begin(), deck.end(), rng );	
