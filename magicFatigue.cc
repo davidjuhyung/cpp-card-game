@@ -1,7 +1,7 @@
 #include "magicFatigue.h"
 
 MagicFatigue::MagicFatigue(std::string name, Board* board) : Enchantment{name, board} {
-	enchantmentName = "Mana Fatigue";
+	enchantmentName = "Magic Fatigue";
 	enchantmentDescription = "Enchanted minion's activated ability costs 2 more";
 	cost = 0;
 }
