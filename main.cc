@@ -10,6 +10,8 @@
 #include "board.h"
 #include "inputException.h"
 
+const int PLAYER1_SEED = 20824741;
+const int PLAYER2_SEED = 20824742;
 
 void readAction(std::string action, std::vector<std::string> params, Board &b, bool testingMode) 
 {
@@ -134,12 +136,10 @@ void readAction(std::string action, std::vector<std::string> params, Board &b, b
 int main(int argc, const char *argv[]) 
 {
   bool testingMode = false;
+  bool seedEnabled = false;
   Board b;
-  std::ifstream defaultDeck1{"./codeForStudents/default.deck"};
-  std::ifstream defaultDeck2{"./codeForStudents/default.deck"};
   std::istream *actionInput = &std::cin;
-  auto deck1 = initialize(defaultDeck1, &b, 1);
-  auto deck2 = initialize(defaultDeck2, &b, 2);
+  std::string deck1File = "", deck2File = ""; 
 
   // read action line arguments
   for (int i = 1; i < argc; i++) {
@@ -147,12 +147,10 @@ int main(int argc, const char *argv[])
     if (cmd.at(0) == '-') {
       if (cmd == "-deck1" || cmd == "-deck2" || cmd == "-init") {
         std::string fileName = argv[++i]; // This is assumed to be true by the pdf
-        std::ifstream infile{fileName}; 
-        auto deck = initialize(infile, &b, 3);
         if (cmd == "-deck1") {
-          deck1 = deck;
+          deck1File = fileName;
         } else if (cmd == "-deck2"){
-          deck2 = deck;
+          deck2File = fileName;
         } else if (cmd == "-init") {
           actionInput = new std::ifstream{fileName}; // must be deleted after
         }
@@ -160,8 +158,18 @@ int main(int argc, const char *argv[])
       if (cmd == "-testing") {
         testingMode = true;
       }
+      if (cmd == "-seed") {
+        seedEnabled = true;
+      }
     }
   }
+    
+  std::ifstream defaultDeck1{"./codeForStudents/default.deck"};
+  std::ifstream defaultDeck2{"./codeForStudents/default.deck"};
+  std::ifstream d1{deck1File};
+  std::ifstream d2{deck2File};
+  auto deck1 = deck1File.empty() ? initialize(defaultDeck1, &b, PLAYER1_SEED, seedEnabled) : initialize(d1, &b, PLAYER1_SEED, seedEnabled);
+  auto deck2 = deck2File.empty() ? initialize(defaultDeck2, &b, PLAYER2_SEED, seedEnabled) : initialize(d2, &b, PLAYER2_SEED, seedEnabled);
 
   // game setup
   const int NUMBER_OF_PLAYERS = 2;
