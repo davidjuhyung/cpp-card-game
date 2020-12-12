@@ -19,7 +19,7 @@ private:
   int playerNum;
   std::string name;
   int life;
-  int magic;
+  int mana;
   std::vector<std::shared_ptr<Card>> deck;
   std::vector<std::shared_ptr<Card>> hand;
   std::vector<std::shared_ptr<AbstractMinion>> minions;
@@ -46,10 +46,6 @@ public:
   std::vector<card_template_t> displayDeck();
 
   int getPlayerNum();
-  std::string getName();
-  std::vector<std::shared_ptr<Card>> getHand();  
-  std::vector<std::shared_ptr<AbstractMinion>> getMinions();
-  std::vector<std::shared_ptr<AbstractMinion>> getGraveyard();
 
   void moveToHand(int i);
   void resurrect();
@@ -57,8 +53,8 @@ public:
   int getLife();
   void damage(int d);
 
-  int getMagic();
-  void setMagic(int m);
+  int getMana();
+  void setMana(int m);
 
   bool hasRitual();
   std::shared_ptr<Ritual> getRitual();

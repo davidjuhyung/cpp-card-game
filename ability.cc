@@ -17,8 +17,8 @@ void Ability::useAbility(int activePlayer, int targetPlayer, int minion) {
 	if (actions == 0) throw InputException("Minion doesn't have any actions remaining");
 	Player* p = board->getPlayer(activePlayer);
 	Player* t = board->getPlayer(targetPlayer);
-	int magic = p->getMagic();
-	if (magic < activationCost) throw InputException("Player doesn't have enough mana");
+	int mana = p->getMana();
+	if (mana < activationCost) throw InputException("Player doesn't have enough mana");
 	if (name == "Novice Pyromancer") {
 		int lastMinion = t->getNumMinions()-1;
 		if (minion < 0) throw InputException{"Please specify a target to use this ability on"};
@@ -30,7 +30,7 @@ void Ability::useAbility(int activePlayer, int targetPlayer, int minion) {
 			t->removeMinion(minion,true);
 		}
 		actions--;
-		p->setMagic(magic-activationCost);
+		p->setMana(mana-activationCost);
 	} else if (name == "Apprentice Summoner") {
 		int numMinions = p->getNumMinions();
 		if (numMinions == Player::maxMinionSize) throw InputException{"Minion slots filled"};
@@ -39,7 +39,7 @@ void Ability::useAbility(int activePlayer, int targetPlayer, int minion) {
 		p->addMinion(a);
 		board->APNAP(When::Play,numMinions);
 		actions--;
-		p->setMagic(magic-activationCost);
+		p->setMana(mana-activationCost);
 	} else if (name == "Master Summoner") {
 		int numMinions = p->getNumMinions();
 		if (numMinions == Player::maxMinionSize) throw InputException{"Minion slots filled"};
@@ -50,7 +50,7 @@ void Ability::useAbility(int activePlayer, int targetPlayer, int minion) {
 			board->APNAP(When::Play,numMinions+i);
 		}
 		actions--;
-		p->setMagic(magic-activationCost);
+		p->setMana(mana-activationCost);
 	}
 }
 
@@ -68,12 +68,13 @@ void Ability::useTriggered(int owner, int playedMinion, bool isOwnerActive, When
 				enemy->removeMinion(i,true);
 			}
 		}
-	} else if (name == "PotionSeller") {
+	} else if (name == "Potion Seller") {
 		if (when != When::End) return;
 		int numMinions = p->getNumMinions();
 		for (int i = 0; i < numMinions; ++i) {
 			p->getMinion(i)->setDefence(p->getMinion(i)->getDefence()+1);
 		}
+		defence--;
 	} else if (name == "Fire Elemental") {
 		if (when != When::Play) return;
 		if (isOwnerActive) return;

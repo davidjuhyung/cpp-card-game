@@ -9,7 +9,7 @@ Player::Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card
   : playerNum{playerNum}
   , name{name}
   , life{20}
-  , magic{3}
+  , mana{3}
   , deck{deck}
   {
     while (hand.size() < 5) {
@@ -19,10 +19,10 @@ Player::Player(int playerNum, std::string name, std::vector<std::shared_ptr<Card
     }
   }
 
-// The player gains 1 magic.
+// The player gains 1 mana.
 void Player::startTurn()
 {
-  magic++;
+  mana++;
   draw();
   for (auto m : minions) m->setAction();
 }
@@ -97,26 +97,6 @@ int Player::getPlayerNum()
   return playerNum;
 }
 
-std::string Player::getName()
-{
-  return name;
-}
-
-std::vector<std::shared_ptr<Card>> Player::getHand()
-{
-  return hand;
-}
-
-std::vector<std::shared_ptr<AbstractMinion>> Player::getMinions()
-{
-  return minions;
-}
-
-std::vector<std::shared_ptr<AbstractMinion>> Player::getGraveyard()
-{
-  return graveyard;
-}
-
 // Any action that would make a minion return to the player’s hand (e.g., Unsummon)
 // will instead make the minion vanish from play and be destroyed if the hand is already full.
 void Player::moveToHand(int i)
@@ -146,14 +126,14 @@ void Player::damage(int d)
   life -= d;
 } 
 
-int Player::getMagic()
+int Player::getMana()
 {
-  return magic;
+  return mana;
 }
 
-void Player::setMagic(int m)
+void Player::setMana(int m)
 {
-  magic = m;
+  mana = m;
 }
 
 bool Player::hasRitual() { return (ritual != nullptr); }
@@ -208,7 +188,7 @@ bool Player::isGraveyardEmpty() {
 }
 
 card_template_t Player::display() {
-  return display_player_card(playerNum, name, life, magic);
+  return display_player_card(playerNum, name, life, mana);
 }
 
 std::vector<card_template_t> Player::displayMinions() {
