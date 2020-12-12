@@ -146,7 +146,7 @@ int main(int argc, const char *argv[])
     std::string cmd{argv[i]};
     if (cmd.at(0) == '-') {
       if (cmd == "-deck1" || cmd == "-deck2" || cmd == "-init") {
-        std::string fileName = argv[++i]; 
+        std::string fileName = argv[++i]; // This is assumed to be true by the pdf
         std::ifstream infile{fileName}; 
         auto deck = initialize(infile, &b, 3);
         if (cmd == "-deck1") {
@@ -167,15 +167,15 @@ int main(int argc, const char *argv[])
   const int NUMBER_OF_PLAYERS = 2;
   std::string names[NUMBER_OF_PLAYERS] = {"", ""};
   for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+    if (actionInput->eof() && actionInput != &std::cin) {
+      delete actionInput;
+      actionInput = &std::cin;
+    } 
     if (actionInput == &std::cin) {
       std::cout << "Enter the name of player " << i+1 << ": ";
     }
     std::getline(*actionInput, names[i]);
     if (names[i].empty()) names[i] = "anon. player";
-    if (actionInput->eof() && actionInput != &std::cin) {
-      delete actionInput;
-      actionInput = &std::cin;
-    } 
   }
   auto p1 = std::make_shared<Player>(1, names[0], deck1);
   auto p2 = std::make_shared<Player>(2, names[1], deck2);
@@ -185,6 +185,10 @@ int main(int argc, const char *argv[])
 
   std::string action;
   while (std::getline(*actionInput, action)) {
+    if (actionInput->eof() && actionInput != &std::cin) {
+      delete actionInput;
+      actionInput = &std::cin;
+    }
     try {
       std::istringstream stream{action};
       std::vector<std::string> params;
@@ -195,10 +199,6 @@ int main(int argc, const char *argv[])
         params.push_back(s);
       }
       readAction(action, params, b, testingMode);
-      if (actionInput->eof() && actionInput != &std::cin) {
-        delete actionInput;
-        actionInput = &std::cin;
-      }
     } catch (InputException err) {
       std::cout << err.getReason() << std::endl;
       if (err.getQuit()) break;
