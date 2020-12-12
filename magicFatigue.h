@@ -1,12 +1,12 @@
-#ifndef Mana_FATIGUE_H
-#define Mana_FATIGUE_H
+#ifndef MAGIC_FATIGUE_H
+#define MAGIC_FATIGUE_H
 
 #include "enchantment.h"
 
-class ManaFatigue : public Enchantment 
+class MagicFatigue : public Enchantment 
 {
   public:
-		ManaFatigue(std::string name, Board* board);
+		MagicFatigue(std::string name, Board* board);
 		void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false) override;
 		void useAbility(int activePlayer, int targetPlayer, int minion = -1) override;	
 		void useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) override;
