@@ -4,12 +4,15 @@
 Ritual::Ritual(std::string name, Board* board) : Card{name,board} {
 	if (name == "Dark Ritual") {
 		cost = 0;
+        activationCost = 1;
 		description = "At the start of your turn, gain 1 magic";
-	} else if (name == "Aura Of Power") {
+	} else if (name == "Aura of Power") {
 		cost = 1;
+        activationCost = 1;
 		description = "Whenever a minion enter a play under your control, it gains +1/+1";
 	} else {
 		cost = 3;
+        activationCost = 2;
 		description = "Whenever a minion enter a play, destroy it";
 	}
 }
@@ -27,16 +30,16 @@ void Ritual::play(int owner, int targetPlayer, int minion, bool actOnRitual)
 void Ritual::useAbility(int owner, int playedMinion, bool isOwnerActive, When when)
 {
     Player* p = board->getPlayer(owner);
-    if (charges < activationCost) throw InputException{"Ritual doesn't have enough charges"};
+    if (charges < activationCost) return;
     if (name == "Dark Ritual") {
         //At the start of your turn, gain 1 magic
-        if (!isOwnerActive || when!=When::Start) return;
+        if (isOwnerActive == false || when!=When::Start) return;
         charges -= activationCost;
         p->setMagic(p->getMagic()+1);
     }
     else if (name == "Aura Of Power") {
         //whenever a minion enter a play under your control, it gains +1/+1
-        if (!isOwnerActive || when!=When::Play) return;
+        if (isOwnerActive == false || when != When::Play) return;
         charges -= activationCost;
         // playedMinion is never out of bound but i'll still check
         if (playedMinion < 0 || playedMinion > p->getNumMinions()-1) throw InputException{"Played Minion is out of bounds"};

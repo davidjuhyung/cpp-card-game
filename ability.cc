@@ -70,13 +70,13 @@ void Ability::useTriggered(int owner, int playedMinion, bool isOwnerActive, When
 	} else if (name == "PotionSeller") {
 		if (when != When::End) return;
 		int numMinions = p->getNumMinions();
-		for (int i = 0; i <  numMinions; ++i) {
-			p->getMinion(i)->setAttack(p->getMinion(i)->getAttack()+1);
+		for (int i = 0; i < numMinions; ++i) {
+			p->getMinion(i)->setDefence(p->getMinion(i)->getDefence()+1);
 		}
 	} else if (name == "Fire Elemental") {
 		if (when != When::Play) return;
 		if (isOwnerActive) return;
-		if (playedMinion < 0 || playedMinion > enemy->getNumMinions()-1) throw InputException{"Enemy have no minion at position " + std::to_string(playedMinion+1)};
+		if (playedMinion < 0 || playedMinion > enemy->getNumMinions()-1) return;
 		enemy->getMinion(playedMinion)->damage(1);
 		if (enemy->getMinion(playedMinion)->getDefence() <= 0) {
 			board->APNAP(When::Death);
