@@ -58,7 +58,7 @@ void AbstractMinion::attackPlayer(int player) {
 }
 
 void AbstractMinion::attackMinion(int ownPosition, int owner, int player, int target) {
-	int lastNum1 = board->getPlayer(player%2+1)->getNumMinions()-1;
+	int lastNum1 = board->getPlayer(owner)->getNumMinions()-1;
 	int lastNum2 = board->getPlayer(player)->getNumMinions()-1;
 	if (0 > ownPosition || lastNum1 < ownPosition) {
 		throw InputException{"You have no minion at position " + std::to_string(ownPosition+1)};

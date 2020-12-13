@@ -4,7 +4,6 @@
 #include "minion.h"
 #include "ritual.h"
 #include "inputException.h"
-#include <iostream>
 
 
 // getPlayer and setPlayer will use a loop in the future, but for now this is sufficient.
@@ -92,34 +91,34 @@ void Board::discard(int i) {
   }
 }
 
-void Board::inspect(int i)
+void Board::inspect(int i, std::ostream &out)
 {
   std::vector<card_template_t> m = getPlayer(active)->inspectMinion(i-1);
   int numEnchantments = m.size() - 1;
   if (numEnchantments < 0) return;
   card_template_t card = m.at(0);
   int cardSize = card.size();
-  for (auto line : card) std::cout << line << std::endl;
+  for (auto line : card) out << line << std::endl;
   int numLines = numEnchantments / 5;
   if (numEnchantments%5 != 0) numLines++;
   for (int f = 0; f < numLines; ++f) {
     for (int j = 0; j < cardSize; ++j) {
       for (int k = 1; k <= 5; ++k) {
         if (k+f*5 > numEnchantments) break;
-        std::cout << m.at(k+f*5).at(j);
+        out << m.at(k+f*5).at(j);
       }
-      std::cout << std::endl;
+      out << std::endl;
     }
   }
 }
 
-void Board::display()
+void Board::display(std::ostream &out)
 {
   const int width = CARD_TEMPLATE_EMPTY.at(0).length();
   const int height = CARD_TEMPLATE_EMPTY.size();
-  std::cout << EXTERNAL_BORDER_CHAR_TOP_LEFT;
-  for (int i = 0; i < 5*width; ++i) std::cout << EXTERNAL_BORDER_CHAR_LEFT_RIGHT;
-  std::cout << EXTERNAL_BORDER_CHAR_TOP_RIGHT << std::endl;
+  out << EXTERNAL_BORDER_CHAR_TOP_LEFT;
+  for (int i = 0; i < 5*width; ++i) out << EXTERNAL_BORDER_CHAR_LEFT_RIGHT;
+  out << EXTERNAL_BORDER_CHAR_TOP_RIGHT << std::endl;
 
   card_template_t ritual1 = getPlayer(1)->showRitual();
   card_template_t ritual2 = getPlayer(2)->showRitual();
@@ -133,55 +132,55 @@ void Board::display()
   int numMinions2 = minions2.size();
 
   for (int i = 0; i < height; ++i) {
-    std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
+    out << EXTERNAL_BORDER_CHAR_UP_DOWN;
     for (int j = 0; j < 5; ++j) {
-      if (j == 0) std::cout << grave1.at(i);
-      else if (j == 2) std::cout << p1.at(i);
-      else if (j == 4) std::cout << ritual1.at(i);
-      else for (int empty = 0; empty < width; empty++) std::cout << " ";
+      if (j == 0) out << grave1.at(i);
+      else if (j == 2) out << p1.at(i);
+      else if (j == 4) out << ritual1.at(i);
+      else for (int empty = 0; empty < width; empty++) out << " ";
     }
-    std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
-    std::cout << std::endl;
+    out << EXTERNAL_BORDER_CHAR_UP_DOWN;
+    out << std::endl;
   }
   for (int i = 0; i < height; ++i) {
-    std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
+    out << EXTERNAL_BORDER_CHAR_UP_DOWN;
     for (int j = 0; j < 5; ++j) {
-      if (j+1 > numMinions1) std::cout << CARD_TEMPLATE_BORDER.at(i);
-      else std::cout << minions1.at(j).at(i);
+      if (j+1 > numMinions1) out << CARD_TEMPLATE_BORDER.at(i);
+      else out << minions1.at(j).at(i);
     }
-    std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
-    std::cout << std::endl;
+    out << EXTERNAL_BORDER_CHAR_UP_DOWN;
+    out << std::endl;
   }
 
-  for (auto line : CENTRE_GRAPHIC) std::cout << line << std::endl;;
+  for (auto line : CENTRE_GRAPHIC) out << line << std::endl;;
 
   for (int i = 0; i < height; ++i) {
-    std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
+    out << EXTERNAL_BORDER_CHAR_UP_DOWN;
     for (int j = 0; j < 5; ++j) {
-      if (j+1 > numMinions2) std::cout << CARD_TEMPLATE_BORDER.at(i);
-      else std::cout << minions2.at(j).at(i);
+      if (j+1 > numMinions2) out << CARD_TEMPLATE_BORDER.at(i);
+      else out << minions2.at(j).at(i);
     }
-    std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
-    std::cout << std::endl;
+    out << EXTERNAL_BORDER_CHAR_UP_DOWN;
+    out << std::endl;
   }
   for (int i = 0; i < height; ++i) {
-    std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
+    out << EXTERNAL_BORDER_CHAR_UP_DOWN;
     for (int j = 0; j < 5; ++j) {
-      if (j == 4) std::cout << grave2.at(i);
-      else if (j == 2) std::cout << p2.at(i);
-      else if (j == 0) std::cout << ritual2.at(i);
-      else for (int empty = 0; empty < width; empty++) std::cout << " ";
+      if (j == 4) out << grave2.at(i);
+      else if (j == 2) out << p2.at(i);
+      else if (j == 0) out << ritual2.at(i);
+      else for (int empty = 0; empty < width; empty++) out << " ";
     }
-    std::cout << EXTERNAL_BORDER_CHAR_UP_DOWN;
-    std::cout << std::endl;
+    out << EXTERNAL_BORDER_CHAR_UP_DOWN;
+    out << std::endl;
   }
-  std::cout << EXTERNAL_BORDER_CHAR_BOTTOM_LEFT;
-  for (int i = 0; i < 5*width; ++i) std::cout << EXTERNAL_BORDER_CHAR_LEFT_RIGHT;
-  std::cout << EXTERNAL_BORDER_CHAR_BOTTOM_RIGHT << std::endl;
+  out << EXTERNAL_BORDER_CHAR_BOTTOM_LEFT;
+  for (int i = 0; i < 5*width; ++i) out << EXTERNAL_BORDER_CHAR_LEFT_RIGHT;
+  out << EXTERNAL_BORDER_CHAR_BOTTOM_RIGHT << std::endl;
 }
 
 //   std::vector<std::shared_ptr<Card>> hand;
-void Board::showHand()
+void Board::showHand(std::ostream &out)
 { 
   std::vector<card_template_t> m = getPlayer(active)->displayHand();
   int num = m.size();
@@ -190,9 +189,9 @@ void Board::showHand()
   int cardSize = card.size();
   for (int j = 0; j < cardSize; ++j) {
     for (int k = 0; k < num; ++k) {
-      std::cout << m.at(k).at(j);
+      out << m.at(k).at(j);
     }
-    std::cout << std::endl;
+    out << std::endl;
   }
 }
 
