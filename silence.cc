@@ -30,7 +30,7 @@ void Silence::play(int owner, int targetPlayer, int minion, bool actOnRitual, bo
 
 void Silence::useAbility(int activePlayer, int targetPlayer, int minion, bool testing) { throw InputException{"This Minion is silenced"}; }
 
-void Silence::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) { throw InputException{"This Minion is silenced"}; }
+void Silence::useTriggered(int owner, int playedMinion, bool isOwnerActive, When when) {}
 
 std::shared_ptr<AbstractMinion> Silence::getMinion(bool forDisplay) {
 	if (minion == nullptr) throw InputException{"Unexpected! Enchantment not attached to a minion"};
