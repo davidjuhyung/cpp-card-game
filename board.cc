@@ -18,8 +18,8 @@ Player* Board::getPlayer(int p)
 
 void Board::setPlayer(std::unique_ptr<Player> player)
 {
-  if (player->getPlayerNum() == 1) std::swap(player1, player);
-  if (player->getPlayerNum() == 2) std::swap(player2, player);
+  if (player->getPlayerNum() == 1) player.swap(player1);
+  else if (player->getPlayerNum() == 2) player.swap(player2);
 }
 
 void Board::startTurn()
