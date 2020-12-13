@@ -57,7 +57,7 @@ void AbstractMinion::attackPlayer(int player) {
 	actions--;
 }
 
-void AbstractMinion::attackMinion(int ownPosition, int player, int target) {
+void AbstractMinion::attackMinion(int ownPosition, int owner, int player, int target) {
 	int lastNum1 = board->getPlayer(player%2+1)->getNumMinions()-1;
 	int lastNum2 = board->getPlayer(player)->getNumMinions()-1;
 	if (0 > ownPosition || lastNum1 < ownPosition) {
@@ -72,17 +72,17 @@ void AbstractMinion::attackMinion(int ownPosition, int player, int target) {
 	auto m = p->getMinion(target);
 	m->damage(attack);
 	defence -= m->getAttack();
+	if (defence <= 0) {
+		board->APNAP(When::Death);
+		auto removed = removeAllEnchantments();
+		board->getPlayer(owner)->replaceMinion(ownPosition,removed);
+		board->getPlayer(owner)->removeMinion(ownPosition,true);
+	}
 	if (m->getDefence() <= 0) {
 		board->APNAP(When::Death);
 		auto removed = m->removeAllEnchantments();
 		p->replaceMinion(target,removed);
 		p->removeMinion(target,true);
-	}
-	if (defence <= 0) {
-		board->APNAP(When::Death);
-		auto removed = removeAllEnchantments();
-		p->replaceMinion(ownPosition,removed);
-		board->getPlayer(player%2+1)->removeMinion(ownPosition,true);
 	}
 	actions--;
 }
