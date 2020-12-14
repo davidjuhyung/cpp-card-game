@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include "codeForStudents/ascii_graphics.h"
+#include "ascii_graphics.h"
 
 class Card;
 class AbstractMinion;

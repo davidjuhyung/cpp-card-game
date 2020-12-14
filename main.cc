@@ -36,8 +36,8 @@ int main(int argc, const char *argv[])
     }
   }
     
-  std::ifstream defaultDeck1{"./codeForStudents/default.deck"};
-  std::ifstream defaultDeck2{"./codeForStudents/default.deck"};
+  std::ifstream defaultDeck1{"default.deck"};
+  std::ifstream defaultDeck2{"default.deck"};
   std::ifstream d1{deck1File};
   std::ifstream d2{deck2File};
   auto deck1 = deck1File.empty() ? initialize(defaultDeck1, &b, PLAYER1_SEED, testingMode) : initialize(d1, &b, PLAYER1_SEED, testingMode);
