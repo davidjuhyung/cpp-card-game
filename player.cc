@@ -42,7 +42,7 @@ void Player::attack(int i, int o, int t)
 // plays the ith card in the active player’s hand with no target.
 void Player::play(int i, bool testing)
 {
-  hand.at(i)->play(playerNum, playerNum, testing);
+  hand.at(i)->play(playerNum, playerNum, -1, false, testing);
   hand.erase(hand.begin()+i);
 }
 
