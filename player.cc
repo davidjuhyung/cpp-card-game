@@ -54,7 +54,7 @@ void Player::play(int i, bool testing)
 void Player::play(int i, int p, char t, bool testing)
 {
   if (t == 'r') {
-    hand.at(i)->play(playerNum, p, -1, true); // true = attack on ritual
+    hand.at(i)->play(playerNum, p, -1, true, testing); // true = attack on ritual
     return;
   }
   int m = t - '0';
