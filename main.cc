@@ -284,7 +284,6 @@ int main(int argc, const char *argv[])
 
     std::stringstream ins;
 
-//    box(stdscr,71,1);
     refresh();
     keypad(stdscr,true);
     std::string choices[6] = {"Play","Attack","Use","Inspect","End","Quit"};
