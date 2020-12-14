@@ -58,7 +58,7 @@ void Player::play(int i, int p, char t, bool testing)
     return;
   }
   int m = t - '0';
-  hand.at(i)->play(playerNum, p, m-1, testing);
+  hand.at(i)->play(playerNum, p, m-1, false, testing);
   hand.erase(hand.begin()+i);
 }
 

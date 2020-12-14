@@ -331,6 +331,7 @@ int main(int argc, const char *argv[])
               else refreshBoard(pic,highlight/5+1,highlight%5);
             }
             c = getch();
+            if (c == 10) break;
             if (c == KEY_LEFT) highlight--;
             else if (c == KEY_RIGHT) highlight++;
             if (highlight < 0) highlight = 0;
@@ -342,11 +343,11 @@ int main(int argc, const char *argv[])
             if (highlight == 10) b.play(cardNum+1,testingMode);
             else if (highlight == 11) b.play(cardNum+1,1,'r',testingMode);
             else if (highlight == 12) b.play(cardNum+1,2,'r',testingMode);
-            else b.play(cardNum+1,highlight/5+1,highlight%5+1,testingMode);
+            else b.play(cardNum+1,(highlight/5)+1,(highlight%5)+49,testingMode);
           } catch (InputException err) {
             mvaddstr(79,1,err.getReason().c_str());
             getch();
-            mvaddstr(79,1,"                                                                                   ");
+            mvaddstr(79,1,"                                                                                    ");
             if (err.getQuit()) break;
           } catch (...) {
             mvaddstr(79,1,"Try another Target");
@@ -383,6 +384,7 @@ int main(int argc, const char *argv[])
               else refreshBoard(pic,highlight/5+1,highlight);
             }
             c = getch();
+            if (c == 10) break;
             if (c == KEY_LEFT) highlight--;
             else if (c == KEY_RIGHT) highlight++;
             if (highlight < 0) highlight = 0;
@@ -391,10 +393,10 @@ int main(int argc, const char *argv[])
             if (c == KEY_UP) highlight = 12;
           }
           try {
-            if (highlight == 10) b.use(minionNum);
+            if (highlight == 10) b.use(minionNum+1,testingMode);
             else if (highlight == 11) b.use(minionNum+1,1,'r',testingMode);
             else if (highlight == 12) b.use(minionNum+1,2,'r',testingMode);
-            else b.use(minionNum+1,highlight/5+1,highlight%5+1,testingMode);
+            else b.use(minionNum+1,(highlight/5)+1,highlight%5+49,testingMode);
           } catch (InputException err) {
             mvaddstr(79,1,err.getReason().c_str());
             getch();
@@ -422,9 +424,10 @@ int main(int argc, const char *argv[])
           highlight = 5;
           while (c != 10) {
             b.display(pic);
-            if (highlight == 5) refreshBoard(pic,b.active%2+1,7);
-            else refreshBoard(pic,b.active%2+1,highlight);
+            if (highlight == 5) refreshBoard(pic,(b.active%2)+1,7);
+            else refreshBoard(pic,(b.active%2)+1,highlight);
             c = getch();
+            if (c == 10) break;
             if (c == KEY_LEFT) highlight--;
             else if (c == KEY_RIGHT) highlight++;
             if (highlight < 0) highlight = 0;
@@ -433,7 +436,7 @@ int main(int argc, const char *argv[])
           }
           try {
             if (highlight == 5) b.attack(minionNum+1);
-            else b.attack(minionNum+1,highlight%5+1);
+            else b.attack(minionNum+1,(highlight%5)+1);
           } catch (InputException err) {
             mvaddstr(79,1,err.getReason().c_str());
             getch();
@@ -451,6 +454,7 @@ int main(int argc, const char *argv[])
             b.display(pic);
             refreshBoard(pic,b.active,highlight);
             c = getch();
+            if (c == 10) break;
             if (c == KEY_LEFT) highlight--;
             else if (c == KEY_RIGHT) highlight++;
             if (highlight < 0) highlight = 0;
