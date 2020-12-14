@@ -11,7 +11,8 @@ int main(int argc, const char *argv[])
   bool g = false;
   Board b;
   std::istream *actionInput = &std::cin;
-  std::string deck1File = "", deck2File = ""; 
+  std::string deck1File = "", deck2File = "";
+  std::ifstream file; 
 
   // read action line arguments
   for (int i = 1; i < argc; i++) {
@@ -24,7 +25,8 @@ int main(int argc, const char *argv[])
         } else if (cmd == "-deck2") {
           deck2File = fileName;
         } else if (cmd == "-init") {
-          actionInput = new std::ifstream{fileName}; // must be deleted after
+          file = std::ifstream{fileName};
+          actionInput = &file; // must be deleted after
         }
       }
       if (cmd == "-testing") {
@@ -53,7 +55,6 @@ int main(int argc, const char *argv[])
     std::getline(*actionInput, names[i]);
     if (names[i].empty()) names[i] = "anon. player";
     if (actionInput->eof() && actionInput != &std::cin) {
-      delete actionInput;
       actionInput = &std::cin;
     } 
   }
@@ -70,7 +71,6 @@ int main(int argc, const char *argv[])
   while (std::getline(*actionInput, action) || action.empty() || !actionInput->eof()) { // to support both ctrl+D and quit command
     try { 
       if (actionInput->eof() && actionInput != &std::cin) {
-        delete actionInput;
         actionInput = &std::cin;
       } else if (actionInput->eof()) throw InputException("Terminating the program...", true);
       if (action.empty()) continue;
