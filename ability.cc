@@ -11,7 +11,7 @@ Ability::Ability(std::string name, Board* board, std::shared_ptr<AbstractMinion>
 	enchantmentDescription = "Not actually an enchantment";
 }
 
-void Ability::play(int owner, int targetPlayer, int minion, bool actOnRitual, bool testing) {}
+void Ability::play(bool testing, int owner, int targetPlayer, int minion, bool actOnRitual) {}
 
 void Ability::useAbility(int activePlayer, int targetPlayer, int minion, bool testing) {
 	if (actions == 0) throw InputException("Minion doesn't have any actions remaining");

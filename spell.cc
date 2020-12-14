@@ -24,7 +24,7 @@ Spell::Spell(std::string name, Board* board) : Card{name,board} {
 	}
 }
 
-void Spell::play(int owner, int targetPlayer, int minion, bool actOnRitual, bool testing) {
+void Spell::play(bool testing, int owner, int targetPlayer, int minion, bool actOnRitual) {
     Player* p = board->getPlayer(owner);
     Player* t = board->getPlayer(targetPlayer);
 	int playerMana = p->getMana();

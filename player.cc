@@ -42,7 +42,7 @@ void Player::attack(int i, int o, int t)
 // plays the ith card in the active player’s hand with no target.
 void Player::play(int i, bool testing)
 {
-  hand.at(i)->play(playerNum, playerNum, -1, false, testing);
+  hand.at(i)->play(testing, playerNum, playerNum);
   hand.erase(hand.begin()+i);
 }
 
@@ -54,11 +54,11 @@ void Player::play(int i, bool testing)
 void Player::play(int i, int p, char t, bool testing)
 {
   if (t == 'r') {
-    hand.at(i)->play(playerNum, p, -1, true, testing); // true = attack on ritual
+    hand.at(i)->play(testing, playerNum, p, -1, true); // true = attack on ritual
     return;
   }
   int m = t - '0';
-  hand.at(i)->play(playerNum, p, m-1, false, testing);
+  hand.at(i)->play(testing, playerNum, p, m-1);
   hand.erase(hand.begin()+i);
 }
 

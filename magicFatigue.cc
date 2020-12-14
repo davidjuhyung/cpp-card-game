@@ -6,7 +6,7 @@ MagicFatigue::MagicFatigue(std::string name, Board* board) : Enchantment{name, b
 	cost = 0;
 }
 
-void MagicFatigue::play(int owner, int targetPlayer, int minion, bool actOnRitual, bool testing) {
+void MagicFatigue::play(bool testing, int owner, int targetPlayer, int minion, bool actOnRitual) {
 	//enchanted minion's activated ability costs 2 more
 	Player* p = board->getPlayer(owner);
 	Player* t = board->getPlayer(targetPlayer);
