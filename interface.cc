@@ -1,12 +1,9 @@
 #include "interface.h"
 
-const int BOARDCOLOR = 1;
-
-const int HANDCOLOR = 2;
-
-const int MENUCOLOR = 3;
-
-const std::string whitespace = "                                                                                                                                                                                                                    ";
+static const int BOARDCOLOR = 1;
+static const int HANDCOLOR = 2;
+static const int MENUCOLOR = 3;
+static const std::string whitespace = "                                                                                                                                                                                                                    ";
 
 void readAction(std::string action, std::vector<std::string> params, Board &b, bool testingMode) 
 {
@@ -128,7 +125,7 @@ void readAction(std::string action, std::vector<std::string> params, Board &b, b
   }
 }
 
-void refreshBoard(std::stringstream &snap, int active, int highlight = -1) {
+static void refreshBoard(std::stringstream &snap, int active, int highlight = -1) {
   attron(COLOR_PAIR(BOARDCOLOR));
   int lineNum = 1;
   std::string line;
@@ -163,7 +160,7 @@ void refreshBoard(std::stringstream &snap, int active, int highlight = -1) {
   attroff(COLOR_PAIR(BOARDCOLOR));
 }
 
-void refreshHand(std::stringstream &snap, int highlight = -1) {
+static void refreshHand(std::stringstream &snap, int highlight = -1) {
   attron(COLOR_PAIR(HANDCOLOR));
   int lineNum = 58;
   std::string e = "                                 ";
@@ -184,7 +181,7 @@ void refreshHand(std::stringstream &snap, int highlight = -1) {
   attroff(COLOR_PAIR(HANDCOLOR));
 }
 
-void refreshInspect(std::stringstream &snap, bool clear = false) {
+static void refreshInspect(std::stringstream &snap, bool clear = false) {
   int lineNum = 10;
   std::string line;
   if (clear) {
