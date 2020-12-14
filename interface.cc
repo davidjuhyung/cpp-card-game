@@ -157,6 +157,7 @@ void refreshBoard(std::stringstream &snap, int active, int highlight = -1) {
 
 void refreshHand(std::stringstream &snap, int highlight = -1) {
   int lineNum = 58;
+  std::string e = "                                 ";
   int empty;
   std::string line;
   while (getline(snap,line)) {
@@ -164,7 +165,7 @@ void refreshHand(std::stringstream &snap, int highlight = -1) {
     for (int i = 0; i < 5; ++i) {
       if (i == highlight) attron(A_REVERSE);
       if (i <= empty) mvaddstr(lineNum, i*33, line.substr(i*33,33).c_str());
-      else mvaddstr(lineNum, i*33, whitespace.c_str());
+      else mvaddstr(lineNum, i*33, e.c_str());
       attroff(A_REVERSE);
     }
     lineNum++;
@@ -174,7 +175,7 @@ void refreshHand(std::stringstream &snap, int highlight = -1) {
 }
 
 void refreshInspect(std::stringstream &snap, bool clear = false) {
-  int lineNum = 40;
+  int lineNum = 10;
   std::string line;
   if (clear) {
     for (int i = 0; i < 50; ++i) {
@@ -202,7 +203,7 @@ int gdisplay(bool testingMode, Board &b) {
     b.display(pic);
     refreshBoard(pic,1);
 
-    mvaddstr(57,1,"Your Hand:");
+    mvaddstr(57,6,"Your Hand:");
 
     std::stringstream h;
     b.showHand(h);
@@ -218,7 +219,7 @@ int gdisplay(bool testingMode, Board &b) {
     while (true) {
       for (int i = 0; i < 6; ++i) {
         if (i == highlight) attron(A_REVERSE);
-        mvaddstr(i+72,1,choices[i].c_str());
+        mvaddstr(i+58,170,choices[i].c_str());
         attroff(A_REVERSE);
       }
       c = getch();
@@ -245,13 +246,13 @@ int gdisplay(bool testingMode, Board &b) {
           while (c != 10) {
             if (highlight == 10) {
               attron(A_REVERSE);
-              mvaddstr(77,1,"No Target");
+              mvaddstr(64,170,"No Target");
               attroff(A_REVERSE);
               b.display(pic);
               refreshBoard(pic,b.active);
             } else {
               b.display(pic);
-              mvaddstr(77,1,"No Target");
+              mvaddstr(64,170,"No Target");
               if (highlight == 11) refreshBoard(pic,1,6);
               else if (highlight == 12) refreshBoard(pic,2,6);
               else refreshBoard(pic,highlight/5+1,highlight%5);
@@ -261,9 +262,9 @@ int gdisplay(bool testingMode, Board &b) {
             if (c == KEY_LEFT) highlight--;
             else if (c == KEY_RIGHT) highlight++;
             if (highlight < 0) highlight = 0;
-            if (highlight > 10) highlight = 10;
-            if (c == KEY_DOWN) highlight = 11;
-            if (c == KEY_UP) highlight = 12;
+            if (highlight > 12) highlight = 12;
+            if (c == KEY_DOWN) highlight = 12;
+            if (c == KEY_UP) highlight = 11;
           }
           try {
             if (highlight == 10) b.play(cardNum+1,testingMode);
@@ -271,14 +272,14 @@ int gdisplay(bool testingMode, Board &b) {
             else if (highlight == 12) b.play(cardNum+1,2,'r',testingMode);
             else b.play(cardNum+1,(highlight/5)+1,(highlight%5)+49,testingMode);
           } catch (InputException err) {
-            mvaddstr(79,1,err.getReason().c_str());
+            mvaddstr(70,1,err.getReason().c_str());
             getch();
-            mvaddstr(79,1,whitespace.c_str());
+            mvaddstr(70,1,whitespace.c_str());
             if (err.getQuit()) break;
           } catch (...) {
-            mvaddstr(79,1,"Try another Target");
+            mvaddstr(70,1,"Try another Target");
             getch();
-            mvaddstr(79,1,whitespace.c_str());
+            mvaddstr(70,1,whitespace.c_str());
           }
         } else if (highlight == 2) {
           c = 0;
@@ -298,12 +299,12 @@ int gdisplay(bool testingMode, Board &b) {
           while (c != 10) {
             if (highlight == 10) {
               attron(A_REVERSE);
-              mvaddstr(77,1,"No Target");
+              mvaddstr(64,170,"No Target");
               attroff(A_REVERSE);
               b.display(pic);
               refreshBoard(pic,b.active);
             } else {
-              mvaddstr(77,1,"No Target");
+              mvaddstr(64,170,"No Target");
               b.display(pic);
               if (highlight == 11) refreshBoard(pic,1,6);
               else if (highlight == 12) refreshBoard(pic,2,6);
@@ -314,9 +315,9 @@ int gdisplay(bool testingMode, Board &b) {
             if (c == KEY_LEFT) highlight--;
             else if (c == KEY_RIGHT) highlight++;
             if (highlight < 0) highlight = 0;
-            if (highlight > 10) highlight = 10;
-            if (c == KEY_DOWN) highlight = 11;
-            if (c == KEY_UP) highlight = 12;
+            if (highlight > 12) highlight = 12;
+            if (c == KEY_DOWN) highlight = 12;
+            if (c == KEY_UP) highlight = 11;
           }
           try {
             if (highlight == 10) b.use(minionNum+1,testingMode);
@@ -324,14 +325,14 @@ int gdisplay(bool testingMode, Board &b) {
             else if (highlight == 12) b.use(minionNum+1,2,'r',testingMode);
             else b.use(minionNum+1,(highlight/5)+1,highlight%5+49,testingMode);
           } catch (InputException err) {
-            mvaddstr(79,1,err.getReason().c_str());
+            mvaddstr(70,1,err.getReason().c_str());
             getch();
-            mvaddstr(79,1,whitespace.c_str());
+            mvaddstr(70,1,whitespace.c_str());
             if (err.getQuit()) break;
           } catch (...) {
-            mvaddstr(79,1,"Try another Target");
+            mvaddstr(70,1,"Try another Target");
             getch();
-            mvaddstr(79,1,whitespace.c_str());
+            mvaddstr(70,1,whitespace.c_str());
           }
         } else if (highlight == 1) {
           highlight = 0;
@@ -364,14 +365,14 @@ int gdisplay(bool testingMode, Board &b) {
             if (highlight == 5) b.attack(minionNum+1);
             else b.attack(minionNum+1,(highlight%5)+1);
           } catch (InputException err) {
-            mvaddstr(79,1,err.getReason().c_str());
+            mvaddstr(70,1,err.getReason().c_str());
             getch();
-            mvaddstr(79,1,whitespace.c_str());
+            mvaddstr(70,1,whitespace.c_str());
             if (err.getQuit()) break;
           } catch (...) {
-            mvaddstr(79,1,"Try another Target");
+            mvaddstr(70,1,"Try another Target");
             getch();
-            mvaddstr(79,1,whitespace.c_str());
+            mvaddstr(70,1,whitespace.c_str());
           }
         } else if (highlight == 3) {
           highlight = 0;
@@ -392,14 +393,14 @@ int gdisplay(bool testingMode, Board &b) {
             getch();
             refreshInspect(ins,true);
           } catch (InputException err) {
-            mvaddstr(79,1,err.getReason().c_str());
+            mvaddstr(70,1,err.getReason().c_str());
             getch();
-            mvaddstr(79,1,whitespace.c_str());
+            mvaddstr(70,1,whitespace.c_str());
             if (err.getQuit()) break;
           } catch (...) {
-            mvaddstr(79,1,"Try another Target");
+            mvaddstr(70,1,"Try another Target");
             getch();
-            mvaddstr(79,1,whitespace.c_str());
+            mvaddstr(70,1,whitespace.c_str());
           }
         } else if (highlight == 4) {
           b.endturn();
@@ -414,7 +415,7 @@ int gdisplay(bool testingMode, Board &b) {
         refreshBoard(pic,b.active);
         b.showHand(h);
         refreshHand(h);
-        mvaddstr(77,4,"        ");
+        mvaddstr(64,170,whitespace.c_str());
       }
     }
 
