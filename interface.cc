@@ -1,5 +1,11 @@
 #include "interface.h"
 
+const int BOARDCOLOR = 1;
+
+const int HANDCOLOR = 2;
+
+const int MENUCOLOR = 3;
+
 const std::string whitespace = "                                                                                                                                                                                                                    ";
 
 void readAction(std::string action, std::vector<std::string> params, Board &b, bool testingMode) 
@@ -123,6 +129,7 @@ void readAction(std::string action, std::vector<std::string> params, Board &b, b
 }
 
 void refreshBoard(std::stringstream &snap, int active, int highlight = -1) {
+  attron(COLOR_PAIR(BOARDCOLOR));
   int lineNum = 1;
   std::string line;
   while (getline(snap,line)) {
@@ -153,9 +160,11 @@ void refreshBoard(std::stringstream &snap, int active, int highlight = -1) {
   }
   refresh();
   std::stringstream().swap(snap);
+  attroff(COLOR_PAIR(BOARDCOLOR));
 }
 
 void refreshHand(std::stringstream &snap, int highlight = -1) {
+  attron(COLOR_PAIR(HANDCOLOR));
   int lineNum = 58;
   std::string e = "                                 ";
   int empty;
@@ -172,6 +181,7 @@ void refreshHand(std::stringstream &snap, int highlight = -1) {
   }
   refresh();
   std::stringstream().swap(snap);
+  attroff(COLOR_PAIR(HANDCOLOR));
 }
 
 void refreshInspect(std::stringstream &snap, bool clear = false) {
@@ -199,6 +209,11 @@ int gdisplay(bool testingMode, Board &b) {
     noecho();
     curs_set(false);
 
+    start_color();
+    init_pair(BOARDCOLOR, COLOR_BLUE, COLOR_BLACK);
+    init_pair(HANDCOLOR, COLOR_RED, COLOR_BLACK);
+    init_pair(MENUCOLOR, COLOR_GREEN, COLOR_BLACK);
+
     std::stringstream pic;
     b.display(pic);
     refreshBoard(pic,1);
@@ -219,7 +234,9 @@ int gdisplay(bool testingMode, Board &b) {
     while (true) {
       for (int i = 0; i < 6; ++i) {
         if (i == highlight) attron(A_REVERSE);
+        attron(COLOR_PAIR(MENUCOLOR));
         mvaddstr(i+58,170,choices[i].c_str());
+        attroff(COLOR_PAIR(MENUCOLOR));
         attroff(A_REVERSE);
       }
       c = getch();
@@ -227,11 +244,11 @@ int gdisplay(bool testingMode, Board &b) {
       else if (c == KEY_DOWN) highlight++;
       if (highlight < 0) highlight = 0;
       if (highlight > 5) highlight = 5;
-      if (c == 10) {
+      if (c == (int)'\n') {
         if (highlight == 0) {
           c = 0;
           highlight = 0;
-          while (c != 10) {
+          while (c != (int)'\n') {
             b.showHand(h);
             refreshHand(h,highlight);
             c = getch();
@@ -243,22 +260,25 @@ int gdisplay(bool testingMode, Board &b) {
           c = 0;
           int cardNum = highlight;
           highlight = 10;
-          while (c != 10) {
+          while (c != (int)'\n') {
             if (highlight == 10) {
               attron(A_REVERSE);
+              attron(COLOR_PAIR(MENUCOLOR));
               mvaddstr(64,170,"No Target");
+              attroff(COLOR_PAIR(MENUCOLOR));
               attroff(A_REVERSE);
               b.display(pic);
               refreshBoard(pic,b.active);
             } else {
               b.display(pic);
+              attron(COLOR_PAIR(MENUCOLOR));
               mvaddstr(64,170,"No Target");
+              attroff(COLOR_PAIR(MENUCOLOR));
               if (highlight == 11) refreshBoard(pic,1,6);
               else if (highlight == 12) refreshBoard(pic,2,6);
               else refreshBoard(pic,highlight/5+1,highlight%5);
             }
             c = getch();
-            if (c == 10) break;
             if (c == KEY_LEFT) highlight--;
             else if (c == KEY_RIGHT) highlight++;
             if (highlight < 0) highlight = 0;
@@ -284,7 +304,7 @@ int gdisplay(bool testingMode, Board &b) {
         } else if (highlight == 2) {
           c = 0;
           highlight = 0;
-          while (c != 10) {
+          while (c != (int)'\n') {
             b.display(pic);
             refreshBoard(pic,b.active,highlight);
             c = getch();
@@ -296,22 +316,25 @@ int gdisplay(bool testingMode, Board &b) {
           c = 0;
           int minionNum = highlight;
           highlight = 10;
-          while (c != 10) {
+          while (c != (int)'\n') {
             if (highlight == 10) {
               attron(A_REVERSE);
+              attron(COLOR_PAIR(MENUCOLOR));
               mvaddstr(64,170,"No Target");
+              attroff(COLOR_PAIR(MENUCOLOR));
               attroff(A_REVERSE);
               b.display(pic);
               refreshBoard(pic,b.active);
             } else {
+              attron(COLOR_PAIR(MENUCOLOR));
               mvaddstr(64,170,"No Target");
+              attroff(COLOR_PAIR(MENUCOLOR));
               b.display(pic);
               if (highlight == 11) refreshBoard(pic,1,6);
               else if (highlight == 12) refreshBoard(pic,2,6);
               else refreshBoard(pic,highlight/5+1,highlight);
             }
             c = getch();
-            if (c == 10) break;
             if (c == KEY_LEFT) highlight--;
             else if (c == KEY_RIGHT) highlight++;
             if (highlight < 0) highlight = 0;
@@ -337,7 +360,7 @@ int gdisplay(bool testingMode, Board &b) {
         } else if (highlight == 1) {
           highlight = 0;
           c = 0;
-          while (c != 10) {
+          while (c != (int)'\n') {
             b.display(pic);
             refreshBoard(pic,b.active,highlight);
             c = getch();
@@ -349,12 +372,11 @@ int gdisplay(bool testingMode, Board &b) {
           c = 0;
           int minionNum = highlight;
           highlight = 5;
-          while (c != 10) {
+          while (c != (int)'\n') {
             b.display(pic);
             if (highlight == 5) refreshBoard(pic,(b.active%2)+1,7);
             else refreshBoard(pic,(b.active%2)+1,highlight);
             c = getch();
-            if (c == 10) break;
             if (c == KEY_LEFT) highlight--;
             else if (c == KEY_RIGHT) highlight++;
             if (highlight < 0) highlight = 0;
@@ -377,11 +399,10 @@ int gdisplay(bool testingMode, Board &b) {
         } else if (highlight == 3) {
           highlight = 0;
           c = 0;
-          while (c != 10) {
+          while (c != (int)'\n') {
             b.display(pic);
             refreshBoard(pic,b.active,highlight);
             c = getch();
-            if (c == 10) break;
             if (c == KEY_LEFT) highlight--;
             else if (c == KEY_RIGHT) highlight++;
             if (highlight < 0) highlight = 0;
@@ -416,6 +437,7 @@ int gdisplay(bool testingMode, Board &b) {
         b.showHand(h);
         refreshHand(h);
         mvaddstr(64,170,whitespace.c_str());
+        highlight = 0;
       }
     }
 
