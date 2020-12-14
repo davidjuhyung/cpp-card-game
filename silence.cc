@@ -6,7 +6,7 @@ Silence::Silence(std::string name, Board* board) : Enchantment{name, board} {
 	cost = 1;
 }
 
-void Silence::play(int owner, int targetPlayer, int minion, bool actOnRitual, bool testing) {
+void Silence::play(bool testing, int owner, int targetPlayer, int minion, bool actOnRitual) {
 	//enchanted minion cannot use ability
 	Player* p = board->getPlayer(owner);
 	Player* t = board->getPlayer(targetPlayer);

@@ -17,7 +17,7 @@ Ritual::Ritual(std::string name, Board* board) : Card{name,board} {
 	}
 }
 
-void Ritual::play(int owner, int targetPlayer, int minion, bool actOnRitual, bool testing) 
+void Ritual::play(bool testing, int owner, int targetPlayer, int minion, bool actOnRitual) 
 {
     Player* p = board->getPlayer(owner);
     int mana = p->getMana();

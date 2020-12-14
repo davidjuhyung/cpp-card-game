@@ -13,7 +13,7 @@ class Ritual : public Card
 
   public:
   	Ritual(std::string name, Board* board);
-  	void play(int owner, int targetPlayer, int minion = -1, bool actOnRitual = false, bool testing = false) override;
+  	void play(bool testing, int owner, int targetPlayer, int minion = -1, bool actOnRitual = false) override;
   	// if isOwnerActive is false, then the playedMinion is owned by the enemy
 	void useAbility(int owner, int playedMinion, bool isOwnerActive, When when);
 	int getCharges() const;

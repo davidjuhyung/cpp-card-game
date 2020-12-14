@@ -6,7 +6,7 @@ Delay::Delay(std::string name, Board* board) : Enchantment{name,board} {
 	cost = 1;
 }
 
-void Delay::play(int owner, int targetPlayer, int minion, bool actOnRitual, bool testing) {
+void Delay::play(bool testing, int owner, int targetPlayer, int minion, bool actOnRitual) {
 	//enchanted minion doesn't gain an action on their next turn. automatically destroyed after 1 turn
 	Player* p = board->getPlayer(owner);
 	Player* t = board->getPlayer(targetPlayer);

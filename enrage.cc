@@ -6,7 +6,7 @@ Enrage::Enrage(std::string name, Board* board) : Enchantment{name,board} {
 	cost = 2;
 }
 
-void Enrage::play(int owner, int targetPlayer, int minion, bool actOnRitual, bool testing) {
+void Enrage::play(bool testing, int owner, int targetPlayer, int minion, bool actOnRitual) {
 	Player* p = board->getPlayer(owner);
 	Player* t = board->getPlayer(targetPlayer);
     int mana = p->getMana();

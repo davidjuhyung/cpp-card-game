@@ -6,7 +6,7 @@ GiantStrength::GiantStrength(std::string name, Board* board) : Enchantment{name,
 	cost = 1;
 }
 
-void GiantStrength::play(int owner, int targetPlayer, int minion, bool actOnRitual, bool testing) {
+void GiantStrength::play(bool testing, int owner, int targetPlayer, int minion, bool actOnRitual) {
 	Player* p = board->getPlayer(owner);
 	Player* t = board->getPlayer(targetPlayer);
     int mana = p->getMana();

@@ -3,7 +3,7 @@
 
 Minion::Minion(std::string name, Board* board) : AbstractMinion{name,board} {}
 
-void Minion::play(int owner, int targetPlayer, int minion, bool actOnRitual, bool testing) {
+void Minion::play(bool testing, int owner, int targetPlayer, int minion, bool actOnRitual) {
 	Player* p = board->getPlayer(owner);
 	int playerMana = p->getMana();
 	if (cost > playerMana && testing == false) throw InputException{"Player doesn't have enough mana"};
