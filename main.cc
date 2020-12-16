@@ -26,7 +26,7 @@ int main(int argc, const char *argv[])
           deck2File = fileName;
         } else if (cmd == "-init") {
           file = std::ifstream{fileName};
-          actionInput = &file; // must be deleted after
+          actionInput = &file;
         }
       }
       if (cmd == "-testing") {
