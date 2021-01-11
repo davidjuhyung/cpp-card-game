@@ -16,6 +16,7 @@ We recognized that the flow of information for maximum efficiency should be as f
 - Board class should handle the player’s actions.
 - Player’s should be responsible for activating the Cards’ methods
 - The Cards’ affect the board in some way. 
+
 As you can notice, this leads to a sort of circular dependency issue which we solved by using a forward declaration of the Player class. This issue arises because the cards need a pointer to a board to be able to affect the board.
 
 We designed to have high cohesion and low coupling. All of our methods and fields in a class are strictly related to their own classes. Combined with this, we also minimized the use of public fields and only added getters and setters when absolutely necessary. For example, instead of having a display function in one class that displays everything, we created display functions for each class so that the board only had to simply call their functions, without necessarily knowing their structures and fields of each class, leading to even higher cohesion and less coupling (i.e. didn't have to use the getCardType).
