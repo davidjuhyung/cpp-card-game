@@ -9,7 +9,7 @@ The AbstractMinion, as the name suggests, is an abstract class that can be eithe
 
 
 ### Design
-The overall design of our classes also enables us to use polymorphism for the Card and AbstractMinion classes. We thought this was the best way to implement it as this simplifies our player and board classes, and also improves functionality of the card class.
+The overall design of our classes enables us to use polymorphism for the Card and AbstractMinion classes. We thought this was the best way to implement it as this simplifies our player and board classes, and also improves functionality of the card class.
 
 We recognized that the flow of information for maximum efficiency should be as follows:
 The main controller should call the Board's methods.
