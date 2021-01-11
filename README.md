@@ -1,5 +1,5 @@
 # What is this game?
-#### Please refer to “Hearthstone: Heroes of Warcraft” or “Magic: the Gathering.” for instructions on how to play the game! 
+#### Please refer to “Hearthstone: Heroes of Warcraft” or “Magic: the Gathering” for instructions on how to play the game! 
 #### If you would like to request a complete demo of this game, please message any one of us! :)
 
 ### Overview
