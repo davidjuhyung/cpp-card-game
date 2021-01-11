@@ -1,4 +1,6 @@
 # What is this game?
+#### Please refer to “Hearthstone: Heroes of Warcraft” or “Magic: the Gathering.” for instructions on how to play the game! 
+#### If you would like to request a complete demo of this game, please message any one of us! :)
 
 ### Overview
 The overall structure of this game can be classified as Board, Player, and Card class. The Board class uses two pointers of Player class to represent Player 1 and Player 2, and each player can use 0 or more cards of Card class. The Card class is an abstract class whose child classes are AbstractMinion, Spell, and Ritual. Since all child classes are a “card” and share similar properties such as the name and magic cost, we used inheritance to represent such a relationship. By simply inheriting the properties and functionalities of a Card class, we were able to maximize code reusability in the child classes and enhanced the overall readability and structure of our project.
